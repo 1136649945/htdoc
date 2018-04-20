@@ -1,0 +1,144 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+            	<volist name="project" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/project/icon.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="navUl">
+                	<notempty name="list['_']">
+		                <volist name="list['_']" id="vo">
+	                    <li <if condition="$category_id neq null"><if condition="$category_id eq $vo['category_id']">class="current"</if> <else/> <if condition="$key eq 0">class="current"</if>  </if> >
+	                        <a href="/index.php/Home/Project/project?category_id={$vo['category_id']}" class="navUl_a">
+	                            <em>{$vo[$title]}</em>
+								<span class="iconfont iconAdd">&#xe6f1;</span>
+	                        </a>
+	                        <notempty name="vo['_']">
+		                	<ol class="navOl">
+		                	<volist name="vo['_']" id="vo1">
+	                            <li><a href="javaScript:;"> >> <span>{$vo1[$title]}</span></a></li>
+	                        </volist>
+	                        </ol>
+	                        </notempty>
+	                    </li>
+	                    </volist>
+                    </notempty>
+                </ul>
+                </volist>
+                <img src="__IMG__/navHide.png" alt="" id="goBack" class="goBack"/>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                        <volist name="picture" id="vo">
+	                        <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+	                    </volist>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+						<!-- 面包屑 -->
+	                		{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                    </div>
+                    <div class="matterBox">
+                    	<script>
+	                    	var contentarr = null;
+	                   	</script>
+                    	<if condition="$id neq null">
+                    		<volist name="docinfo" id="vo">
+                    			{$vo.content}
+                    		</volist>
+                    	<else/>
+							<script>
+								contentarr = {$docarr};
+							</script>
+                    		<ul class="project">
+
+							</ul>
+							<div id="page" class="page"></div>
+                    	</if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<script>
+	$('.menu_ul li:eq(0)').addClass('current');
+    $('ul.navUl li:first-child a').css('border-top','0');
+    //默认
+    $('ul.navUl>li:eq(0)').find('ol.navOl').fadeIn();
+
+	/*面包屑*/
+	for(var i=0;i<$('ul.navUl>li').length;i++){
+		var liCur = $('ul.navUl>li').eq(i);
+		if(liCur.hasClass('current')){
+			var cont = liCur.find('a.navUl_a em').text();
+			$('#activecrumb a').text(cont);
+		}
+	}
+	/*内容*/
+	if(contentarr!=null && contentarr.length>0){
+		var num = 10;
+		var total = contentarr.length;
+		var n = Math.ceil(total / num);
+		//调取内容
+		piecewiseCont(contentarr, 0);
+		//分页
+		$("#page").show();
+		$("#page").paging({
+			pageNo:1,//默认第一页
+			totalPage: n,//页数
+			totalSize: total,//总条数
+			callback: function(n) {
+				piecewiseCont(contentarr, n-1);
+			}
+		});
+	}else{
+		$("#page").hide();
+	}
+	function piecewiseCont(arr, n){
+		$('ul.project').empty();
+		var arrL = arr.length;
+		var html = '';
+		for (var i = n * num; i < (n + 1) * num && i < arrL; i++) {
+			html += '<li><img src="__IMG__/project/play.png" alt=""/>'
+					+'<a href="/index.php/Home/Project/project?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">'+arr[i].title+'</a>'
+					+'<em>'+timestampToTime(arr[i].create_time)+'</em>'
+					+'</li>';
+		}
+		$('ul.project').append(html);
+	}
+	/*日期转换*/
+	function timestampToTime(timestamp) {
+		var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		Y = date.getFullYear() + '-';
+		M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+		D = (date.getDate() + 1 < 10 ? '0' + (date.getDate() + 1) : date.getDate() + 1) + ' ';
+		h = (date.getHours() + 1 < 10 ? '0' + (date.getHours() + 1) : date.getHours() + 1) + ':';
+		m = (date.getMinutes() + 1 < 10 ? '0' + (date.getMinutes() + 1) : date.getMinutes() + 1) + ':';
+		s = (date.getSeconds() + 1 < 10 ? '0' + (date.getSeconds() + 1) : date.getSeconds() + 1);
+		return Y + M + D + h + m + s;
+	}
+</script>
+<include file="Public/footer"/>

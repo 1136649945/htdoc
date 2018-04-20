@@ -1,0 +1,21 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>导入</h2>
+    </div>
+    <form action="{:U(import)}" method="post" enctype="multipart/form-data"  class="form-horizontal" >
+		<input type="file" name="file"/>
+		<input type="submit" value="提交"/>
+    </form>
+    <form action="{:U(export)}" method="post" enctype="multipart/form-data"  class="form-horizontal" >
+		<input type="submit" value="导出"/>
+    </form>
+    
+    
+    
+</block>
+<block name="script">
+    <script type="text/javascript">
+    </script>
+</block>

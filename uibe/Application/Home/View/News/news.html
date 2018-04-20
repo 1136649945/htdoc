@@ -1,0 +1,251 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+                <div class="newsType">
+                <volist name="news" id="vo">
+                    <a href="/index.php/Home/News/news?category_id={$vo.category_id}"  <if condition="$category_id neq null"><if condition="$category_id eq $vo['category_id']">class="current"</if> <else/> <if condition="$key eq 0">class="current"</if>  </if>>{$vo[$title]}</a>
+	                <if condition="$key eq 0">
+	                    <span>|</span>
+	                </if>
+                </volist>
+                </div>
+                <div class="navL_h">
+                    <img src="__IMG__/news/icon.png" alt=""/>
+                    <em>|</em>
+                	{$words['w17']}
+                </div>
+                <ul class="navUl navUl_news">
+                	<volist name="document" id="vo">
+                    <li>
+                        <a href="/index.php/Home/News/news?category_id={$vo.cat_id}&id={$vo.id}" class="navUl_a">
+                            <em>{$vo[$title]}</em>
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+                <div class="meet">
+                    <div class="meet_imgs">
+                        <ul>
+                        	<volist name="scollpicture" id="vo">
+                            <li>
+                                <a href=""><img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/></a>
+                                <p>相约贸大{$i}</p>
+                            </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <div class="meet_btn">
+                        <!-- span-->
+                    </div>
+                </div>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                        <volist name="picture" id="vo">
+	                        <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+	                    </volist>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+                        <!-- 面包屑 -->
+	                	{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                    </div>
+                    <div class="matterBox">
+                        <script>
+                            var contentarr = null;
+                        </script>
+                    	<if condition="$id neq null">
+                    		<volist name="docinfo" id="doc"> 
+                    		<div class="details">
+				                    <h1>{$doc[$title]}</h1>
+				                    <h3>
+			                            {$words['w84']}：{$doc.auth}
+			                             <em>|</em>  
+			                            {$words['w85']}：{$doc.view}
+			                            <em>|</em> 
+			                            {$words['w86']}：{$doc.create_time|date='Y-m-d',###}
+		                            </h3>
+				                    <div class="details_cont">
+				                        {$doc.content}
+				                        <div class="Dshare" id="share">
+				                            <div class="bdsharebuttonbox">
+				                                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				                                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+				                                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				                                <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+				                            </div>
+				                            <span>
+					                            {$words['w87']}：
+				                           </span>
+				                        </div>
+				                    </div>
+				                    <h2>
+			                            {$words['w88']}：
+				                    </h2>
+			                    <ul class="news_more">
+			                    <volist name="moredoc" id="vo"> 
+			                        <li>
+			                            <h4>{$vo.title}</h4>
+			                            <h5><em>{$vo.create_time|date='Y-m-d',###}</em></h5>
+			                            <p>
+			                                {$vo.descr}......
+			                                <a href="/index.php/Home/News/news?category_id={$vo['cat_id']}&id={$vo['id']}">[{$words['w89']}]</a>
+			                            </p>
+			                        </li>
+			                     </volist>
+			                    </ul>
+			                    <div class="return_news">
+                                	<a href="/index.php/Home/News/news?category_id={$doc['cat_id']}"><if condition="$doc['cat_id'] eq 72">{$words['w72']}<else/>{$words['w73']}</if></a>
+                            	</div>
+				             </div>
+				             </volist>
+                    	<else/>
+                            <script>
+                                contentarr = {$docarr};
+                            </script>
+                    		<ul class="notice">
+                        	</ul>
+                        	<div id="page" class="page"></div>
+                    	</if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<input type="hidden" id="viewMore" value=""/>
+<style>
+    .bdsharebuttonbox{float: right;height: 40px;line-height: 40px;}
+    .bdsharebuttonbox a{margin: 0 5px;display: inline-block;width: 37px;height: 37px;}
+    .bdsharebuttonbox a.bds_tsina{background: url("__IMG__/news/sina.png") no-repeat;}
+    .bdsharebuttonbox a.bds_qzone{background: url("__IMG__/news/qq.png") no-repeat;}
+    .bdsharebuttonbox a.bds_weixin{background: url("__IMG__/news/weChat.png") no-repeat;}
+    .bdsharebuttonbox a.bds_tqq{background: url("__IMG__/news/xina.png") no-repeat;}
+</style>
+<script>
+    window._bd_share_config = {
+            "common": {
+                "bdSnsKey": {},
+                "bdText": "",
+                "bdMini": "1",
+                "bdMiniList": false,
+                "bdPic": "",
+                "bdStyle": "0",
+                "bdSize": "16"
+            },
+            "share": {},
+            "selectShare": {
+                "bdContainerClass": null,
+                "bdSelectMiniList": ["tsina", "qzone", "weixin", "tqq"]
+            }
+        };with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+    $('.menu_ul li:eq(4)').addClass('current');
+    $('ul.navUl li:first-child a').css('border-top','0');
+    //新闻分类
+    for(var i=0;i<$('.newsType a').length;i++){
+        var aCur = $('.newsType a').eq(i);
+        if(aCur.hasClass('current')){
+            var cont = aCur.text();
+            $('#activecrumb').text(cont);
+        }
+    }
+</script>
+<script>
+    if(contentarr==null){
+        /*新闻推荐*/
+        var hrefcur = window.location.href;
+        for(var i=0;i<$('ul.navUl.navUl_news li').length;i++){
+            var licur = $('ul.navUl.navUl_news li').eq(i);
+            var a_h = licur.find('a').attr('href');
+            if(hrefcur.indexOf(a_h)!=-1){
+                licur.addClass('current');
+            }
+        }
+    }else if(contentarr.length>0){
+        console.log(contentarr);
+        var num = 7;
+        var total = contentarr.length;
+        var n = Math.ceil(total / num);
+        //调取内容
+        piecewiseCont(contentarr, 0);
+        //分页
+        $("#page").show();
+        $("#page").paging({
+            pageNo:1,//默认第一页
+            totalPage: n,//页数
+            totalSize: total,//总条数
+            callback: function(n) {
+                piecewiseCont(contentarr, n-1);
+            }
+        });
+    }else{
+        $("#page").hide();
+    }
+
+    function piecewiseCont(arr, n) {
+        var arrL = arr.length;
+        $('ul.notice').empty();
+        var html = '';
+        for (var i = n * num; i < (n + 1) * num && i < arrL; i++) {
+            html += '<li><a href="/index.php/Home/News/news?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '" class="noticeL"><img src="' + arr[i].path + '" alt=""/></a>'
+                    + '<div class="noticeR">'
+                    + '<h3><a href="/index.php/Home/News/news?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">' + arr[i].title + '</a></h3>'
+                    + '<p>'
+                    + strLength(arr[i].descr)
+                    + '<a href="/index.php/Home/News/news?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">[' + $('#view_details').val() + ']</a></p>'
+                    + '<div class="date">'
+                    + '<span>' + $('#activecrumb').text() + '</span>'
+                    + '<em></em>'
+                    + '<span>' + timestampToTime(arr[i].create_time) + '</span>'
+                    + '</div>'
+                    + '</div>'
+                    + '</li>'
+        }
+        $('ul.notice').append(html);
+    }
+
+    /*日期转换*/
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        D = (date.getDate() + 1 < 10 ? '0' + (date.getDate() + 1) : date.getDate() + 1) + ' ';
+        h = (date.getHours() + 1 < 10 ? '0' + (date.getHours() + 1) : date.getHours() + 1) + ':';
+        m = (date.getMinutes() + 1 < 10 ? '0' + (date.getMinutes() + 1) : date.getMinutes() + 1) + ':';
+        s = (date.getSeconds() + 1 < 10 ? '0' + (date.getSeconds() + 1) : date.getSeconds() + 1);
+        return Y + M + D + h + m + s;
+    }
+
+    /*内容长度*/
+    function strLength(cont) {
+        var len = 65;
+        var l = cont.length;
+        if (l > len) {
+            cont = cont.substring(0, len) + '...';
+        }
+        return cont;
+    }
+
+</script>
+<include file="Public/footer"/>

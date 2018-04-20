@@ -1,0 +1,250 @@
+<include file="Public/header"/>
+<!--banner-->
+<div class="banner">
+    <div>
+        <div id="show" rel="autoPlay">
+            <div class="img">
+                <div class="imgBox">
+                    <span>
+	                    <volist name="scroll" id="vo">
+	                    	<a href="javaScript:;"><img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}"/></a>
+	                    </volist>
+                    </span>
+                </div>
+                <div class="masks mk1"></div>
+                <div class="masks mk2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="banner_bg">
+    <img src="__IMG__/banner_bg.png" alt=""/>
+</div>
+<!--特色项目-->
+<div class="item">
+    <div class="wrap">
+        <div class="title">
+            <span class="tit_l fl">{$words['w29']}</span>
+            <a href="" class="tit_more fr">{$words['w4']} >></a>
+		    <div class="cb"></div>
+        </div>
+        <div class="tit_br">
+            <span> >> </span>
+            <em></em>
+        </div>
+        <div class="item_box">
+            <div class="fl item_left">
+                <div class="il_box">
+                    <div class="il_auto">
+                        <input type="hidden" value="0" id="ilCur"/>
+                        <ul class="il_list">
+	                        <volist name="document" id="vo" >
+                        	<if condition="$key lt 3"> 
+                        		<li <if condition="$key eq 0">class="current"</if>>
+	                                <a href="javascript:;" class="il_img">
+	                                    <img src="{$vo['path']}" alt=""/>
+	                                </a>
+	                                <div class="il_cont">
+	                                    <div class="fl ir_date">
+	                                        <h5>{$vo['create_time']|date='M',###}</h5>
+	                                        <p>
+	                                            <em></em>
+	                                            <span>{$vo['create_time']|date="d",###}</span>
+	                                        </p>
+	                                        <p class="il_p2">
+	                                            <em></em>
+	                                            <span>{$vo['create_time']|date="Y",###}</span>
+	                                        </p>
+                                            <i class="tit_sg"></i>
+                                        </div>
+	                                    <div class="fr ir_cont">
+	                                        <h3>
+	                                            <a href="/index.php/Home/Project/project?id={$vo['id']}&category_id={$vo['cat_id']}" target="_blank">{$vo.title}</a>
+	                                        </h3>
+	                                        <p>{$vo.descr}.......</p>
+	                                    </div>
+	                                </div>
+                            	</li>
+                        	</if>
+	                        </volist>
+                        </ul>
+                    </div>
+                    <div class="_btn">
+                        <img src="__IMG__/item_left.png" alt="" id="itemL"/>
+                        <span></span>
+                        <img src="__IMG__/item_right.png" alt="" id="itemR"/>
+                    </div>
+                </div>
+            </div>
+            <div class="fl item_right">
+                <ul class="ir_list">
+                <volist name="document" id="vo" >
+                <if condition="$key gt 2">
+                    <li>
+                        <div class="fl ir_date">
+                            <h5>{$vo['create_time']|date='M',###}</h5>
+                            <p>
+                                <em></em>
+                                <span>{$vo['create_time']|date='d',###}</span>
+                            </p>
+                        </div>
+                        <div class="fr ir_cont">
+                            <h3>
+                                <a href="/index.php/Home/Project/project?id={$vo['id']}&category_id={$vo['cat_id']}" target="_blank" >{$vo.title}</a>
+                                <span class="item_add iconfont iconItem">
+                                    &#xe63d;
+                                    <!--<img src="__IMG__/item_add.png" alt=""/>-->
+                                    <!--<img src="__IMG__/item_addCur.png" alt=""/>-->
+                                </span>
+                            </h3>
+                            <p>{$vo.descr}.....</p>
+                        </div>
+                        <img data-id={$vo.id} category-id={$vo.cat_id}  class="project_img" src="{$vo['path']}" style="display:none;"/>
+                    </li>
+                    </if>
+                    </volist>
+                </ul>
+                <div class="item_imgs">
+                    <volist name="document" id="vo" >
+                        <if condition="$key gt 2">
+                            <a href="">
+                                <img src="{$vo['path']}" alt=""/>
+                            </a>
+                        </if>
+                    </volist>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--通知公告-->
+<div class="announcement">
+    <div class="wrap">
+        <div class="title">
+            <span class="tit_l fl">{$words['w30']}</span>
+            <a href="" class="tit_more fr">{$words['w4']} >></a>
+            <div class="cb"></div>
+        </div>
+        <div class="tit_br">
+            <span> >> </span>
+            <em></em>
+        </div>
+        <ul class="anno_cont">
+        <volist name="document1" id="vo" >
+	        <li>
+	            <a href="/index.php/Home/News/news?id={$vo['id']}&category_id={$vo['cat_id']}" target="_blank"><img src="{$vo['path']}" alt=""/></a>
+	            <a href="/index.php/Home/News/news?id={$vo['id']}&category_id={$vo['cat_id']}" target="_blank" class="anno_tit">
+	                <h3>
+	                    <span>{$vo['create_time']|date='Y-m-d',###}</span>
+	                    <em></em>
+	                </h3>
+	                <p><span>{$vo.title}</span></p>
+	            </a>
+	        </li>
+        </volist>
+    </ul>
+    </div>
+</div>
+<!--学院新闻-->
+<div class="news">
+    <div class="wrap">
+        <div class="title">
+            <span class="tit_l fl">{$words['w31']}</span>
+            <a href="" class="tit_more fr">{$words['w4']} >></a>
+            <div class="cb"></div>
+        </div>
+        <div class="tit_br">
+            <span class="tit_bg"> >> </span>
+            <em></em>
+        </div>
+    </div>
+    <ul class="news_list">
+    	<volist name="document2" id="vo" >
+        <li>
+            <div class="wrap">
+                <div class="fl n_date">
+                    <h4>{$vo['create_time']|date='d',###}</h4>
+                    <h5>{$vo['create_time']|date='m',###}{$words['w93']}</h5>
+                </div>
+                <div class="fl n_br">
+                    <em></em>
+                </div>
+                <div class="fl n_img">
+                    <a href="javascript:;"><img src="{$vo['path']}" alt=""/></a>
+                </div>
+                <div class="fl n_cont">
+                    <h3><a href="/index.php/Home/News/news?id={$vo['id']}&category_id={$vo['cat_id']}" target="_blank" >{$vo.title}</a></h3>
+                    <p>{$vo.descr}....</p>
+                </div>
+                <div class="cb"></div>
+            </div>
+        </li>
+        </volist>
+    </ul>
+</div>
+<!--部门设置-->
+<div class="department">
+    <div class="wrap">
+    	<volist name="depset" id="list">
+    	<h2 class="depar_tit">
+            <span>{$list[$title]}</span>
+        </h2>
+        <div class="depar_box">
+            <ul class="fl depar_list">
+	            <notempty name="list['_']">
+		            <volist name="list['_']" id="vo">
+		            	<li data-point="{$vo['gattr1']}">
+		                    <a href="/index.php/Home/About/about?category_id={$vo['category_id']}" target="_blank">
+		                        <div class="type">
+		                            <img src="__IMG__/{$vo['url']}" alt=""/>
+		                            <span>{$vo[$title]}</span>
+		                        </div>
+		                        <div class="type2">
+		                            <span class="fl">{$vo[$title]}</span>
+		                            <img class="fr" src="__IMG__/depar_add.png" alt=""/>
+		                        </div>
+		                    </a>
+	                	</li>
+					</volist>
+				</notempty>
+            </ul>
+            
+            <div class="fr depar_map">
+                <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+                <div class="dituContent" id="dituContent"></div>
+                <script type="text/javascript" src="__JS__/map.js"></script>
+                <div class="share">
+                    <ul>
+                        <li>
+                            <a href="javaScript:;" class="icon iconfont iconShare">&#xe6ab;</a>
+                            <!--<a href="javaScript:;" class="icon2"><img src="__IMG__/icon11.png" alt=""/></a>-->
+                        </li>
+                        <li>
+                            <a href="javaScript:;" class="icon iconfont iconShare2">&#xe65a;</a>
+                            <!--<a href="javaScript:;" class="icon"><img src="__IMG__/icon02.png" alt=""/></a>-->
+                            <!--<a href="javaScript:;" class="icon2"><img src="__IMG__/icon12.png" alt=""/></a>-->
+                        </li>
+                        <li>
+                            <a href="javaScript:;" class="icon"><img src="__IMG__/icon03.png" alt=""/></a>
+                            <a href="javaScript:;" class="icon2"><img src="__IMG__/icon13.png" alt=""/></a>
+                        </li>
+                        <li>
+                            <a href="javaScript:;" class="icon"><img src="__IMG__/icon04.png" alt=""/></a>
+                            <a href="javaScript:;" class="icon2"><img src="__IMG__/icon14.png" alt=""/></a>
+                        </li>
+                        <li>
+                            <a href="javaScript:;" class="icon iconfont iconShare">&#xe65b;</a>
+                            <!--<a href="javaScript:;" class="icon"><img src="__IMG__/icon05.png" alt=""/></a>-->
+                            <!--<a href="javaScript:;" class="icon2"><img src="__IMG__/icon15.png" alt=""/></a>-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </volist>
+    </div>
+</div>
+<script>
+    $('#nav a:eq(0)').addClass('current');
+</script>
+<include file="Public/footer"/>

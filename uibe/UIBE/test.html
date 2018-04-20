@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>UIBE</title>
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
+</head>
+<body>
+<div>
+    <script type="text/javascript">  
+    //http://ip.taobao.com/service/getIpInfo.php?ip=124.127.161.254
+    $.ajax({
+		    url: 'http://ip.taobao.com/service/getIpInfo.php?ip='+returnCitySN["cip"],
+		    type: 'GET',
+		    dataType: 'JSONP',
+		    success: function(data){
+		       console.log(JSON.stringify(data));
+		    },
+		    error: function(data){
+		       console.log(data);
+		    }
+		});
+    </script>
+</div>
+</body>
+</html>

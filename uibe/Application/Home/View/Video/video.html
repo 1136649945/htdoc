@@ -1,0 +1,156 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+            	<volist name="video" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/video/icon.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="navUl navUl_video">
+                <notempty name="list['_']">
+		            <volist name="list['_']" id="vo">
+                    <li <if condition="$block eq $vo['gattr1']">class="current"</if>>
+                        <a href="/index.php/Home/Video/video?block={$vo['gattr1']}" class="navUl_a">
+                            <em>{$vo[$title]}</em>
+                            <span class="iconfont iconAdd">&#xe6f1;</span>
+                        </a>
+                    </li>
+                    </volist>
+                </notempty>
+                </ul>
+                </volist>
+                <volist name="relate" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/video/icon_link.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="related_links">
+                <notempty name="list['_']">
+		            <volist name="list['_']" id="vo">
+                    	<li><a href="{$vo['url']}" <if condition="$vo['target'] eq 1"> target="_blank"</if>>{$vo[$title]}</a></li>
+                    </volist>
+                 </notempty>
+                </ul>
+                </volist>
+                <div class="dime">
+                    <div class="_dime">
+                        <a href="javaScript:;">
+                        <volist name="relatepicture" id="vo">
+                        <if condition="$key eq 0">
+                        	<img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+                        </if>
+                        </volist>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                    <volist name="picture" id="vo">
+                        <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+                    </volist>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+                        <!-- 面包屑 -->
+	                		{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                        
+                    </div>
+                    <div class="matterBox">
+                        <ul class="video">
+                         	<volist name="videolist" id="vo">
+	                            <li data-video="/{$vo['path']}">
+	                                <div class="video_box">
+	                                    <img src="/{$vo['imgpath']}" alt="" class="video_bg"/>
+	                                    <img src="__IMG__/video/play.png" alt="" class="video_play"/>
+	                                </div>
+	                                <p>{$vo.title}</p>
+	                            </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 视频窗口-->
+<div id="videoWindow">
+    <div class="videoHead">
+        <img src="__IMG__/video/videoClose.png" alt="" class="videoClose"/>
+    </div>
+    <div class="videoTest">
+        <video controls preload="auto">
+            <source src="video/index.mp4">
+        </video>
+    </div>
+</div>
+<!-- end-->
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<script>
+    $('#nav a:eq(2)').addClass('current');
+    $('ul.navUl li:first-child a').css('border-top','0');
+    //视频切换
+    $('.video li img.video_play').bind('click',function(){
+        var ths = $(this).parents('li');
+        var thsSrc = ths.attr('data-video');
+        var thsVideo = $('#videoWindow video');
+        $('#videoWindow').show();
+        thsVideo.attr('src',thsSrc);
+        thsVideo.trigger('play');
+        thsVideo.click(function() {
+            if (thsVideo.hasClass('pause')) {
+                thsVideo.trigger("play");
+                $(this).removeClass('pause');
+                $(this).addClass('play');
+            } else {
+                thsVideo.trigger("pause");
+                $(this).removeClass('play');
+                $(this).addClass('pause');
+            }
+        })
+    });
+    //视频窗口
+    if($(window).width()<=1024){
+        var videoW = $(window).width();
+        var videoH = $(window).height();
+    }else if($(window).width()>1024 && $(window).width()<1600){
+        var videoW = 1024;
+        var videoH = 576;
+    }else if($(window).width()>1600){
+        var videoW = 1280;
+        var videoH = 720;
+    }
+    $('#videoWindow').width(videoW+'px');
+    $('#videoWindow').height(videoH+'px');
+    $('#videoWindow').css('margin-left',-videoW/2+'px');
+    $('#videoWindow').css('margin-top',-videoH/2+'px');
+    $('.videoTest').height(videoH+'px');
+    //视频关闭
+    $('.videoClose').click(function(){
+        $('#videoWindow').hide();
+        $('#videoWindow video').trigger('pause').removeClass('play').addClass('pause')
+    });
+</script>
+<include file="Public/footer"/>

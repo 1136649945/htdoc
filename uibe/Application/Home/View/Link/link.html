@@ -1,0 +1,94 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+                <volist name="link" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/link/icon.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="navUl navUl_link">
+                	<notempty name="list['_']">
+		            <volist name="list['_']" id="vo">
+                    <li  <if condition="$block eq $vo['gattr1']">class="current"</if>>
+                        <a href="/index.php/Home/Link/link?block={$vo['gattr1']}" class="navUl_a">
+                            <em>{$vo[$title]}</em>
+                            <span class="iconfont iconAdd">&#xe6f1;</span>
+                        </a>
+                    </li>
+                    </volist>
+                    </notempty>
+                </ul>
+                </volist>
+                <volist name="relate" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/video/icon_link.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="related_links">
+                <notempty name="list['_']">
+		            <volist name="list['_']" id="vo">
+                    	<li><a href="{$vo['url']}" <if condition="$vo['target'] eq 1"> target="_blank"</if>>{$vo[$title]}</a></li>
+                    </volist>
+                 </notempty>
+                </ul>
+                </volist>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                        <volist name="picture" id="vo">
+                        	<img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+                    	</volist>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+                        <!-- 面包屑 -->
+	                	{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                    </div>
+                    <div class="matterBox">
+                        <ul class="links">
+                        	<if condition="linkpic neq null"> 
+                        	<volist name="linkpic" id="vo">
+                            <li>
+                                <a href="{$vo['link']}" target="_blank" class="links_img">
+                                    <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+                                </a>
+                                <p><a href="{$vo['link']}" target="_blank">{$vo['title']}</a></p>
+                            </li>
+                           	</volist>
+                           	</if>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<script>
+    $('#nav a:eq(5)').addClass('current');
+    $('ul.navUl li:first-child a').css('border-top','0');
+    //默认
+    $('ul.navUl>li:eq(0)').find('ol.navOl').fadeIn();
+</script>
+<include file="Public/footer"/>

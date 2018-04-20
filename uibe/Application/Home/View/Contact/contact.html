@@ -1,0 +1,170 @@
+<include file="Public/header"/>
+<!-- banner-->
+<div class="banner_contact">
+	<volist name="picture" id="vo">
+    <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+    </volist>
+</div>
+<!-- contact-->
+<div class="contact">
+    <div class="wrap">
+        <div class="_contact">
+            <h1>
+            <!-- 面包屑 -->
+               {$words['w3']}：
+               <volist name="crumb" id="vo">
+                	<if condition="$key eq 0">
+                  	<a href="{$vo['url']}">{$vo[$title]}</a>
+                  	>
+                 	</if>
+                 	<if condition="$key eq 1">
+                  	<a href="javascript:;">{$vo[$title]}</a>
+                 	</if>
+                </volist>
+                <span></span>
+                <em></em>
+            </h1>
+            <div class="contact_box">
+                <div class="cL">
+                    <img src="__IMG__/contact/clock.png" alt="" class="clock"/>
+                    <h2>08:30—11:30</h2>
+                    <h2>13:30—16:30</h2>
+                	<h4>{$words['w25']}</h4>
+               		<img src="__IMG__/contact/code.jpg" alt="" class="code"/>
+                   	<p>{$words['w16']}</p>
+                    
+                </div>
+                <div class="cM">
+                	<h2>{$words['w18']}</h2>
+                    <p class="cM_p1">
+                		{$words['w5']}：（86-10）64492327，64492329</p>
+                    <p class="cM_p2">
+                		{$words['w7']}：（86-10）64493820
+                	</p>
+                    <h2>{$words['w11']}</h2>
+                    <p class="cM_p1">
+                		{$words['w5']}：（86-10）64492327，64492329</p>
+                    <p class="cM_p2">
+                		{$words['w7']}：（86-10）64493820</p>
+                    <h2>
+                		{$words['w13']}
+                	</h2>
+                    <p class="cM_p1">
+                		{$words['w13']}
+                	</p>
+                    <p class="cM_p2">
+                		{$words['w9']}：100029
+                	</p>
+                </div>
+                <div class="cR">
+                    <h2>
+                		{$words['w14']}
+               		</h2>
+                    <form action="#" id="activity" class="activity">
+                        <select name="acttype" class="act_type">
+                        <volist name="activetype" id="vo">
+                            <option value="{$vo['id']}">{$vo[$title]}</option>
+                        </volist>
+                        </select>
+                        <input type="button" class="btn" onclick="subActive()" value="{$words['w27']}"/>
+                        <select name="activement" class="section">
+                        <volist name="activement" id="vo">
+                            <option value="{$vo['id']}">{$vo[$title]}</option>
+                        </volist>
+                        </select>
+                        <select name="actclass" class="act_class">
+                        <volist name="activtratype" id="vo">
+                            <option value="{$vo['id']}">{$vo[$title]}</option>
+                        </volist>
+                        </select>
+                        <input type="text" name="name" class="name" placeholder="{$words['w26']}"/>
+                    <input type="text" name="tel" class="tel" placeholder="{$words['w5']}"/>
+                        <textarea class='act_tex' name="content" placeholder="{$words['w24']}"></textarea>
+                    </form>
+                    <h2>{$words['w15']}</h2>
+                    <p>E-mail:  sie@uibe.edu.cn</p>
+                    <p>nondegree@163.com（{$words['w20']}）</p>
+                    <p>degreeinchinese@163.com（{$words['w21']}）</p>
+                    <p>degreeinenglish@163.com（{$words['w22']}）</p>
+                    <p>uibescholarship@163.com（{$words['w23']}）</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ditu-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+<div class="dituContent" id="dituContent" data-point="116.43424,39.98642"></div>
+<script src="__STATIC__/layer.js"></script>
+<script type="text/javascript" src="__JS__/mapContact.js"></script>
+<script type="text/javascript">
+	var diatitle = "{$words['w36']}";
+	var type = "{$words['w32']}";
+	var ment = "{$words['w33']}";
+	var proj = "{$words['w34']}";
+	var name = "{$words['w26']}";
+	var tel = "{$words['w5']}";
+	var cont = "{$words['w35']}";
+	var success = "{$words['w37']}";
+	var fail = "{$words['w38']}";
+</script>
+<script>
+    $('#nav a:eq(6)').addClass('current');
+    function subActive(){
+    	if($('input.name').val()==''){
+    		$('input.name').addClass('ipt_color');
+    		$('input.name').focus();
+    		return;
+    	}else if($('input.tel').val()==''){
+    		$('input.tel').addClass('ipt_color');
+    		$('input.tel').focus();
+    		return;
+    	}else{
+    		var url = '/index.php/Home/Active/add';
+        	var from = $("#activity").serialize();
+        	var test = 
+        	type+"："+$('select.act_type option:selected').text()+'<br/>'
+        	+ment+"："+$('select.section option:selected').text()+'<br/>'
+        	+proj+"："+$('select.act_class option:selected').text()+'<br/>'
+        	+name+"："+$('input.name').val()+'<br/>'
+        	+tel+"："+$('input.tel').val()+'<br/>'
+        	+cont+"："+$('textarea.act_tex').val();
+        	layer.alert(test, {title:diatitle});
+        	$('.layui-layer-btn0').on('click', function(){
+        		$.ajax({
+	    			type: 'post',
+	    			url: url,
+	    			dataType: "json",
+	    			data: from,
+	    			success: function(data){
+	    				if(data.status){
+	    					$('#activity')[0].reset();
+	    					layer.msg(success, {time: 1000,icon: 1});
+	    				}else{
+	    					layer.msg(fail, {time: 1000,icon: 2});
+	    				}
+	    			},
+	    			error: function(data){
+	    				layer.msg(fail, {time: 1000,icon: 2});
+	    			}
+	    		});
+        	});
+    	}
+    	
+    }
+    $('input.name').bind('blur',function(){
+    	if($(this).val()==''){
+    		$(this).addClass('ipt_color');
+    	}else{
+    		$(this).removeClass('ipt_color');
+    	}
+    });
+    $('input.tel').bind('blur',function(){
+    	if($(this).val()==''){
+    		$(this).addClass('ipt_color');
+    	}else{
+    		$(this).removeClass('ipt_color');
+    	}
+    });
+</script>
+<include file="Public/footer"/>

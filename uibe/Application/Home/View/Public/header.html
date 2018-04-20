@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{:C('WEB_SITE_TITLE')}</title>
+    <link rel="shortcut icon" href="__ROOT__/Public/favicon.ico">
+    <meta name="keywords" content="{:C('WEB_SITE_TITLE')}"/>
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="{:C('WEB_SITE_TITLE')}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <link rel="stylesheet" type="text/css" href="__CSS__/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="__ICONFONT__/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/slide.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/csshake.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/home.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/version-zh.css"/>
+    <link rel="stylesheet" type="text/css" href="__CSS__/list.css"/>
+    <script type="text/javascript" src="__STATIC__/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="__JS__/slide.js"></script>
+    <script type="text/javascript" src="__JS__/prism.min.js"></script>
+   	<script type="text/javascript" >
+    	var LANG_SET = "{$lang_set}";
+	</script>
+    <script type="text/javascript" src="__JS__/home.js"></script>
+    <script type="text/javascript" src="__JS__/paging.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="wrap">
+        <div id="nav" class="header_left fl">
+        <volist name="channelf" id="vo1">
+            <a href="{$vo1['url']}?l={$lang_set}" <if condition="$vo1.target eq 1"> target="_blank"</if>   >{$vo1[$title]}</a>
+            <em></em>
+        </volist>
+        </div>
+        <div class="fl header_phone">
+            <img src="__IMG__/logo.png" alt=""/>
+        </div>
+        <div class="header_right fr">
+            <div class="fr language">
+                <div class="languageCur">
+                    <div class="languageBox">
+                        <span class="current" data-language="zh">中文</span>
+                        <span data-language="en">EN</span>
+                    </div>
+                    <img src="__IMG__/push.png" alt="" id="push"/>
+                </div>
+                <ul class="languageMore">
+                    <li data-language="en">EN</li>
+                    <li data-language="ko">&#54620;&#44397;&#50612;</li>
+                    <li data-language="ja">日本語</li>
+                    <li data-language="fr">FRAN&Ccedil;AIS</li>
+                    <li data-language="ru">РУССКИЙ</li>
+                    <li data-language="es">Espa&ntilde;ol</li>
+                    <li data-language="de">Deutsch</li>
+                    <li data-language="ar">&#1575;&#1604;&#1604;&#1594;&#1577; &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</li>
+                </ul>
+            </div>
+            <div class="fr _share">
+                <a href=""><img src="__IMG__/share01.png" alt=""/></a>
+                <a href=""><img src="__IMG__/share02.png" alt=""/></a>
+                <a href=""><img src="__IMG__/share03.png" alt=""/></a>
+            </div>
+        </div>
+        <div class="cb"></div>
+    </div>
+</div>
+<div class="logo-search">
+    <div class="wrap">
+        <a class="fl logoImg" href="index.php"><img src="__IMG__/logo.png" alt=""></a>
+        <div class="fl logoEn"><img src="__IMG__/logoEn.png" alt=""/></div>
+        <a href="" target="_blank" class="fr problem current">
+            {$words['w2']}
+            <i class="preview-item big transp shake-constant shake-constant--hover shake-little" id="pr2">
+                <span class="iconfont iconMessage">&#xe6f5;</span>
+                <!--<img src="__IMG__/promptCur.png" alt=""/>-->
+            </i>
+        </a>
+        <div class="fr search">
+            <div class="fl key_box">
+		        <input type="text" placeholder="{$words['w1']}...." id="keywords"/>
+            </div>
+            <a href="javaScript:;" class="_search" id="search">
+                <img src="__IMG__/search.png" alt=""/>
+            </a>
+            <div class="cb"></div>
+        </div>
+        <div class="cb"></div>
+    </div>
+</div>
+<div class="menu">
+    <div class="wrap">
+        <ul class="menu_ul">
+        	<volist name="channels" id="list">
+	            <li>
+	                <a href="{$list['url']}?l={$lang_set}" <if condition="$list.target eq 1"> target="_blank"</if>>{$list[$title]}</a>
+	                <div class="nav">
+	                <notempty name="list['_']">
+	                	<volist name="list['_']" id="vo2">
+						 	<p><a href="{$vo2['url']}&l={$lang_set}" <if condition="$vo2.target eq 1"> target="_blank"</if>>{$vo2[$title]}</a></p>
+						</volist>
+					</notempty>
+	                </div>
+	            </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<!--mouble_nav-->
+<div class="mouble" style="background-image: url('__IMG__/mouble.png')"></div>
+<div class="mouble_nav">
+    <ul>
+    	<volist name="channelfs" id="vo3">
+            <li><a href="{$vo3['url']}">{$vo3[$title]}</a></li>
+        </volist>
+    </ul>
+</div>
+<!--关键词-->
+<input type="hidden" value="{$words['w91']}" id="first_page"/>
+<input type="hidden" value="{$words['w92']}" id="last_page"/>
+<input type="hidden" value="{$words['w89']}" id="view_details"/>
+<input type="hidden" value="{$words['w93']}" id="month"/>

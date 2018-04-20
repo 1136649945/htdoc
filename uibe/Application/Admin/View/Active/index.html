@@ -1,0 +1,75 @@
+<extend name="Public/base" />
+
+<block name="body">
+<div class="a4-page">
+
+
+	<div class="main-title">
+		<h2>提交活动管理</h2>
+	</div>
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th>活动类型</th>
+					<th>部门</th>
+					<th>种类</th>
+					<th>姓名</th>
+					<th>电话</th>
+					<th>报告内容</th>
+				</tr>
+			</thead>
+			<tbody>
+				<notempty name="data"> <volist name="data" id="vo">
+				<tr style="height:50px;">
+					<td>{$active[$vo['acttype']]}</td>
+					<td>{$active[$vo['activement']]}</td>
+					<td>{$active[$vo['actclass']]}</td>
+					<td>{$vo.name}</td>
+					<td>{$vo.tel}</td>
+					<td>{$vo.content}</td>
+				</tr>
+				</volist> <else />
+				<td colspan="10" class="text-center">aOh! 暂时还没有内容!</td>
+				</notempty>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+	</div>
+</div>
+<div class="page" style="position: absolute; bottom: 0px;">{$page}</div>
+</block>
+
+<block name="script"> <script type="text/javascript">
+        $(function() {
+            //导航高亮
+            highlight_subnav('{:U('index')}');
+            $('#select').change(function(){
+            	var block = $(this).children('option:selected').val();
+            	var url = '{:U(index)}';
+            	url += "&block="+block;
+            	window.location.href=url;
+            });
+        });
+        
+        function deleteGroup(id){
+        	if(id){
+        		$.ajax(
+        		{
+        			url:"{:U('del')}",
+        			type:"POST",
+        			dataType:"json",
+        			data:{"id":id},
+        			success:function(data){
+        				if(data.status){
+        					window.location.reload();
+        				}else{
+        					alert(data.info);
+        				}
+        			},error:function(data){
+        				alert("服务器出错了！");
+        			}
+        		});
+        	}
+        }
+    </script> </block>

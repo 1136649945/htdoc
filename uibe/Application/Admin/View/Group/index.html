@@ -1,0 +1,84 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>导航分组管理 </h2>
+    </div>
+
+    <div class="cf">
+        <a class="btn" href="{:U('add')}">新 增</a>
+    </div>
+
+    <div class="data-table table-striped">
+        <form class="ids">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>排序</th>
+                        <th>隐藏</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+				<notempty name="data">
+                <volist name="data" id="group">
+                    <tr>
+                        <td>{$group.id}</td>
+                        <td>{$group.title}</td>
+                        <td>{$group.sort}</td>
+                        <td>
+                            <if condition="$group['hide'] eq 0">
+                            	否    
+                            <else />
+                            	是
+                            </if>
+                        </td>
+                        <td>
+                            <a title="编辑" href="{:U('edit?id='.$group['id'])}">编辑</a>
+                            <a class="confirm" title="删除" href="javascript:deleteGroup({$group['id']});">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+				<else/>
+				<td colspan="10" class="text-center"> aOh! 暂时还没有内容! </td>
+				</notempty>
+                </tbody>
+            </table>
+        </form>
+        <!-- 分页 -->
+        <div class="page">
+
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(function() {
+            //导航高亮
+            highlight_subnav('{:U('index')}');
+        });
+        function deleteGroup(id){
+        	if(id){
+        		$.ajax(
+        		{
+        			url:"{:U('del')}",
+        			type:"POST",
+        			dataType:"json",
+        			data:{"id":id},
+        			success:function(data){
+        				if(data.status){
+        					window.location.reload();
+        				}else{
+        					alert(data.info);
+        				}
+        			},error:function(data){
+        				alert("服务器出错了！");
+        			}
+        		});
+        	}
+        }
+    </script>
+</block>

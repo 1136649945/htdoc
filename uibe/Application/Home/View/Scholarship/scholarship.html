@@ -1,0 +1,76 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+                <volist name="scholarship" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/scholarship/icon.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="navUl navUl_ship">
+                	<notempty name="list['_']">
+		                <volist name="list['_']" id="vo">
+	                    <li <if condition="($pcate eq $vo['category_id']) OR ($category_id eq $vo['category_id'])"> class="current"</if> >
+	                        <a href="/index.php/Home/Scholarship/scholarship?category_id={$vo['category_id']}" class="navUl_a">
+	                            <em>{$vo[$title]}</em>
+	                            <img src="__IMG__/icon/add.png" class="ia" alt=""/>
+	                            <img src="__IMG__/icon/add_cur.png" class="ia2" alt=""/>
+	                        </a>
+	                        <notempty name="vo['_']">
+		                	<ol class="navOl" <if condition="$pcate eq $vo['category_id']">style="display:block;"</if>>
+		                	<volist name="vo['_']" id="vo1">
+	                            <li <if condition="$category_id eq $vo1['category_id']">class="ol_li_current"</if>><a href="/index.php/Home/Scholarship/scholarship?category_id={$vo1['category_id']}"> >> <span>{$vo1[$title]}</span></a></li>
+	                        </volist>
+	                        </ol>
+	                        </notempty>
+	                    </li>
+	                    </volist>
+                    </notempty>
+                </ul>
+                </volist>
+                <img src="__IMG__/navHide.png" alt="" id="goBack" class="goBack"/>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                        <volist name="picture" id="vo">
+	                        <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+	                    </volist>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+                        <!-- 面包屑 -->
+	                		{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                    </div>
+                    <div class="matterBox">
+                        <div class="scholarship">
+                            <volist name="docinfo" id="vo">
+                            {$vo.content}
+                            </volist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<include file="Public/footer"/>

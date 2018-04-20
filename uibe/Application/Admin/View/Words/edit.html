@@ -1,0 +1,86 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{$info['id']?'编辑':'新增'}单词</h2>
+    </div>
+    <form action="{:U(edit)}" method="post" enctype="multipart/form-data"  class="form-horizontal" >
+        <input type="hidden" name="id" value="{$info['id']|default=''}"/>
+        <div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">中文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="title"
+						value="{$info.title|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">英文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleen"
+						value="{$info.titleen|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">韩文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleko"
+						value="{$info.titleko|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">日文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleja"
+						value="{$info.titleja|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">法文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlefr"
+						value="{$info.titlefr|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">俄文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleru"
+						value="{$info.titleru|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">西班牙文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlees"
+						value="{$info.titlees|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">德文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlede"
+						value="{$info.titlede|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">阿拉伯文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlear"
+						value="{$info.titlear|default=''}">
+				</div>
+			</div>
+		</div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    	highlight_subnav('{:U('index')}');
+    	Think.setValue("hide", {$info.hide|default = 0});
+    </script>
+</block>

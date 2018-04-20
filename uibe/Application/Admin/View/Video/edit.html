@@ -1,0 +1,85 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{$info['id']?'编辑':'新增'}导航图片</h2>
+    </div>
+    <form action="{:U(edit)}" method="post" enctype="multipart/form-data"  class="form-horizontal" >
+        <input type="hidden" name="block" value="{$info['block']|default=''}"/>
+        <input type="hidden" name="path" value="{$info['path']|default=''}"/>
+         <input type="hidden" name="id" value="{$info['id']|default=''}"/>
+        <div class="form-item">
+            <label class="item-label">标题</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+            </div>
+        </div>
+       <input type="file" name="img" data="img" accept="image/*" id="img" style="display:none;"/>
+        <div class="layui-upload" >
+	  		<button type="button" class="layui-btn" id="uploadimg" >选择视频封面</button> 
+	  		<blockquote class="layui-elem-quote layui-quote-nm" style="width: 365px;">
+	    		预览：
+	    		<div class="layui-upload-list" id="viewimg"></div>
+	 		</blockquote>
+		</div>
+        <div class="layui-form-item">
+			<div class="layui-inline">
+	            <label class="layui-form-label">排序</label>
+	            <div class="layui-input-inline" style="width: 100px;">
+	                <input type="text" class="layui-input" name="sort" value="{$info.sort|default=0}">
+	            </div>
+        	</div>
+        	<div class="layui-inline">
+	            <label class="layui-form-label">隐藏</label>
+	            <div class="layui-input-inline" style="margin-top: 10px;">
+	            	<label class="radio"><input type="radio" name="hide" value="1">是</label>
+	            	<label class="radio"><input type="radio" name="hide" value="0">否</label>
+	            </div>
+        	</div>
+		</div>
+		<div class="layui-inline">
+				<div class="layui-inline">
+					<label class="layui-form-label">视频分类</label>
+					<div class="layui-input-inline" style="width: 100px;">
+						<select name="block" style="margin-top: 5px;width: 200px;">
+						<volist name="block" id="vo">
+							<if condition="$info['block'] eq $vo['id']"> 
+								<option value="{$vo.id}" selected="selected">{$vo.title}</option>
+							<else />
+								<option value="{$vo.id}" >{$vo.title}</option>
+							</if>
+						</volist>
+						</select>
+					</div>
+				</div>
+			</div>
+		<input type="file" name="video" data="video" accept="video/mp4" id="video" style="display:none;"/>
+        <div class="layui-upload" >
+	  		<button type="button" class="layui-btn" id="uploadvideo" >选择视频</button> 
+	  		<blockquote class="layui-elem-quote layui-quote-nm" style="width: 365px;">
+	    		预览：
+	    		<div class="layui-upload-list" id="viewvideo"></div>
+	 		</blockquote>
+		</div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+    <div class="view-video">
+    	<label class="layui-form-label">视频封面</label>
+    	<br/>
+    	<img src="/{$info['imgpath']}" style="max-height: 350px;max-width: 350px;"/>
+    	<br/>
+       	<label class="layui-form-label">视频</label>
+    	<br/>
+       	<video src="/{$info['path']}" style="max-height: 350px;max-width: 350px;"></video>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    	highlight_subnav('{:U('index')}');
+    	Think.setValue("hide", {$info.hide|default = 0});
+    </script>
+</block>

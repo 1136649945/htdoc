@@ -1,0 +1,161 @@
+<extend name="Public/base" />
+
+<block name="body">
+<div class="a4-page">
+
+
+	<div class="main-title">
+		<h2>单词管理</h2>
+	</div>
+
+	<div class="cf">
+		<a class="btn" href="javascript:dialog(false);">添加</a>
+	</div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>中文</th>
+					<th>英文</th>
+					<th>韩文</th>
+					<th>日文</th>
+					<th>法文</th>
+					<th>俄文</th>
+					<th>西班牙文</th>
+					<th>德文</th>
+					<th>阿拉伯文</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<notempty name="data"> <volist name="data" id="vo">
+				<tr style="height:40px;">
+					<td>{$vo.id}</td>
+					<td>{$vo.title}</td>
+					<td>{$vo.titleen}</td>
+					<td>{$vo.titleko}</td>
+					<td>{$vo.titleja}</td>
+					<td>{$vo.titlefr}</td>
+					<td>{$vo.titleru}</td>
+					<td>{$vo.titlees}</td>
+					<td>{$vo.titlede}</td>
+					<td>{$vo.titlear}</td>
+					<td><a title="编辑" href="{:U('edit?id='.$vo['id'])}">编辑</a></td>
+				</tr>
+				</volist> <else />
+				<td colspan="10" class="text-center">aOh! 暂时还没有内容!</td>
+				</notempty>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+	</div>
+</div>
+<div class="page" style="position: absolute; bottom: 0px;">{$page}</div>
+<div class="dialog" style="left: 28%;width:700px;height:325px;">
+	<form action="{:U(add)}" method="post" enctype="multipart/form-data"
+		class="form-horizontal">
+		<fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 0px;">
+			<legend>单词添加</legend>
+		</fieldset>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">中文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="title"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">英文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleen"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">韩文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleko"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">日文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleja"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">法文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlefr"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">俄文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titleru"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">西班牙文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlees"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">德文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlede"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 80px;">阿拉伯文</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="titlear"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-item bottom-button">
+			<button class="btn submit-btn" type="submit"
+				target-form="form-horizontal">确定</button>
+			<button type="button" class="btn btn-return"
+				onclick="javascript:dialog(true);">关闭</button>
+		</div>
+	</form>
+</div>
+<div class="ui-mask"></div>
+</block>
+
+<block name="script"> <script type="text/javascript">
+        $(function() {
+            //导航高亮
+            highlight_subnav('{:U('index')}');
+            $('#select').change(function(){
+            	var block = $(this).children('option:selected').val();
+            	var url = '{:U(index)}';
+            	url += "&block="+block;
+            	window.location.href=url;
+            });
+        });
+        
+        function deleteGroup(id){
+        	if(id){
+        		$.ajax(
+        		{
+        			url:"{:U('del')}",
+        			type:"POST",
+        			dataType:"json",
+        			data:{"id":id},
+        			success:function(data){
+        				if(data.status){
+        					window.location.reload();
+        				}else{
+        					alert(data.info);
+        				}
+        			},error:function(data){
+        				alert("服务器出错了！");
+        			}
+        		});
+        	}
+        }
+    </script> </block>

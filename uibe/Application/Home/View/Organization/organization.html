@@ -1,0 +1,209 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+                <volist name="organization" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/organization/icon.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="navUl navUl_organ">
+                	<notempty name="list['_']">
+		                <volist name="list['_']" id="vo">
+	                    <li <if condition="$category_id neq null"><if condition="($category_id eq $vo['category_id']) OR ($parcat eq $vo['category_id'])">class="current"</if> <else/> <if condition="$key eq 0">class="current"</if>  </if>>
+	                        <a href="/index.php/Home/Organization/organization?category_id={$vo['category_id']}" data-url="" class="navUl_a">
+	                            <em>{$vo[$title]}</em>
+                                <span class="iconfont iconAdd">&#xe6f1;</span>
+	                        </a>
+	                        <notempty name="vo['_']">
+		                	<ol class="navOl">
+		                	<volist name="vo['_']" id="vo1">
+	                            <li><a href="javaScript:;"> >> <span>{$vo1[$title]}</span></a></li>
+	                        </volist>
+	                        </ol>
+	                        </notempty>
+	                    </li>
+	                    </volist>
+                    </notempty>
+                </ul>
+                </volist>
+                <img src="__IMG__/navHide.png" alt="" id="goBack" class="goBack"/>
+                <div class="meet meet_organ">
+                    <div class="meet_imgs">
+                        <ul>
+                        <volist name="rollpicture" id="vo">
+                            <li>
+                                <a href="javascript:;"><img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/></a>
+                            </li>
+                         </volist>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meet_btn">
+                    <!-- span-->
+                </div>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                        <volist name="picture" id="vo">
+	                        <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+	                    </volist>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+                        <!-- 面包屑 -->
+	                	{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                    </div>
+                    <div class="matterBox">
+                    <script>
+			               var contentarr = null;
+			        </script>
+                    <if condition="$docinfo neq null">
+                    	<volist name="docinfo" id="vo">
+	                    		{$vo.content}
+	                    </volist>
+                    <else/>
+                     	<if condition="$docarr neq null">
+                            <script>
+                                contentarr = {$docarr};
+                            </script>
+                        </if>
+                        <ul class="organization">
+                          <!--  <li>
+                               <div class="organ_date">
+                                   <h4>17</h4>
+                                   <h5>2月</h5>
+                               </div>
+                               <div class="organ_br">
+                                   <em></em>
+                               </div>
+                               <div class="organ_img">
+                                   <a href=""><img src="images/organization/organ01.jpg" alt=""/></a>
+                               </div>
+                               <div class="organ_cont">
+                                   <h3><a href="">CATTI中国•高级翻译专业从业资格认证</a></h3>
+                                   <p>
+                                       全国翻译专业资格（水平）考试是受国家人力资源和社会保障部委托，由中国外文出版发行事业局负责实施与管理的一项国家级职业资格考试，已纳入国家职业资格证书制度。2017年首次面向外籍人士推出的CATTI考试培训.....
+                                       <a href="">[ 查看详情 ]</a>
+                                   </p>
+                               </div>
+                           </li> -->
+                            
+                        </ul>
+                        <div id="page" class="page"></div>
+                    </if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<script>
+    $('.menu_ul li:eq(6)').addClass('current');
+    $('ul.navUl li:first-child a').css('border-top','0');
+    //默认
+    $('ul.navUl>li:eq(0)').find('ol.navOl').fadeIn();
+
+    /*面包屑*/
+    for(var i=0;i<$('ul.navUl>li').length;i++){
+        var liCur = $('ul.navUl>li').eq(i);
+        if(liCur.hasClass('current')){
+            var cont = liCur.find('a.navUl_a em').text();
+            $('#activecrumb a').text(cont);
+        }
+    }
+    /*内容*/
+    if(contentarr!=null && contentarr.length>0){
+        console.log(contentarr);
+        var num = 5;
+        var total = contentarr.length;
+        var n = Math.ceil(total / num);
+        //调取内容
+        piecewiseCont(contentarr, 0);
+        //分页
+        $("#page").show();
+        $("#page").paging({
+            pageNo:1,//默认第一页
+            totalPage: n,//页数
+            totalSize: total,//总条数
+            callback: function(n) {
+                piecewiseCont(contentarr, n-1);
+            }
+        });
+    }else{
+        $("#page").hide();
+    }
+    function piecewiseCont(arr, n){
+        $('ul.organization').empty();
+        var arrL = arr.length;
+        var html = '';
+        for (var i = n * num; i < (n + 1) * num && i < arrL; i++) {
+            html += '<li><div class="organ_date">'
+                    +'<h4>'+_Date(arr[i].create_time)+'</h4>'
+                    +'<h5>'+_Month(arr[i].create_time)+$('#month').val()+'</h5>'
+                    +'</div>'
+                    +'<div class="organ_br">'
+                    +'<em></em>'
+                    +'</div>'
+                    +'<div class="organ_img">'
+                    +'<a href="/index.php/Home/Organization/organization?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">'
+                    +'<img src="'+arr[i].path+'" alt=""/>'
+                    +'</a>'
+                    +'</div>'
+                    +'<div class="organ_cont">'
+                    +'<h3><a href="/index.php/Home/Organization/organization?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">'
+                    + arr[i].title
+                    +'</a></h3>'
+                    +'<p>'
+                    + strLength(arr[i].descr)
+                    +'<a href="/index.php/Home/Organization/organization?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">['+$('#view_details').val()+']</a>'
+                    +'</p>'
+                    +'</div>'
+                    +'</li>';
+        }
+        $('ul.organization').append(html);
+        $('.organization li:last-child').css('border-bottom','0');
+    }
+    /*内容长度*/
+    function strLength(cont) {
+        var len = 100;
+        var l = cont.length;
+        if (l > len) {
+            cont = cont.substring(0, len) + '...';
+        }
+        return cont;
+    }
+    /*月*/
+    function _Month(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        M = date.getMonth();
+        return M;
+    }
+    /*日*/
+    function _Date(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        D = (date.getDate() + 1 < 10 ? '0' + (date.getDate() + 1) : date.getDate() + 1) + ' ';
+        return D;
+    }
+</script>
+<include file="Public/footer"/>

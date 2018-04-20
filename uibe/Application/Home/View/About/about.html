@@ -1,0 +1,222 @@
+<include file="Public/header"/>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+            	<volist name="about" id="list">
+                <div class="navL_h">
+                    <img src="__IMG__/about/icon.png" alt=""/>
+                    <em>|</em>
+                    {$list[$title]}
+                </div>
+                <ul class="navUl">
+                	<notempty name="list['_']">
+		                <volist name="list['_']" id="vo">
+	                    <li <if condition="$category_id neq null"><if condition="($category_id eq $vo['category_id']) OR ($parcat eq $vo['category_id'])">class="current"</if> <else/> <if condition="$key eq 0">class="current"</if>  </if>>
+	                        <a href="/index.php/Home/About/about?category_id={$vo['category_id']}" class="navUl_a" >
+	                            <em>{$vo[$title]}</em>
+                                <span class="iconfont iconAdd">&#xe6f1;</span>
+	                            <!--<img src="__IMG__/icon/add.png" class="ia" alt=""/>-->
+	                            <!--<img src="__IMG__/icon/add_cur.png" class="ia2" alt=""/>-->
+	                        </a>
+	                        <notempty name="vo['_']">
+		                	<ol class="navOl" data-id={$category_id} <if condition="$category_id neq null"><if condition="($category_id eq $vo['category_id']) OR ($parcat eq $vo['category_id'])">style="display:block;"</if> </if>>
+		                	<volist name="vo['_']" id="vo1">
+	                            <li data-id={$vo1['category_id']}><a href="javaScript:;"> >> <span>{$vo1[$title]}</span></a></li>
+	                        </volist>
+	                        </ol>
+	                        </notempty>
+	                    </li>
+	                    </volist>
+                    </notempty>
+                </ul>
+                </volist>
+                <volist name="document" id="vo">
+                <div class="dime">
+                    <div class="_dime">
+                        <a href="javaScript:;"><img src="{$vo['path']}" alt=""/></a>
+                    </div>
+                    <p>{$vo['title']}</p>
+                </div>
+                </volist>
+                <img src="__IMG__/navHide.png" alt="" id="goBack" class="goBack"/>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                    <volist name="picture" id="vo">
+                        <img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/>
+                    </volist>
+                    </div>
+                    <div class="headline">
+                       <span class="hl_icon"></span>
+                        <!-- 面包屑 -->
+	                	{$words['w3']}：
+                       <volist name="crumb" id="vo">
+                        	<if condition="$key eq 0">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+	                        <if condition="$key eq 1">
+		                        <a href="{$vo['url']}">{$vo[$title]}</a>
+		                        >
+	                        </if>
+		                    <if condition="$key eq 2">
+		                        <span id="activecrumb">
+			                        <a href="javascript:;">{$vo[$title]}</a>
+                        		</span>
+		                    </if>
+                        </volist>
+                    </div>
+                    <div class="matterBox">
+                    	<script>
+			               var contentarr = null;
+			            </script>
+	                    <if condition="$docinfo neq null">
+	                    	<volist name="docinfo" id="vo">
+	                    		{$vo.content}
+	                    	</volist>
+						<elseif condition="$docarr neq null"/>
+                            <script>
+                                contentarr = {$docarr};
+                            </script>
+							<ul class="campus">
+
+		                    </ul>
+                            <div id="page" class="page"></div>
+						<elseif condition="$mentcont neq null"/> 
+							<div class="set_box">
+                            <ul class="setup">
+							<volist name="mentcont" id="vo">
+							<if condition="$key lt 4  ">
+                                <li id="setUp{$i}">
+                                    <div class="set_tit">
+                                        <em>{$vo.title}</em>
+                                        <img src="__IMG__/about/triangle.png" alt=""/>
+                                        <div class="cb"></div>
+                                    </div>
+                                    <a href="javaScript:;" class="set_img"><img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/></a>
+                                    <div class="set_type">
+                                    <notempty name="vo['content']">
+                                    <volist name="vo['content']" id="vo1">
+                                        <p><span> > </span><a href="/index.php/Home/About/about?id={$vo1['id']}&category_id={$vo1['cat_id']}">{$vo1.title}</a></p>
+                                    </volist>
+                                    </notempty>
+                                    </div>
+                                </li>
+                            </if>
+                            </volist>
+                            </ul>
+                            <ul class="setup">
+							<volist name="mentcont" id="vo">
+							<if condition="$key gt 3 ">
+                                <li id="setUp{$i}">
+                                    <div class="set_tit">
+                                        <em>{$vo.title}</em>
+                                        <img src="__IMG__/about/triangle.png" alt=""/>
+                                        <div class="cb"></div>
+                                    </div>
+                                    <a href="javaScript:;" class="set_img"><img src="/{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" alt=""/></a>
+                                    <div class="set_type">
+                                    <notempty name="vo['content']">
+                                    <volist name="vo['content']" id="vo1">
+                                        <p><span> > </span><a href="/index.php/Home/About/about?id={$vo1['id']}&category_id={$vo1['cat_id']}">{$vo1.title}</a></p>
+                                    </volist>
+                                    </notempty>
+                                    </div>
+                                </li>
+                            </if>
+                            </volist>
+                            </ul>
+                            </div>
+						</if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="__IMG__/Floating.png" alt="" id="Floating" class="Floating">
+<script>
+    $('#nav a:eq(1)').addClass('current');
+    $('ul.navUl li:first-child a').css('border-top','0');
+
+    //部门设置
+    for(var i=1;i<=$('ol.navOl li').length;i++){
+        scrollT($('ol.navOl li:eq('+(i-1)+') a'),$("#setUp"+i));
+    }
+    function scrollT(ele,lis) {
+        ele.bind('click', function () {
+            console.log();
+            $("html, body").animate({
+                scrollTop: lis.offset().top-50
+            }, {duration: 500, easing: "swing"});
+            return false;
+        });
+    }
+
+    /*面包屑*/
+    for(var i=0;i<$('ul.navUl>li').length;i++){
+        var liCur = $('ul.navUl>li').eq(i);
+        if(liCur.hasClass('current')){
+            var cont = liCur.find('a.navUl_a em').text();
+            $('#activecrumb a').text(cont);
+        }
+    }
+
+    /*校园风光*/
+    if(contentarr!=null && contentarr.length>0){
+        var num = 12;
+        var total = contentarr.length;
+        var n = Math.ceil(total / num);
+        //调取内容
+        piecewiseCont(contentarr, 0);
+        //分页
+        $("#page").show();
+        $("#page").paging({
+            pageNo:1,//默认第一页
+            totalPage: n,//页数
+            totalSize: total,//总条数
+            callback: function(n) {
+                piecewiseCont(contentarr, n-1);
+            }
+        });
+    }else{
+        $("#page").hide();
+    }
+    function piecewiseCont(arr, n){
+        $('ul.campus').empty();
+        var arrL = arr.length;
+        var html = '';
+        for (var i = n * num; i < (n + 1) * num && i < arrL; i++) {
+            html += '<li><a href="/index.php/Home/About/About?category_id=' + arr[i].cat_id + '&id=' + arr[i].id + '">'
+                    +'<div class="campus_img">'
+                    +'<img src="'+arr[i].path+'" alt="">'
+                    +'</div>'
+                    +'<p>'+arr[i].title+'</p>'
+                    +'</a>'
+                    +'</li>';
+        }
+        $('ul.campus').append(html);
+    }
+
+    /*for(var i=0;i<$('.setup li').length;i++){
+        scrollT($("ol.navOl li:eq('+i+') a"),$("#setUp"+i));
+    }
+    function scrollT(ele,lis) {
+        ele.bind('click', function () {
+            $(this).addClass('current').siblings().remove('current');
+            $("html, body").animate({
+                scrollTop: lis.offset().top-50
+            }, {duration: 500, easing: "swing"});
+            if($(window).width()<768){
+                $('.navL').animate({'left':'-300px'});
+                $('#Floating').show();
+            }
+            return false;
+        });
+    }*/
+
+</script>
+<include file="Public/footer"/>

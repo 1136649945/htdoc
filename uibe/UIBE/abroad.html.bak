@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>留学贸大</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="keywords" content="UIBE"/>
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="UIBE"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <link rel="stylesheet" type="text/css" href="css/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="iconfont/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/slide.css"/>
+    <link rel="stylesheet" type="text/css" href="css/csshake.css"/>
+    <link rel="stylesheet" type="text/css" href="css/home.css"/>
+    <link rel="stylesheet" type="text/css" href="css/list.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="js/slide.js"></script>
+    <script type="text/javascript" src="js/prism.min.js"></script>
+    <script type="text/javascript" src="js/home.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="wrap">
+        <div id="nav" class="header_left fl">
+            <a href="index.html">首页</a>
+            <em></em>
+            <a href="about.html">关于我们</a>
+            <em></em>
+            <a href="video.html">视频</a>
+            <em></em>
+            <a href="self_study.html">在线自学</a>
+            <em></em>
+            <a href="download.html">下载专区</a>
+            <em></em>
+            <a href="link.html">友情链接</a>
+            <em></em>
+            <a href="contact.html">联系我们</a>
+        </div>
+        <div class="fl header_phone">
+            <img src="images/logo.png" alt=""/>
+        </div>
+        <div class="header_right fr">
+            <div class="fr language">
+                <div class="languageCur">
+                    <div class="languageBox">
+                        <span class="current" data-language="zh">中文</span>
+                        <span data-language="en">EN</span>
+                    </div>
+                    <img src="images/push.png" alt="" id="push"/>
+                </div>
+                <ul class="languageMore">
+                    <li data-language="en">EN</li>
+                    <li data-language="ko">한국어</li>
+                    <li data-language="ja">日本語</li>
+                    <li data-language="fr">FRANÇAIS</li>
+                    <li data-language="ru">РУССКИЙ</li>
+                    <li data-language="es">Español</li>
+                    <li data-language="de">Deutsch</li>
+                    <li data-language="ar">اللغة العربية</li>
+                </ul>
+            </div>
+            <div class="fr _share">
+                <a href=""><img src="images/share01.png" alt=""/></a>
+                <a href=""><img src="images/share02.png" alt=""/></a>
+                <a href=""><img src="images/share03.png" alt=""/></a>
+            </div>
+        </div>
+        <div class="cb"></div>
+    </div>
+</div>
+<div class="logo-search">
+    <div class="wrap">
+        <a class="fl logoImg" href="index.html"><img src="images/logo.png" alt=""></a>
+        <div class="fl logoEn"><img src="images/logoEn.png" alt=""/></div>
+        <a href="" target="_blank" class="fr problem current">
+            常见问题
+            <i class="preview-item big transp shake-constant shake-constant--hover shake-little" id="pr2">
+                <img src="images/promptCur.png" alt=""/>
+            </i>
+        </a>
+        <div class="fr search">
+            <div class="fl key_box">
+                <input type="text" placeholder="请输入关键词...." id="keywords"/>
+            </div>
+            <a href="javaScript:;" class="_search" id="search">
+                <img src="images/search.png" alt=""/>
+            </a>
+            <div class="cb"></div>
+        </div>
+        <div class="cb"></div>
+    </div>
+</div>
+<div class="menu">
+    <div class="wrap">
+        <ul class="menu_ul">
+            <li>
+                <a href="project.html">项目介绍</a>
+                <div class="nav">
+                    <p><a href="project.html">非学历项目</a></p>
+                    <p><a href="project.html">本科学历项目</a></p>
+                    <p><a href="project.html">硕士研究生学历项目</a></p>
+                    <p><a href="project.html">博士研究生学历项目</a></p>
+                    <p><a href="project.html">学分项目</a></p>
+                    <p><a href="project.html">互惠生项目</a></p>
+                </div>
+            </li>
+            <li>
+                <a href="javaScript:;">在线报名</a>
+                <div class="nav">
+                    <p><a href="javaScript:;">报名指南</a></p>
+                    <p><a href="javaScript:;">在线申请</a></p>
+                </div>
+            </li>
+            <li>
+                <a href="scholarship.html">奖学金</a>
+                <div class="nav">
+                    <p><a href="scholarship.html">中国政府奖学金</a></p>
+                    <p><a href="scholarship.html">北京市政府奖学金</a></p>
+                    <p><a href="scholarship.html">对外经济贸易大学奖学金</a></p>
+                    <p><a href="scholarship.html">高端及卓越项目奖学金</a></p>
+                    <p><a href="scholarship.html">中国孔子学院奖学金</a></p>
+                </div>
+            </li>
+            <li><a href="abroad.html">留学贸大</a></li>
+            <li><a href="news.html">新闻通告</a></li>
+            <li><a href="job.html">实习就业</a></li>
+            <li>
+                <a href="organization.html">学生组织</a>
+                <div class="nav">
+                    <p><a href="organization.html">学生活动</a></p>
+                    <p><a href="organization.html">学生风采</a></p>
+                    <p><a href="organization.html">学生捐赠</a></p>
+                    <p><a href="organization.html">学生服务</a></p>
+                    <p><a href="organization.html">学生交流</a></p>
+                    <p><a href="organization.html">校友</a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--mouble_nav-->
+<div class="mouble" style="background-image: url('images/mouble.png')"></div>
+<div class="mouble_nav">
+    <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我们</a></li>
+        <li><a href="video.html">视频</a></li>
+        <li><a href="self_study.html">在线自学</a></li>
+        <li><a href="download.html">下载专区</a></li>
+        <li><a href="link.html">友情链接</a></li>
+        <li><a href="contact.html">联系我们</a></li>
+        <li><a href="project.html">项目介绍</a></li>
+        <li><a href="online.html">在线报名</a></li>
+        <li><a href="scholarship.html">奖学金</a></li>
+        <li><a href="abroad.html">留学贸大</a></li>
+        <li><a href="news.html">新闻通告</a></li>
+        <li><a href="job.html">实习就业</a></li>
+        <li><a href="organization.html">学生组织</a></li>
+    </ul>
+</div>
+<!--mouble_nav-->
+<div class="mouble" style="background-image: url('images/mouble.png')"></div>
+<div class="mouble_nav">
+    <ul>
+        <li>
+            <a href="">项目介绍</a>
+            <div class="nav">
+                <p><a href="" target="_blank">非学历项目</a></p>
+                <p><a href="" target="_blank">本科学历项目</a></p>
+                <p><a href="" target="_blank">硕士研究生学历项目</a></p>
+                <p><a href="" target="_blank">博士研究生学历项目</a></p>
+                <p><a href="" target="_blank">学分项目</a></p>
+                <p><a href="" target="_blank">互惠生项目</a></p>
+                <p><a href="" target="_blank">留学生创业培训项目</a></p>
+                <p><a href="" target="_blank">国际英语资格证书培训项目</a></p>
+                <p><a href="" target="_blank">外籍人士CATTI口译、笔译培训班项目</a></p>
+            </div>
+        </li>
+        <li>
+            <a href="">在线报名</a>
+            <div class="nav">
+                <p><a href="" target="_blank">报名指南</a></p>
+                <p><a href="" target="_blank">在线申请</a></p>
+            </div>
+        </li>
+        <li>
+            <a href="">奖学金</a>
+            <div class="nav">
+                <p><a href="" target="_blank">中国政府奖学金</a></p>
+                <p><a href="" target="_blank">北京市政府奖学金</a></p>
+                <p><a href="" target="_blank">对外经济贸易大学奖学金</a></p>
+                <p><a href="" target="_blank">高端及卓越项目奖学金</a></p>
+                <p><a href="" target="_blank">中国孔子学院奖学金</a></p>
+            </div>
+        </li>
+        <li class="current"><a href="">留学贸大</a></li>
+        <li><a href="">重要通知</a></li>
+        <li><a href="">实习就业</a></li>
+        <li>
+            <a href="">学生组织</a>
+            <div class="nav">
+            <p><a href="" target="_blank">学生支持</a></p>
+        </div>
+        </li>
+    </ul>
+</div>
+<!-- matter-->
+<div class="matter">
+    <div class="wrap">
+        <div class="matter_box">
+            <div class="navL">
+                <div class="navL_h">
+                    <img src="images/abroad/icon.png" alt=""/>
+                    <em>|</em>
+                    留学贸大
+                </div>
+                <ul class="navUl navUl_abroad">
+                    <li>
+                        <a href="javaScript:;" data-url="" class="navUl_a">
+                            <em>规章制度</em>
+                            <img src="images/icon/add.png" class="ia" alt=""/>
+                            <img src="images/icon/add_cur.png" class="ia2" alt=""/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javaScript:;" data-url="" class="navUl_a">
+                            <em>签证提醒</em>
+                            <img src="images/icon/add.png" class="ia" alt=""/>
+                            <img src="images/icon/add_cur.png" class="ia2" alt=""/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javaScript:;" data-url="" class="navUl_a">
+                            <em>留学生会</em>
+                            <img src="images/icon/add.png" class="ia" alt=""/>
+                            <img src="images/icon/add_cur.png" class="ia2" alt=""/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javaScript:;" data-url="" class="navUl_a">
+                            <em>志愿服务</em>
+                            <img src="images/icon/add.png" class="ia" alt=""/>
+                            <img src="images/icon/add_cur.png" class="ia2" alt=""/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javaScript:;" data-url="" class="navUl_a">
+                            <em>生活指南</em>
+                            <img src="images/icon/add.png" class="ia" alt=""/>
+                            <img src="images/icon/add_cur.png" class="ia2" alt=""/>
+                        </a>
+                    </li>
+                </ul>
+                <img src="images/navHide.png" alt="" id="goBack" class="goBack"/>
+            </div>
+            <div class="contR">
+                <div class="cont_box">
+                    <div class="bannerR">
+                        <img src="images/abroad/banner.jpg" alt=""/>
+                    </div>
+                    <div class="headline">
+                        <span class="hl_icon"></span>
+                        当前位置：
+                        <a href="javaScript:;">首页</a>
+                        >
+                        <a href="javaScript:;">留学贸大</a>
+                        >
+                        <a href="javaScript:;">规章制度</a>
+                    </div>
+                    <div class="matterBox">
+                        <ul class="abroad">
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">中华人民共和国外国人入境出境管理法</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">中华人民共和国境内外国人宗教活动管理规定</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">海关、卫生检疫及保险</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">非学历留学生在学管理规定</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">对外经济贸易大学留学生住宿管理规定</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">关于来华留学生驾驶摩托车的管理规定</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">签证制度</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">志愿者中心</a>
+                                <em>2018-03-11</em>
+                            </li>
+                            <li>
+                                <img src="images/project/play.png" alt=""/>
+                                <a href="">留学生组织结构</a>
+                                <em>2018-03-11</em>
+                            </li>
+                        </ul>
+                        <div class="page">
+                            <a href="javaScript:;" class="btnPage" id="firstPage">首页</a>
+                            <a href="javaScript:;" id="prev">&lt;</a>
+                            <div style="display: inline-block;">
+                                <a href="javaScript:;">1</a>
+                                <a href="javaScript:;">2</a>
+                                <a href="javaScript:;" class="current">3</a>
+                                <a href="javaScript:;">4</a>
+                                <a href="javaScript:;">5</a>
+                                <a href="javaScript:;">6</a>
+                            </div>
+                            <a href="javaScript:;" id="next">&gt;</a>
+                            <a href="javaScript:;" class="btnPage" id="endPage">末页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="images/Floating.png" alt="" id="Floating" class="Floating">
+<script>
+    $('ul.menu_ul li:eq(3)').addClass('current');
+    $('ul.navUl>li:last-child a').css('border-bottom','dashed 1px #aaaaaa');
+    //默认
+    $('ul.navUl>li:eq(0)').addClass('current');
+    $('ul.navUl>li:eq(0)').find('ol.navOl').fadeIn();
+</script>
+<div class="footer_addr">
+    <div class="wrap">
+        <h4>CopyRight ©2016-2018 版权：对外经济贸易大学国际学院</h4>
+        <p>地址：中国·北京市朝阳区惠新东街10号 <em>邮编：100029</em></p>
+    </div>
+</div>
+<div class="footer_tel">
+    <span>
+        <img src="images/emile.png" alt=""/>
+        邮 箱: sie@uibe.edu.cn
+    </span>
+    <span>
+        <img src="images/tel.png" alt=""/>
+        电 话: (86-10) 6449-2327 / (86-10) 6449-2329
+    </span>
+    <span>
+        <img src="images/fax.png" alt=""/>
+        传 真: (86-10) 6449-3820
+    </span>
+</div>
+</body>
+</html>
