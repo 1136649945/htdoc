@@ -30,7 +30,7 @@ class HomeController extends WordController {
         if(!C('WEB_SITE_CLOSE')){
             $this->error('站点已经关闭，请稍后访问~');
         }
-        $this->word2html("E:/lang.doc", "E:/lang.html");
+        $this->word2html("E:/lang.docx", "E:/lang.html");
     }
 
 	/* 用户登录检测 */
