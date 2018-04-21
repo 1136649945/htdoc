@@ -76,8 +76,17 @@ class PublicController extends \Think\Controller {
         }
     }
 
-    public function verify(){
-        $verify = new \Think\Verify();
+ public function verify()
+    {
+        $config = array(
+            'useCurve' => false, // 是否画混淆曲线
+            'useNoise' => false, // 是否添加杂点
+            'length' => 4, // 验证码位数
+            'codeSet' => '2345678ABCDEFGHJKLMNPQRTUVWXY',
+            'fontttf' => '2.ttf'
+        ); // 验证码字体，不设置随机获取
+        
+        $verify = new \Think\Verify($config);
         $verify->entry(1);
     }
 

@@ -1,0 +1,94 @@
+/*color*/
+.header_left a:hover,
+.header_left a.current,
+.tit_more:hover,
+.ir_list li:hover .ir_cont h3 a,
+.ir_list li:hover .ir_date p,
+.ir_list li:hover .ir_date span,
+.il_list li .ir_date p,
+.il_list li .ir_date span,
+.job_cont p a,
+.iconMessage,
+.ir_list li:hover .iconItem
+{color:#8f000b;}
+
+/*backgroun-color*/
+.languageBox span.current,
+._search,
+.menu,
+.menu_ul li .nav p,
+.footer_addr,
+.ir_list li:hover .ir_date h5,
+.ir_list li:hover .ir_date p em,
+.il_list li .ir_date h5,
+._contact h1 span,._contact h1 em,
+.activity input.btn,
+.mouble_nav ul li,
+.mouble_nav ul li .nav p,
+.meet_btn span,
+.page a.current
+{background-color:#8f000b;}
+
+/*border*/
+.tit_l,
+.depar_tit span
+{border-bottom: solid 4px #8f000b;}
+
+.page a.current{border: solid 1px #8f000b;}
+
+/*background-color:hover*/
+.menu_ul li.current,
+.menu_ul li:hover,
+.menu_ul li .nav p:hover,
+.languageMore li:hover
+{background-color: #700005;}
+
+/*color-d50b23*/
+.n_cont h3 a:hover,
+.n_cont p a:hover,
+.share ul li a.iconShare2:hover
+{color: #d50b23;}
+
+/*background-color-d50b23*/
+.ir_list li:hover .ir_date p em,
+.il_list li .ir_date p em,
+.anno_cont li:hover .anno_tit,
+.n_br em,
+.meet_btn span.current,
+.campus li:hover p
+{background-color: #d50b23;}
+
+/*d50b23--border*/
+.type2 span
+{border-bottom: solid 6px #d50b23;}
+
+/*background-color-b51c26*/
+.navL_h,
+.date em,
+.return_news a,
+.organ_br em
+{background-color: #b51c26;}
+
+/*color-b51c26*/
+.navUl li.current a.navUl_a,
+.navOl li a:hover,
+.navUl_news li.current a.navUl_a,
+.navUl_news li a.navUl_a em:hover,
+.related_links li a:hover,
+.links li:hover a.links_img,
+.links li:hover p,.links li:hover p a,
+.newsType a.current,
+.noticeR h3:hover,.noticeR h3 a:hover,
+.noticeR p a,
+.page a:hover,
+.project li a:hover,
+.news_more li p a,
+.abroad li a:hover,
+.organ_cont h3 a:hover,
+.organ_cont p a,
+.navOl li a:hover,.navOl li.ol_li_current a
+{color: #b51c26;}
+
+/*border-b51c26*/
+.links li:hover a.links_img
+{border:solid 1px #b51c26;}

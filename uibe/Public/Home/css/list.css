@@ -58,7 +58,7 @@ em{font-style: inherit;}
     .menu_ul li a{font-size: 24px;}
     #show .btns S.prev{left: -50px;}
     #show .btns S.next{right: -50px;}
-    .tit_l{font-size: 32px;padding: 8px 0;border-bottom: solid 3px #8f000b;}
+    .tit_l{font-size: 32px;padding: 8px 0;border-bottom-width: 3px;}
     .tit_br{font-size: 16px;margin-top: 15px;}
     .tit_br span{top:-12px;}
     .tit_more{font-size: 18px;margin-top: 30px;}
@@ -73,7 +73,7 @@ em{font-style: inherit;}
     .footer_addr{height: 134px;padding-top: 34px;}
     .footer_tel{height: 60px;line-height: 60px;font-size: 18px;}
     .footer_addr h4{font-size: 24px;margin-bottom: 15px;}
-
+    .il_list li .il_img,.il_list li .il_img img{height: 405px;}
     /*关于我们*/
     .cL h2{font-size: 20px;}
     /*左侧菜单*/
@@ -164,7 +164,7 @@ em{font-style: inherit;}
     ._search{height: 34px;width: 90px;}
     ._search img{display: inline-block;width: 16px;margin-top: 10px;}
     .problem{font-size: 15px;margin-top: 40px;}
-    .tit_l{font-size: 24px;padding: 5px 0;border-bottom: solid 2px #8f000b;letter-spacing: 6px;}
+    .tit_l{font-size: 24px;padding: 5px 0;border-bottom-width: 2px;letter-spacing: 6px;}
     .tit_br{font-size: 16px;margin-top: 15px;}
     .tit_br span{top:-12px;}
     .tit_more{font-size: 16px;margin-top: 25px;}
@@ -175,9 +175,9 @@ em{font-style: inherit;}
     .ir_cont p, .ir_cont p a{font-size: 14px;line-height: 20px;margin-top: 8px;}
     .ir_cont h3 .item_add{margin-top: 4px;}
     .ir_list li{padding: 20px 15px;}
-    .depar_tit span{font-size: 24px;padding: 5px 0;border-bottom: solid 2px #8f000b;}
+    .depar_tit span{font-size: 24px;padding: 5px 0;border-bottom-width: 2px;}
     .type span{font-size: 18px;margin-left: 35px;}
-    .type2 span{font-size: 18px;border-bottom: solid 2px #d50b23;}
+    .type2 span{font-size: 18px;border-bottom-width: 2px;}
     .type2 img{margin-bottom: -13px;margin-top: 18px;}
     .type2{padding: 15px 30px;}
     .depar_box{margin-top: 40px;}
@@ -197,6 +197,7 @@ em{font-style: inherit;}
     .footer_addr h4{font-size: 16px;margin-bottom: 10px;}
     .footer_addr p{font-size: 14px;}
     .footer_addr p em{font-size: 14px;}
+    .il_list li .il_img,.il_list li .il_img img{height: 300px;}
 
     .logo-search{padding: 10px 0;}
     ._share{display: none;}
@@ -285,6 +286,7 @@ em{font-style: inherit;}
     .set_type{margin-top: 15px;}
     .set_type p{font-size: 14px;margin: 8px 0;}
     .set_type p a{font-size: 14px;}
+    .il_list li .il_img,.il_list li .il_img img{height: 270px;}
 }
 @media screen and (max-width: 767px){
 
@@ -313,7 +315,7 @@ em{font-style: inherit;}
     .problem{margin-top: 18px;font-size: 14px;margin-right: 20px;/*float: left;*/}
     .logo-search{padding: 15px 0;}
     .item{padding: 20px 10px;}
-    .tit_l{font-size: 18px;padding: 2px 0;border-bottom: solid 2px #8f000b;letter-spacing: 2px;}
+    .tit_l{font-size: 18px;padding: 2px 0;border-bottom-width: 2px;letter-spacing: 2px;}
     .tit_br{font-size: 12px;margin-top: 15px;}
     .tit_br span{top:-9px;}
     .tit_br em{}
@@ -331,10 +333,10 @@ em{font-style: inherit;}
     .anno_cont{margin-top: 20px;}
     .anno_cont li{width: 50%;padding: 10px 0;}
     .anno_tit{padding: 10px;height:65px;}
-    .depar_tit span{font-size: 18px;padding: 2px 0;border-bottom: solid 2px #8f000b;letter-spacing: 2px;}
+    .depar_tit span{font-size: 18px;padding: 2px 0;border-bottom-width: 2px;letter-spacing: 2px;}
     .type{height:inherit;line-height: inherit}
     .type span{font-size: 13px;margin-left: 2px;}
-    .type2 span{font-size: 18px;border-bottom: solid 2px #d50b23;}
+    .type2 span{font-size: 18px;border-bottom-width: 2px;}
     .type2 img{margin-bottom: -13px;margin-top: 18px;}
     .type2{display: none;}
     .depar_box{margin: 10px 0;}
@@ -363,7 +365,7 @@ em{font-style: inherit;}
     .footer_tel span{display: block;}
     .footer_tel span.ph_span{display: inline-block;margin-top:2px;}
     .footer_tel img{margin: 0;margin-bottom: -2px;}
-
+    .il_list li .il_img,.il_list li .il_img img{height: inherit;}
     /*左侧菜单*/
     .matter{margin: 0 0 30px;}
     /*左侧菜单*/
@@ -415,7 +417,7 @@ em{font-style: inherit;}
     .menu{display: none;}
     .mouble{display: block;top:15px;z-index:12;}
     .mouble_nav ul li .nav{width: 220px;}
-    .mouble_nav ul li .nav p{padding: 0;height:30px;line-height:30px;margin-bottom: 1px;background-color: #8f000b;}
+    .mouble_nav ul li .nav p{padding: 0;height:30px;line-height:30px;margin-bottom: 1px;/*background-color: #8f000b;*/}
     .mouble_nav ul li .nav p a{font-size: 1.2em;}
     .mouble_nav ul li .nav{left: -220px;}
     .mouble_nav ul li:hover .nav{height: auto;}
@@ -433,7 +435,7 @@ em{font-style: inherit;}
     .problem{margin-top: 8px;font-size: 14px;/*float: left;*/margin-right: 20px;}
     .logo-search{padding: 15px 0;}
     .item{padding: 20px 10px;}
-    .tit_l{font-size: 18px;padding: 2px 0;border-bottom: solid 2px #8f000b;letter-spacing: 2px;}
+    .tit_l{font-size: 18px;padding: 2px 0;border-bottom-width: 2px;letter-spacing: 2px;}
     .tit_br{font-size: 12px;margin-top: 15px;}
     .tit_br span{top:-9px;}
     .tit_br em{}
@@ -456,10 +458,10 @@ em{font-style: inherit;}
     .anno_cont{margin-top: 20px;}
     .anno_cont li{width: 100%;padding: 10px 0;}
     .anno_tit{padding: 10px;height:65px;}
-    .depar_tit span{font-size: 18px;padding: 2px 0;border-bottom: solid 2px #8f000b;letter-spacing: 2px;}
+    .depar_tit span{font-size: 18px;padding: 2px 0;border-bottom-width: 2px;letter-spacing: 2px;}
     .type{height:inherit;line-height: inherit}
     .type span{font-size: 14px;margin-left: 2px;}
-    .type2 span{font-size: 18px;border-bottom: solid 2px #d50b23;}
+    .type2 span{font-size: 18px;border-bottom-width: 2px;}
     .type2 img{margin-bottom: -13px;margin-top: 18px;}
     .type2{display: none;}
     .depar_box{margin: 10px 0;}
@@ -540,6 +542,11 @@ em{font-style: inherit;}
     .project li em{font-size: 12px;margin-right: 0;}
     .page a.btnPage{width: 48px;}
     .page{margin-bottom: 20px;}
+    .headline{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
     /*留学贸大*/
     .abroad li{height: 42px;line-height: 42px;}
     .abroad li img{margin: 0 5px 15px 5px;}
