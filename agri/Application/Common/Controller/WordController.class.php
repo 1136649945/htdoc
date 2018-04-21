@@ -2,6 +2,7 @@
 namespace Common\Controller;
 
 use Think\Controller;
+use PhpOffice\PhpWord\IOFactory;
 /*
  * Zend/Escaper：https://github.com/zendframework/zend-escaper
 
@@ -12,15 +13,13 @@ Zend/Validator：https://github.com/zendframework/zend-validator
 class WordController extends Controller
 {
     //word转成html
-    public function word2html($docpath,$fileName)
+    public function word2html($docpath,$name)
     {
         import("Org.Util.PHPWord");
         if(is_file($docpath)){
-            $phpWord = new \PHPWord();
-            $phpWord->setDefaultFontName($docpath);
-//             $doc = IOFactory::load($docpath);
-//             $phpWord->setDocumentProperties($doc);
-            $phpWord->save($fileName,"HTML");
+            $phpWord = IOFactory::load($docpath);
+            $xmlWriter = IOFactory::createWriter($phpWord, "HTML");
+            $xmlWriter->save($name);
         }
     }
     
