@@ -23,10 +23,13 @@ class UserController extends AdminController {
     public function index(){
         $nickname       =   I('nickname');
         $map['status']  =   array('egt',0);
-        if(is_numeric($nickname)){
-            $map['uid|nickname']=   array(intval($nickname),array('like','%'.$nickname.'%'),'_multi'=>true);
-        }else{
-            $map['nickname']    =   array('like', '%'.(string)$nickname.'%');
+        $map['uid']  =   array('neq',C("USER_ADMINISTRATOR"));
+        if(count($nickname)>0){
+            if(is_numeric($nickname)){
+                $map['uid|nickname']=   array(intval($nickname),array('like','%'.$nickname.'%'),'_multi'=>true);
+            }else{
+                $map['nickname']    =   array('like', '%'.(string)$nickname.'%');
+            }
         }
 
         $list   = $this->lists('Member', $map);

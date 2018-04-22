@@ -419,9 +419,15 @@ class ArticleController extends AdminController {
         $document   =   D('Document');
         $res = $document->update();
         if(!$res){
-            $this->error($document->getError());
+            $return['data']     =   $res;
+            $return['info']     =   $document->getError();
+            $return['status']   =   0;
+            $this->ajaxReturn($return);
         }else{
-            $this->success($res['id']?'更新成功':'新增成功', Cookie('__forward__'));
+            $return['data']     =   $res;
+            $return['info']     =   $res['id']?'更新成功':'新增成功';
+            $return['status']   =   1;
+            $this->ajaxReturn($return);
         }
     }
 
