@@ -1,0 +1,100 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>新增专家</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+    	<div class="layui-form-item">
+	        <div class="layui-inline">
+	            <label class="layui-form-label" style="width:215px;">用户名（登录账号英文加数字）</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="username" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label" style="width:95px;">昵称（显示）</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="nickname" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:115px;">姓名（5个字内）</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="name" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:215px;">密码（用户密码不能少于6位）</label>
+	            <div class="layui-input-inline">
+	                <input type="password" class="layui-input" name="password" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:95px;">确认密码</label>
+	            <div class="layui-input-inline">
+	                <input type="password" class="layui-input" name="repassword" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:115px;">邮箱（用户邮箱）</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="email" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:65px;">电话</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="mobile" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:45px;">性别</label>
+	            <div class="layui-input-inline" style="margin-top: 10px;width:122px;">
+		            <div class="layui-input-inline"style="width:50px;">
+		                <input type="radio" checked="checked" name="sex" value="0">男
+		            </div>
+		            <div class="layui-input-inline"style="width:50px;">
+		                <input type="radio" name="sex" value="1">女
+		            </div>
+		        </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:65px;">等级</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="mlevel" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:65px;">QQ号</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="qq" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:115px;">专业</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="specialty" value="">
+	            </div>
+	        </div>
+	        <div class="layui-inline">
+	            <label class="layui-form-label"style="width:115px;">擅长领域</label>
+	            <div class="layui-input-inline">
+	                <input type="text" class="layui-input" name="areas" value="">
+	            </div>
+	        </div>
+	        
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('User/expert')}');
+    </script>
+</block>

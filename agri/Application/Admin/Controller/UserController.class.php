@@ -17,28 +17,48 @@ use User\Api\UserApi;
 class UserController extends AdminController {
 
     /**
-     * 用户管理首页
+     * 会员管理首页
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
     public function index(){
-        $nickname       =   I('nickname');
-        $map['status']  =   array('egt',0);
-        $map['uid']  =   array('neq',C("USER_ADMINISTRATOR"));
-        if(count($nickname)>0){
+        $nickname       =   I('get.nickname');
+        $map['role']  =   array('eq','会员');
+        if($nickname){
             if(is_numeric($nickname)){
                 $map['uid|nickname']=   array(intval($nickname),array('like','%'.$nickname.'%'),'_multi'=>true);
             }else{
                 $map['nickname']    =   array('like', '%'.(string)$nickname.'%');
             }
         }
-
         $list   = $this->lists('Member', $map);
         int_to_string($list);
         $this->assign('_list', $list);
         $this->meta_title = '用户信息';
         $this->display();
     }
-
+    /**
+     * 专家管理首页
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function expert(){
+        $nickname       =   I('nickname');
+        $map['status']  =   array('egt',0);
+        $map['uid']  =   array('neq',C("USER_ADMINISTRATOR"));
+        $map['role']  =   array('eq',"专家");
+        if($nickname){
+            if(is_numeric($nickname)){
+                $map['uid|nickname']=   array(intval($nickname),array('like','%'.$nickname.'%'),'_multi'=>true);
+            }else{
+                $map['nickname']    =   array('like', '%'.(string)$nickname.'%');
+            }
+        }
+    
+        $list   = $this->lists('Member', $map);
+        int_to_string($list);
+        $this->assign('_list', $list);
+        $this->meta_title = '专家信息';
+        $this->display();
+    }
     /**
      * 修改昵称初始化
      * @author huajie <banhuajie@163.com>

@@ -409,7 +409,6 @@ class AdminController extends Controller {
         }
         $options      =   array_merge( (array)$OPT->getValue($model), $options );
         $total        =   $model->where($options['where'])->count();
-
         if( isset($REQUEST['r']) ){
             $listRows = (int)$REQUEST['r'];
         }else{
@@ -423,9 +422,7 @@ class AdminController extends Controller {
         $this->assign('_page', $p? $p: '');
         $this->assign('_total',$total);
         $options['limit'] = $page->firstRow.','.$page->listRows;
-
         $model->setProperty('options',$options);
-
         return $model->field($field)->select();
     }
 
