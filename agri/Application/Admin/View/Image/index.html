@@ -1,0 +1,179 @@
+<extend name="Public/base" />
+
+<block name="body">
+<div class="a4-page">
+
+
+	<div class="main-title">
+		<h2>图片管理</h2>
+	</div>
+
+	<div class="cf">
+		<a class="btn" href="javascript:dialog(false);">新增图片</a>
+		<div class="search-form fr cf">
+			<label class="layui-form-label">图片分类</label>
+			<div class="layui-input-inline" style="width: 200px;">
+				<select name="block" style="margin-top: 5px;width: 200px;" id="select">
+				<option value="-1" >所有分类</option>
+				<volist name="block" id="vo">
+					<option value="{$vo['id']}" >{$vo.title}</option>
+				</volist>
+				</select>
+			</div>
+        </div>
+	</div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th>标题</th>
+					<th>描述</th>
+					<th>图片</th>
+					<th>链接地址</th>
+					<th>图片分类</th>
+					<th>排序</th>
+					<th>隐藏</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<notempty name="data"> <volist name="data" id="vo">
+				<tr style="height:80px;">
+					<td>{$vo.title}</td>
+					<td style="width: 200px;"><pre>{$vo.describe|htmlspecialchars_decode}</pre></td>
+					<td style="80px;"><img src="{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" style="max-height: 70px;max-width: 70px;" /></td>
+					<td>{$vo.link}</td>
+					<td>{$group[$vo['block']]}</td>
+					<td>{$vo.sort}</td>
+					<td><if condition="$vo['hide'] eq 0"> 否 <else /> 是 </if></td>
+					<td><a title="编辑" href="{:U('edit?id='.$vo['id'])}">编辑</a>
+						<a class="confirm ajax-get" title="删除"
+						href="{:U('del?id='.$vo['id'])}">删除</a></td>
+				</tr>
+				</volist> <else />
+				<td colspan="10" class="text-center">aOh! 暂时还没有内容!</td>
+				</notempty>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+	</div>
+</div>
+<div class="page" style="position: absolute; bottom: 0px;">{$page}</div>
+<div class="dialog">
+	<form action="{:U(add)}" method="post" enctype="multipart/form-data"
+		class="form-horizontal">
+		<fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 0px;">
+			<legend>图片上传</legend>
+		</fieldset>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 40px;">标题</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="title"
+						value="{$info.title|default=''}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 40px;">排序</label>
+				<div class="layui-input-inline" style="width: 100px;">
+					<input type="text" class="layui-input" name="sort"
+						value="{$info.sort|default=0}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 40px;">隐藏</label>
+				<div class="layui-input-inline"
+					style="margin-top: 10px; width: 90px;">
+					<label class="radio"><input type="radio" name="hide"
+						value="1">是</label> <label class="radio"><input
+						type="radio" name="hide" value="0" checked>否</label>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" style="width: 90px;">链接地址</label>
+				<div class="layui-input-inline" style="width: 300px;">
+					<input type="text" class="layui-input" name="link"
+						value="{$info.link}">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<div class="layui-inline">
+					<label class="layui-form-label">图片分类</label>
+					<div class="layui-input-inline" style="width: 100px;">
+						<select name="block" style="margin-top: 5px;width: 100px;">
+						<volist name="block" id="vo">
+							<option value="{$vo['id']}" >{$vo.title}</option>
+						</volist>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">描述</label>
+			<div>
+				<textarea name="describe" placeholder="请输入内容" class="layui-textarea">{$info.describe|default=''}</textarea>
+			</div>
+		</div>
+
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 90px;">请选择文件</label>
+			<div class="layui-input-inline"
+				style="margin-top: 10px; width: 150px;">
+				<label class="radio">
+					<button type="button"
+						class="layui-btn layui-btn-primary layui-btn-xs" id="uploadimg">选择文件</button>
+				</label>
+			</div>
+		</div>
+		<input type="file" name="image[]" data="img" accept="image/*" multiple id="img"
+			style="display: none;" />
+		<div class="layui-upload-list" id="viewimg">
+		</div>
+		<div class="form-item bottom-button">
+			<button class="btn submit-btn" type="submit"
+				target-form="form-horizontal">确定上传</button>
+			<button type="button" class="btn btn-return"
+				onclick="javascript:dialog(true);">关闭</button>
+		</div>
+	</form>
+</div>
+<div class="ui-mask"></div>
+</block>
+
+<block name="script"> <script type="text/javascript">
+        $(function() {
+            //导航高亮
+            highlight_subnav('{:U('index')}');
+            $('#select').change(function(){
+            	var block = $(this).children('option:selected').val();
+            	var url = '{:U(index)}';
+            	url += "&block="+block;
+            	window.location.href=url;
+            });
+        });
+        
+        function deleteGroup(id){
+        	if(id){
+        		$.ajax(
+        		{
+        			url:"{:U('del')}",
+        			type:"POST",
+        			dataType:"json",
+        			data:{"id":id},
+        			success:function(data){
+        				if(data.status){
+        					window.location.reload();
+        				}else{
+        					alert(data.info);
+        				}
+        			},error:function(data){
+        				alert("服务器出错了！");
+        			}
+        		});
+        	}
+        }
+    </script> </block>
