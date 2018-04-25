@@ -1,47 +1,37 @@
-<extend name="Base/common"/>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{:C('WEB_SITE_TITLE')}</title>
+<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="__STATIC__/jweixin-1.3.2.js"></script>
+</head>
+<body>
+<button onclick="add()">新增</button>
+<div class="add"></div>
+<script type="text/javascript">
+	//wx.miniProgram.navigateTo({url: '../../pages/login/login'})
+	// 或者
+	function add(){
+		//wx.miniProgram.navigateTo({url: '../../pages/login/login'});
+		if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
+				document.addEventListener('WeixinJSBridgeReady', phonto, false);
+		} else {
+			phonto();
+		}
+	}
+	function phonto(){
+		wx.miniProgram.chooseImage({
+			  count: 1, // 默认9
+			  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			  success: function (res) {
+			    // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+			    var tempFilePaths = res.tempFilePaths
+			  }
+			})
+	}
 
-<block name="header">
-    <header class="jumbotron subhead" id="overview">
-        <div class="container">
-            <h2>源自相同起点，演绎不同精彩！</h2>
-            <p class="lead"></p>
-        </div>
-    </header>
-</block>
-
-<block name="side">
-<!-- 左侧 nav
-================================================== -->
-    <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-            {:W('Category/lists', array(1, true))}
-        </ul>
-    </div>
-</block>
-
-<block name="body">
-    <div class="span9">
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">
-            <article:list name="article" category="1" child="true">
-                <div class="">
-                    <h3><a href="{:U('Article/detail?id='.$article['id'])}">{$article.title}</a></h3>
-                </div>
-                <div>
-                    <p class="lead">{$article.description}</p>
-                </div>
-                <div>
-                    <span><a href="{:U('Article/detail?id='.$article['id'])}">查看全文</a></span>
-                    <span class="pull-right">
-                        <span class="author">{$article.uid|get_username}</span>
-                        <span>于 {$article.create_time|date='Y-m-d H:i',###}</span> 发表在 <span>
-                        <a href="{:U('Article/lists?category='.get_category_name($article['category_id']))}">{$article.category_id|get_category_title}</a></span> ( 阅读：{$article.view} )
-                    </span>
-                </div>
-                <hr/>
-            </article:list>
-
-        </section>
-    </div>
-</block>
+</script>
+</body>
+</html>
