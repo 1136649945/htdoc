@@ -13,13 +13,23 @@
 	//wx.miniProgram.navigateTo({url: '../../pages/login/login'})
 	// 或者
 	function add(){
-		console.log("sss");
-		wx.miniProgram.getEnv(function(res) {
-			if(window.__wxjs_environment === 'miniprogram'){
-				$(".add").html("sss");
-			}
-		})
-		
+		//wx.miniProgram.navigateTo({url: '../../pages/login/login'});
+		if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
+				document.addEventListener('WeixinJSBridgeReady', phonto, false);
+		} else {
+			phonto();
+		}
+	}
+	function phonto(){
+		wx.miniProgram.chooseImage({
+			  count: 1, // 默认9
+			  sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			  sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+			  success: function (res) {
+			    // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+			    var tempFilePaths = res.tempFilePaths
+			  }
+			})
 	}
 
 </script>
