@@ -109,12 +109,16 @@
 	            </div>
 	        	</div>
 	    	</div>
+	    	 <div class="layui-form-item">
+		       <label class="layui-form-label"style="width:135px;">简历</label>
+	    	</div>
+	    	
 	        <label class="textarea">
-            <textarea name="content">11</textarea>
-            {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$field['value']))}
+	            <textarea name="content">11</textarea>
+	            {:hook('adminArticleEdit')}
             </label>
         <div class="form-item">
-            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
             <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
         </div>
     </form>

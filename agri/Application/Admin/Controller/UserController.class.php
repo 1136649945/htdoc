@@ -248,7 +248,51 @@ class UserController extends AdminController {
             $this->display();
         }
     }
-
+    /**
+     * 专家新增方法
+     * @param string $username
+     * @param string $password
+     * @param string $repassword
+     * @param string $email
+     */
+    public function expertadd(){
+        if(IS_POST){
+            $Ucenter = M("UcenterMember");
+            $Member = M("Member");
+            $Ucenter->startTrans();
+            if($res && $res1){
+                $Ucenter->commit();
+            }else{
+                $Ucenter->rollback();
+            }
+            $data1 = $Ucenter->create();
+            $data2 = $Member->create();
+            var_dump($data1);
+            var_dump($data2);
+            exit();
+            /* 检测密码 */
+            if($password != $repassword){
+                $this->error('密码和重复密码不一致！');
+            }
+    
+            /* 调用注册接口注册用户 */
+            $User   =   new UserApi;
+            $uid    =   $User->register($username, $password, $email);
+            if(0 < $uid){ //注册成功
+                $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1);
+                if(!M('Member')->add($user)){
+                    $this->error('用户添加失败！');
+                } else {
+                    $this->success('用户添加成功！',U('index'));
+                }
+            } else { //注册失败，显示错误信息
+                $this->error($this->showRegError($uid));
+            }
+        } else {
+            $this->meta_title = '新增用户';
+            $this->display();
+        }
+    }
     /**
      * 获取用户注册错误信息
      * @param  integer $code 错误编码
