@@ -7,7 +7,7 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Admin\Model;
+namespace User\Model;
 use Think\Model;
 
 /**
@@ -15,12 +15,27 @@ use Think\Model;
  * @author 麦当苗儿 <zuojiazi@vip.qq.com>
  */
 
-class UcenterMemberModel extends Model {
+class MemberModel extends Model {
 
-    protected $_validate = array(
-        array('nickname', '1,16', '昵称长度为1-16个字符', self::EXISTS_VALIDATE, 'length'),
-        array('nickname', '', '昵称被占用', self::EXISTS_VALIDATE, 'unique'), //用户名被占用
-    );
+   /* 用户模型自动验证 */
+	protected $_validate = array(
+		/* 验证姓名 */
+		array('name', '1,5', -1, self::EXISTS_VALIDATE, 'length'), //用户名长度不合法
+	    /* 验证专业 */
+	    array('specialty', '1,10', -2, self::EXISTS_VALIDATE, 'length'), //专业长度不合法
+	    /* 验证工作地 */
+	    array('worksplace', '1,25', -3, self::EXISTS_VALIDATE, 'length'), //工作地长度不合法
+	    /* 验证昵称 */
+	    array('nickname', '1,10', -4, self::EXISTS_VALIDATE, 'length'), //昵称长度不合法
+	    /* 验证擅长领域 */
+	    array('areas', '1,15', -5, self::EXISTS_VALIDATE, 'length'), //擅长领域长度不合法
+	    
+	);
+
+	/* 用户模型自动完成 */
+	protected $_auto = array(
+		
+	);
 
     public function lists($status = 1, $order = 'uid DESC', $field = true){
         $map = array('status' => $status);

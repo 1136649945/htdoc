@@ -56,6 +56,8 @@ class UserController extends AdminController {
         $list   = $this->lists('Member', $map);
         int_to_string($list);
         $this->assign('_list', $list);
+        // 记录当前列表页的cookie
+        Cookie('__forward__',$_SERVER['REQUEST_URI']);
         $this->meta_title = '专家信息';
         $this->display();
     }
@@ -210,13 +212,13 @@ class UserController extends AdminController {
         $map['uid'] =   array('in',$id);
         switch ( strtolower($method) ){
             case 'forbiduser':
-                $this->forbid('Member', $map );
+                $this->forbid('UcenterMember', $map );
                 break;
             case 'resumeuser':
-                $this->resume('Member', $map );
+                $this->resume('UcenterMember', $map );
                 break;
             case 'deleteuser':
-                $this->delete('Member', $map );
+                $this->delete('UcenterMember', $map );
                 break;
             default:
                 $this->error('参数非法');
@@ -248,6 +250,24 @@ class UserController extends AdminController {
             $this->display();
         }
     }
+    
+    /**
+     *  验证码，用于登录和注册
+     */
+    public function verify()
+    {
+        $config = array(
+            'useCurve' => false, // 是否画混淆曲线
+            'useNoise' => false, // 是否添加杂点
+            'length' => 4, // 验证码位数
+            'codeSet' => '2345678ABCDEFGHJKLMNPQRTUVWXY',
+            'fontttf' => '2.ttf'
+        ); // 验证码字体，不设置随机获取
+        
+        $verify = new \Think\Verify($config);
+        $verify->entry(1);
+    }
+    
     /**
      * 专家新增方法
      * @param string $username
@@ -255,36 +275,27 @@ class UserController extends AdminController {
      * @param string $repassword
      * @param string $email
      */
-    public function expertadd(){
-        if(IS_POST){
-            $Ucenter = M("UcenterMember");
-            $Member = M("Member");
-            $Ucenter->startTrans();
-            if($res && $res1){
-                $Ucenter->commit();
-            }else{
-                $Ucenter->rollback();
+    public function expertadd($password=null,$repassword=null,$verify=null){
+        if(IS_POST){ //注册用户
+            /* 检测验证码 */
+            if(!check_verify($verify)){
+                $this->error('验证码输入错误！');
             }
-            $data1 = $Ucenter->create();
-            $data2 = $Member->create();
-            var_dump($data1);
-            var_dump($data2);
-            exit();
+            if(!$password){
+                $this->error('密码不能为空！');
+            }
             /* 检测密码 */
             if($password != $repassword){
-                $this->error('密码和重复密码不一致！');
+                $this->error('密码和确认密码不一致！');
             }
-    
             /* 调用注册接口注册用户 */
-            $User   =   new UserApi;
-            $uid    =   $User->register($username, $password, $email);
+            $User = new UserApi;
+            $uid = $User->register();
             if(0 < $uid){ //注册成功
-                $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1);
-                if(!M('Member')->add($user)){
-                    $this->error('用户添加失败！');
-                } else {
-                    $this->success('用户添加成功！',U('index'));
-                }
+                //TODO: 发送验证邮件
+                //记录行为
+                action_log('expertadd', 'User', $uid, UID);
+                $this->success('新增成功', Cookie('__forward__'));
             } else { //注册失败，显示错误信息
                 $this->error($this->showRegError($uid));
             }
@@ -303,7 +314,7 @@ class UserController extends AdminController {
             case -1:  $error = '用户名长度必须在16个字符以内！'; break;
             case -2:  $error = '用户名被禁止注册！'; break;
             case -3:  $error = '用户名被占用！'; break;
-            case -4:  $error = '密码长度必须在6-30个字符之间！'; break;
+            case -4:  $error = '密码长度必须在6-10个字符之间！'; break;
             case -5:  $error = '邮箱格式不正确！'; break;
             case -6:  $error = '邮箱长度必须在1-32个字符之间！'; break;
             case -7:  $error = '邮箱被禁止注册！'; break;

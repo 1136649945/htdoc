@@ -5,31 +5,33 @@
         <h2>新增专家</h2>
     </div>
     <form action="{:U()}" method="post" class="form-horizontal">
+    <div>
+    </div>
     	<div class="layui-form-item">
 	        <div class="layui-inline">
 	            <label class="layui-form-label" style="width:215px;">用户名（登录账号英文加数字）</label>
 	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="username" value="">
+	                <input type="text" class="layui-input" name="username" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10" value="">
 	            </div>
 	        </div>
 	        <div class="layui-inline">
 	            <label class="layui-form-label" style="width:135px;">昵称（显示）</label>
 	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="nickname" value="">
+	                <input type="text" class="layui-input" name="nickname" maxlength="32" value="">
 	            </div>
 	        </div>
 	        </div>
 	        <div class="layui-form-item">
 	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:215px;">密码（用户密码不能少于6位）</label>
+	            <label class="layui-form-label"style="width:215px;">密码（用户密码长度在6-10位）</label>
 	            <div class="layui-input-inline">
-	                <input type="password" class="layui-input" name="password" value="">
+	                <input type="password" class="layui-input" name="password" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10" value="">
 	            </div>
 	        </div>
 	        <div class="layui-inline">
 	            <label class="layui-form-label" style="width:135px;">确认密码</label>
 	            <div class="layui-input-inline">
-	                <input type="password" class="layui-input" name="repassword" value="">
+	                <input type="password" class="layui-input" name="repassword" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10" value="">
 	            </div>
 	        </div>
 	        </div>
@@ -37,7 +39,7 @@
 	        <div class="layui-inline">
 	            <label class="layui-form-label"style="width:215px;">姓名（5个字内）</label>
 	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="name" value="">
+	                <input type="text" class="layui-input" name="name" maxlength="5" value="">
 	            </div>
 	        </div>
 	        <div class="layui-inline">
@@ -56,13 +58,13 @@
 	        <div class="layui-inline">
 	            <label class="layui-form-label"style="width:215px;">手机号</label>
 	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="mobile" value="">
+	                <input type="text" class="layui-input" name="mobile" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11" value="">
 	            </div>
 	        </div>
 	        <div class="layui-inline">
 	            <label class="layui-form-label"style="width:135px;">电话</label>
 	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="mobile" value="">
+	                <input type="text" class="layui-input" name="telephone" value="">
 	            </div>
 	        </div>
 	        </div>
@@ -70,7 +72,7 @@
 	        <div class="layui-inline">
 	            <label class="layui-form-label"style="width:215px;">等级</label>
 	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="mlevel" value="">
+	                <input type="text" class="layui-input" name="mlevel" value="" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11">
 	            </div>
 	        </div>
 	        <div class="layui-inline">
@@ -90,7 +92,7 @@
 		        <div class="layui-inline">
 		            <label class="layui-form-label"style="width:135px;">积分</label>
 		            <div class="layui-input-inline">
-		                <input type="text" class="layui-input" name="areas" value="">
+		                <input type="text" class="layui-input" name="areas" value="" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11">
 		            </div>
 		        </div>
 	        </div>
@@ -114,7 +116,7 @@
 	    	</div>
 	    	
 	        <label class="textarea">
-	            <textarea name="content">11</textarea>
+	            <textarea name="content"></textarea>
 	            {:hook('adminArticleEdit')}
             </label>
         <div class="form-item">
@@ -125,6 +127,41 @@
 </block>
 
 <block name="script">
+	<script type="text/javascript">
+			//上传图片
+		    /* 初始化上传插件 */
+			$("#upload_picture_{$field.name}").uploadify({
+		        "height"          : 30,
+		        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+		        "fileObjName"     : "download",
+		        "buttonText"      : "上传图片",
+		        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+		        "width"           : 120,
+		        'removeTimeout'	  : 1,
+		        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+		        "onUploadSuccess" : uploadPicture{$field.name},
+		        'onFallback' : function() {
+		            alert('未检测到兼容版本的Flash.');
+		        }
+		    });
+			function uploadPicture{$field.name}(file, data){
+		    	var data = $.parseJSON(data);
+		    	var src = '';
+		        if(data.status){
+		        	$("#cover_id_{$field.name}").val(data.id);
+		        	src = data.url || '__ROOT__' + data.path
+		        	$("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
+		        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+		        	);
+		        } else {
+		        	updateAlert(data.info);
+		        	setTimeout(function(){
+		                $('#top-alert').find('button').click();
+		                $(that).removeClass('disabled').prop('disabled',false);
+		            },1500);
+		        }
+		    }
+	</script>
     <script type="text/javascript">
         //导航高亮
         highlight_subnav('{:U('User/expert')}');
