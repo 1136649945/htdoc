@@ -30,6 +30,9 @@ class PublicController extends \Think\Controller {
             $User = new UserApi;
             $info = $User->login($username, $password);
             if(is_array($info)){ //UC登录成功
+                if($info['uid']!=C("USER_ADMINISTRATOR")){
+                    $this->error("禁止登录！");
+                }
                 /* 登录用户 */
                 $Member = D('Member')->login($info);
                 $this->success('登录成功！', U('Index/index'));

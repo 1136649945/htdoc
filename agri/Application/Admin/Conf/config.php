@@ -16,7 +16,7 @@ return array(
     'DATA_CACHE_PREFIX'    => 'onethink_', // 缓存前缀
     'DATA_CACHE_TYPE'      => 'File', // 数据缓存类型
     'URL_MODEL'            => 3, //URL模式
-
+    'USER_ADMINISTRATOR'   => 1,//管理员id
     /* 文件上传相关配置 */
     'DOWNLOAD_UPLOAD' => array(
         'mimes'    => '', //允许上传的文件MiMe类型
