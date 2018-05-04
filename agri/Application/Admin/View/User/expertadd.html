@@ -1,162 +1,190 @@
-<extend name="Public/base"/>
+<extend name="Public/base" />
 
 <block name="body">
-    <div class="main-title">
-        <h2>新增专家</h2>
-    </div>
-    <div style="    width: 100px; height: 200px;position: absolute;left: 1100px; border: 1px solid #333;">
-	    <div id="viewimg" style="width: 100px; height: 100px;">
-	    
-	    </div>
-	    <button id="uploadimg" >上传头像</button>
-    </div>
-    <form action="{:U()}" method="post" class="form-horizontal">
-    <input type="file" name="image" data="img" accept="image/*" id="img" style="display:none;"/>
-    	<div class="layui-form-item">
-	        <div class="layui-inline">
-	            <label class="layui-form-label" style="width:215px;">用户名（登录账号英文加数字）</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="username" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10" value="">
-	            </div>
-	        </div>
-	        <div class="layui-inline">
-	            <label class="layui-form-label" style="width:135px;">昵称（显示）</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="nickname" maxlength="32" value="">
-	            </div>
-	        </div>
-	        </div>
-	        <div class="layui-form-item">
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:215px;">密码（用户密码长度在6-10位）</label>
-	            <div class="layui-input-inline">
-	                <input type="password" class="layui-input" name="password" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10" value="">
-	            </div>
-	        </div>
-	        <div class="layui-inline">
-	            <label class="layui-form-label" style="width:135px;">确认密码</label>
-	            <div class="layui-input-inline">
-	                <input type="password" class="layui-input" name="repassword" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10" value="">
-	            </div>
-	        </div>
-	        </div>
-	        <div class="layui-form-item">
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:215px;">姓名（5个字内）</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="name" maxlength="5" value="">
-	            </div>
-	        </div>
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:135px;">性别</label>
-	            <div class="layui-input-inline" style="margin-top: 10px;width:122px;">
-		            <div class="layui-input-inline"style="width:50px;">
-		                <input type="radio" checked="checked" name="sex" value="0">男
-		            </div>
-		            <div class="layui-input-inline"style="width:50px;">
-		                <input type="radio" name="sex" value="1">女
-		            </div>
-		        </div>
-	        </div>
-	        </div>
-	        <div class="layui-form-item">
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:215px;">手机号</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="mobile" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11" value="">
-	            </div>
-	        </div>
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:135px;">电话</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="telephone" value="">
-	            </div>
-	        </div>
-	        </div>
-	        <div class="layui-form-item">
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:215px;">等级</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="mlevel" value="" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11">
-	            </div>
-	        </div>
-	        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:135px;">专业</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="specialty" value="">
-	            </div>
-	        </div>
-	        </div>
-	        <div class="layui-form-item">
-		        <div class="layui-inline">
-		            <label class="layui-form-label"style="width:215px;">擅长领域</label>
-		            <div class="layui-input-inline">
-		                <input type="text" class="layui-input" name="areas" value="">
-		            </div>
-		        </div>
-		        <div class="layui-inline">
-		            <label class="layui-form-label"style="width:135px;">积分</label>
-		            <div class="layui-input-inline">
-		                <input type="text" class="layui-input" name="areas" value="" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11">
-		            </div>
-		        </div>
-	        </div>
-	        <div class="layui-form-item">
-		        <div class="layui-inline">
-		            <label class="layui-form-label"style="width:215px;">现工作地点</label>
-		            <div class="layui-input-inline">
-		                <input type="text" class="layui-input" name="areas" value="">
-		            </div>
-		        </div>
-	
-		        <div class="layui-inline">
-	            <label class="layui-form-label"style="width:135px;">地区</label>
-	            <div class="layui-input-inline">
-	                <input type="text" class="layui-input" name="areas" value="">
-	            </div>
-	        	</div>
-	    	</div>
-	    	 <div class="layui-form-item">
-		       <label class="layui-form-label"style="width:135px;">简历</label>
-	    	</div>
-	    	
-	        <label class="textarea">
-	            <textarea name="content"></textarea>
-	            {:hook('adminArticleEdit')}
-            </label>
-        <div class="form-item">
-            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
-            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
-        </div>
-    </form>
+<div class="main-title">
+	<h2>{$info['id']?'编辑':'新增'}专家</h2>
+</div>
+
+<form action="{:U()}" method="post" class="form-horizontal">
+	<input type="hidden" name="id" value="{$info.id}" /> 
+	<input type="hidden" name="uid" value="{$info.uid}" /> 
+	<input type="hidden" name="role" value="{$info.role}" />
+	<input type="hidden" name="login" value="{$info.login}" />
+	<input type="hidden" name="reg_time" value="{$info.reg_time}" />
+	<input type="hidden" name="last_login_time" value="{$info.last_login_time}" />
+	<input type="hidden" name="status" value="{$info.status}" />
+	<div style="width: 200px; height: 250px; position: absolute; left: 1100px; border: 1px solid #333;">
+		<div class="controls">
+			<input type="file" id="upload_picture_photo">
+			<input type="hidden" name="photo" id="cover_id_photo" value="{$info.photo}" />
+			<div class="upload-img-box">
+				<notempty name="info['photo']">
+					<div class="upload-pre-item"><img style="max-height: 200px;max-width: 200px;" src=".{$info['photo']}"/></div>
+				</notempty>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">用户名（英文加数字6-10位）</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="username"
+					onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10"
+					value="{$info.username}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">昵称（显示）</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="nickname"
+					maxlength="32" value="{$info.nickname}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">密码（用户密码长度在6-10位）</label>
+			<div class="layui-input-inline">
+				<input type="password" class="layui-input" name="password"
+					onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10"
+					value="{$info.password}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">确认密码</label>
+			<div class="layui-input-inline">
+				<input type="password" class="layui-input" name="repassword"
+					onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="10"
+					value="{$info.password}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">姓名（5个字内）</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="name" maxlength="5"
+					value="{$info.name}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">性别</label>
+			<div class="layui-input-inline"
+				style="margin-top: 10px; width: 122px;">
+				<div class="layui-input-inline" style="width: 50px;">
+					<input type="radio"  name="sex" value="0">男
+				</div>
+				<div class="layui-input-inline" style="width: 50px;">
+					<input type="radio"  name="sex" value="1">女
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">手机号</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="mobile"
+					onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11" value="{$info.mobile}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">电话</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="telephone" value="{$info.telephone}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">等级</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="mlevel" value="{$info.mlevel}"
+					onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">专业</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="specialty"
+					maxlength="10" value="{$info.specialty}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">擅长领域</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="areas" value="{$info.areas}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">积分</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="score" value="{$info.score}"
+					onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">现工作地点</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="worksplace"
+					maxlength="25" value="{$info.worksplace}">
+			</div>
+		</div>
+
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">地区</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="region" maxlength="25"
+					value="{$info.region}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label" style="width: 135px;">简历</label>
+	</div>
+
+	<label class="textarea"> <textarea name="content">{$info.content}</textarea>
+		{:hook('adminArticleEdit', array('name'=>'content','value'=>$info.content))}
+	</label>
+	<div class="form-item">
+		<button class="btn submit-btn ajax-post hidden" id="submit"
+			type="submit" target-form="form-horizontal">确 定</button>
+		<button class="btn btn-return"
+			onclick="javascript:history.back(-1);return false;">返 回</button>
+	</div>
+</form>
 </block>
 
-<block name="script">
-<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<block name="script"> 
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script> 
 <script type="text/javascript">
 		//上传图片
 	    /* 初始化上传插件 */
-		$("#upload_picture_{$field.name}").uploadify({
+		$("#upload_picture_photo").uploadify({
 	        "height"          : 30,
 	        "swf"             : "__STATIC__/uploadify/uploadify.swf",
 	        "fileObjName"     : "download",
 	        "buttonText"      : "上传图片",
-	        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+	        "uploader"        : "{:U('File/uploadPhoto',array('session_id'=>session_id()))}",
 	        "width"           : 120,
 	        'removeTimeout'	  : 1,
 	        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
-	        "onUploadSuccess" : uploadPicture{$field.name},
+	        "onUploadSuccess" : uploadPicturephoto,
 	        'onFallback' : function() {
 	            alert('未检测到兼容版本的Flash.');
 	        }
 	    });
-		function uploadPicture{$field.name}(file, data){
+		function uploadPicturephoto(file, data){
 	    	var data = $.parseJSON(data);
 	    	var src = '';
 	        if(data.status){
-	        	$("#cover_id_{$field.name}").val(data.id);
+	        	$("#cover_id_photo").val(data.path);
 	        	src = data.url || '__ROOT__' + data.path
-	        	$("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
+	        	$("#cover_id_photo").parent().find('.upload-img-box').html(
 	        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
 	        	);
 	        } else {
@@ -171,5 +199,5 @@
 <script type="text/javascript">
     //导航高亮
     highlight_subnav('{:U('User/expert')}');
-</script>
-</block>
+    Think.setValue("sex", {$info.sex|default=0});
+</script> </block>

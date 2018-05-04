@@ -34,7 +34,7 @@ class PictureModel extends Model{
      * @param  array  $config  上传驱动配置
      * @return array           文件上传成功后的信息
      */
-    public function upload($files, $setting, $driver = 'Local', $config = null){
+    public function upload($files, $setting, $driver = 'Local', $config = null,$save = true){
         /* 上传文件 */
         $setting['callback'] = array($this, 'isFile');
 		$setting['removeTrash'] = array($this, 'removeTrash');
@@ -50,11 +50,13 @@ class PictureModel extends Model{
 
                 /* 记录文件信息 */
                 $value['path'] = substr($setting['rootPath'], 1).$value['savepath'].$value['savename'];	//在模板里的url路径
-                if($this->create($value) && ($id = $this->add())){
-                    $value['id'] = $id;
-                } else {
-                    //TODO: 文件上传成功，但是记录文件信息失败，需记录日志
-                    unset($info[$key]);
+                if($save){
+                    if($this->create($value) && ($id = $this->add())){
+                        $value['id'] = $id;
+                    } else {
+                        //TODO: 文件上传成功，但是记录文件信息失败，需记录日志
+                        unset($info[$key]);
+                    }
                 }
             }
             return $info; //文件上传成功

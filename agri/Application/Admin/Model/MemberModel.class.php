@@ -17,11 +17,19 @@ use Think\Model;
 
 class MemberModel extends Model {
 
-//     protected $_validate = array(
-//         array('nickname', '1,16', '昵称长度为1-16个字符', self::EXISTS_VALIDATE, 'length'),
-//         array('nickname', '', '昵称被占用', self::EXISTS_VALIDATE, 'unique'), //用户名被占用
-//     );
-
+    protected $_validate = array(
+        array('name', '0,5', -20, self::EXISTS_VALIDATE, 'length'),//姓名长度
+        array('specialty', '0,10', -21, self::EXISTS_VALIDATE, 'length'),//专业长度
+        array('worksplace', '0,25', -22, self::EXISTS_VALIDATE, 'length'),//工作地
+        array('nickName', '0,10', -23, self::EXISTS_VALIDATE, 'length'),//昵称
+        array('region', '0,25', -24, self::EXISTS_VALIDATE, 'length'),//地区
+        
+    );
+    /* 自动完成规则 */
+    protected $_auto = array(
+         array('content', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
+    );
+   
     public function lists($status = 1, $order = 'uid DESC', $field = true){
         $map = array('status' => $status);
         return $this->field($field)->where($map)->order($order)->select();

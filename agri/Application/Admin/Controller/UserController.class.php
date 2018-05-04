@@ -56,11 +56,154 @@ class UserController extends AdminController {
         $list   = $this->lists('Member', $map);
         int_to_string($list);
         $this->assign('_list', $list);
-        // 记录当前列表页的cookie
-        Cookie('__forward__',$_SERVER['REQUEST_URI']);
         $this->meta_title = '专家信息';
         $this->display();
     }
+    
+    /**
+     * 专家新增方法
+     * @param string $username
+     * @param string $password
+     * @param string $repassword
+     * @param string $email
+     */
+    public function expertadd($id=null,$password=null,$repassword=null,$verify=null){
+        if(IS_POST){ 
+            //注册专家
+            $return = array();
+            /* 检测验证码 */
+            //             if(!check_verify($verify)){
+            //                 $this->error('验证码输入错误！');
+            //                 $return['info']     =   '验证码输入错误！';
+            //                 $return['status']   =   0;
+            //                 $this->ajaxReturn($return,'json');
+            //             }
+            if(!$password){
+                $return['status']   =   0;
+                $return['info']     =   '密码不能为空！';
+                $this->ajaxReturn($return,'json');
+                return ;
+            }
+            /* 检测密码 */
+            if($password != $repassword){
+                $return['status']   =   0;
+                $return['info']     =   '密码和确认密码不一致！';
+                $this->ajaxReturn($return,'json');
+                return ;
+            }
+            if($id){
+                $UcenterMember = D("UcenterMember");
+                $Member = D("Member");
+                $data1 = $UcenterMember->create();
+                $data2 = $Member->create();
+                if($data1 && $data2){
+                    M()->startTrans();
+                    $data1['password'] = think_encrypt( $data1['password'], C("DATA_AUTH_KEY"));
+                    $id = $UcenterMember->save($data1);
+                    if($id!==false){
+                        $uid = $Member->save($data2);
+                        if($uid!==false){
+                            M()->commit();
+                            $return['status']   =   1;
+                            $return['info']     =   '编辑成功！';
+                            $return['url'] = "/admin.php?s=/User/expert";
+                            $this->ajaxReturn($return,'json');
+                            return ;
+                        }else{
+                            M()->rollback();
+                            $return['status']   =   0;
+                            $return['info']     =   '编辑失败！';
+                            $this->ajaxReturn($return,'json');
+                            return ;
+                        }
+                    }else{
+                        M()->rollback();
+                        $return['status']   =   0;
+                        $return['info']     =   '编辑失败！';
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }
+                }else{
+                    if(!$data1){
+                        $return['status']   =   0;
+                        $return['info']     =   $this->showRegError($UcenterMember->getError());
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }else {
+                        $return['status']   =   0;
+                        $return['info']     =   $this->showRegError($Member->getError());
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }
+                }
+            }else{
+                $UcenterMember = D("UcenterMember");
+                $Member = D("Member");
+                $data1 = $UcenterMember->create();
+                $data2 = $Member->create();
+                if($data1 && $data2){
+                    M()->startTrans();
+                    $data1['password'] = think_encrypt( $data1['password'], C("DATA_AUTH_KEY"));
+                    $id = $UcenterMember->add($data1);
+                    if($id){
+                        $data2['uid'] = $id;
+                        $data2['role'] = "专家";
+                        $data2['reg_time'] = date("Y-m-d H:i:s");
+                        $data2['last_login_time'] = date("Y-m-d H:i:s");
+                        $uid = $Member->add($data2);
+                        if($uid){
+                            M()->commit();
+                            $return['status']   =   1;
+                            $return['info']     =   '新增成功！';
+                            $return['url'] = "/admin.php?s=/User/expert";
+                            $this->ajaxReturn($return,'json');
+                            return ;
+                        }else{
+                            M()->rollback();
+                            $return['status']   =   0;
+                            $return['info']     =   '新增失败！';
+                            $this->ajaxReturn($return,'json');
+                            return ;
+                        }
+                    }else{
+                        M()->rollback();
+                        $return['status']   =   0;
+                        $return['info']     =   '新增失败！';
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }
+                }else{
+                    if(!$data1){
+                        $return['status']   =   0;
+                        $return['info']     =   $this->showRegError($UcenterMember->getError());
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }else {
+                        $return['status']   =   0;
+                        $return['info']     =   $this->showRegError($Member->getError());
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }
+                }
+            }
+            
+        } else {
+            if($id){
+                $this->meta_title = '编辑专家';
+                $User = new UserApi;
+                $info = $User->info($id);
+                if(is_array($info)){
+                    $info['password'] = think_decrypt($info['password'], C("DATA_AUTH_KEY"));
+                    $this->assign("info",$info);
+                }
+                $this->display();
+            }else{
+                $this->meta_title = '新增专家';
+                $this->display();
+            }
+        }
+    }
+    
     /**
      * 修改昵称初始化
      * @author huajie <banhuajie@163.com>
@@ -269,69 +412,16 @@ class UserController extends AdminController {
     }
     
     /**
-     * 专家新增方法
-     * @param string $username
-     * @param string $password
-     * @param string $repassword
-     * @param string $email
-     */
-    public function expertadd($password=null,$repassword=null,$verify=null){
-        if(IS_POST){ //注册用户
-            /* 检测验证码 */
-//             if(!check_verify($verify)){
-//                 $this->error('验证码输入错误！');
-//             }
-            if(!$password){
-                $this->error('密码不能为空！');
-            }
-            /* 检测密码 */
-            if($password != $repassword){
-                $this->error('密码和确认密码不一致！');
-            }
-            $UcenterMember = D("UcenterMember");
-            $Member = D("Member");
-            $data1 = $UcenterMember->create();
-            $data2 = $Member->create();
-            if($data1 && $data2){
-                M()->startTrans();
-                $id = $UcenterMember->add($data1);
-                if($id){
-                   $data2['uid'] = $id;
-                   $uid = $Member->add($data2);
-                   if($uid){
-                        M()->commit();
-                        $this->success('新增成功', Cookie('__forward__'));
-                   }else{
-                        M()->rollback();
-                        $this->error('新增失败');
-                   }
-                }else{
-                   M()->rollback();
-                   $this->error('新增失败');
-                }
-            }else{
-                if(!$data1){
-                    $this->error($UcenterMember->getError());
-                }else {
-                    $this->error($Member->getError());
-                }
-            }
-        } else {
-            $this->meta_title = '新增用户';
-            $this->display();
-        }
-    }
-    /**
      * 获取用户注册错误信息
      * @param  integer $code 错误编码
      * @return string        错误信息
      */
     private function showRegError($code = 0){
         switch ($code) {
-            case -1:  $error = '用户名长度必须在16个字符以内！'; break;
+            case -1:  $error = '用户名格式为6-10个数字和字母组成的字符！'; break;
             case -2:  $error = '用户名被禁止注册！'; break;
             case -3:  $error = '用户名被占用！'; break;
-            case -4:  $error = '密码长度必须在6-10个字符之间！'; break;
+            case -4:  $error = '密码格式为6-10个数字和字母组成的字符！'; break;
             case -5:  $error = '邮箱格式不正确！'; break;
             case -6:  $error = '邮箱长度必须在1-32个字符之间！'; break;
             case -7:  $error = '邮箱被禁止注册！'; break;
@@ -339,6 +429,12 @@ class UserController extends AdminController {
             case -9:  $error = '手机格式不正确！'; break;
             case -10: $error = '手机被禁止注册！'; break;
             case -11: $error = '手机号被占用！'; break;
+            case -12: $error = '电话格式不正确！'; break;
+            case -20: $error = '姓名长度在5个汉字内！'; break;
+            case -21: $error = '专业长度在10个汉字内！'; break;
+            case -22: $error = '工作地长度在25个汉字内！'; break;
+            case -23: $error = '昵称在10个汉字内！'; break;
+            case -24: $error = '地区在25个汉字内！'; break;
             default:  $error = '未知错误';
         }
         return $error;

@@ -88,24 +88,6 @@ class UcenterMemberModel extends Model{
 		return true; //TODO: 暂不限制，下一个版本完善
 	}
 
-	/**
-	 * 注册一个新用户
-	 * @param  string $username 用户名
-	 * @param  string $password 用户密码
-	 * @param  string $email    用户邮箱
-	 * @param  string $mobile   用户手机号码
-	 * @return integer          注册成功-用户信息，注册失败-错误编号
-	 */
-	public function register(){
-	    
-		/* 添加用户 */
-		if($this->create($data)){
-			$uid = $this->add();
-			return $uid ? $uid : 0; //0-未知错误，大于0-注册成功
-		} else {
-			return $this->getError(); //错误详情见自动验证注释
-		}
-	}
 
 	/**
 	 * 用户登录认证

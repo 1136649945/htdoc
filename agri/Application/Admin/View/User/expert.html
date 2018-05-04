@@ -17,7 +17,7 @@
 		<div class="search-form fr cf">
 			<div class="sleft">
 				<input type="text" name="nickname" class="search-input" value="{:I('nickname')}" placeholder="请输入用户昵称">
-				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('expert')}"><i class="btn-search"></i></a>
 			</div>
 		</div>
     </div>
@@ -55,6 +55,7 @@
 				<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
 				</eq>
                 <a href="{:U('User/changeStatus?method=deleteUser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+                <a href="{:U('User/expertadd?id='.$vo['uid'])}" class="confirm">编辑</a>
                 </td>
 		</tr>
 		</volist>
