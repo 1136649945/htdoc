@@ -212,13 +212,13 @@ class UserController extends AdminController {
         $map['uid'] =   array('in',$id);
         switch ( strtolower($method) ){
             case 'forbiduser':
-                $this->forbid('UcenterMember', $map );
+                $this->forbid('Member', $map );
                 break;
             case 'resumeuser':
-                $this->resume('UcenterMember', $map );
+                $this->resume('Member', $map );
                 break;
             case 'deleteuser':
-                $this->delete('UcenterMember', $map );
+                $this->delete('Member', $map );
                 break;
             default:
                 $this->error('参数非法');
@@ -278,9 +278,9 @@ class UserController extends AdminController {
     public function expertadd($password=null,$repassword=null,$verify=null){
         if(IS_POST){ //注册用户
             /* 检测验证码 */
-            if(!check_verify($verify)){
-                $this->error('验证码输入错误！');
-            }
+//             if(!check_verify($verify)){
+//                 $this->error('验证码输入错误！');
+//             }
             if(!$password){
                 $this->error('密码不能为空！');
             }
@@ -288,16 +288,33 @@ class UserController extends AdminController {
             if($password != $repassword){
                 $this->error('密码和确认密码不一致！');
             }
-            /* 调用注册接口注册用户 */
-            $User = new UserApi;
-            $uid = $User->register();
-            if(0 < $uid){ //注册成功
-                //TODO: 发送验证邮件
-                //记录行为
-                action_log('expertadd', 'User', $uid, UID);
-                $this->success('新增成功', Cookie('__forward__'));
-            } else { //注册失败，显示错误信息
-                $this->error($this->showRegError($uid));
+            $UcenterMember = D("UcenterMember");
+            $Member = D("Member");
+            $data1 = $UcenterMember->create();
+            $data2 = $Member->create();
+            if($data1 && $data2){
+                M()->startTrans();
+                $id = $UcenterMember->add($data1);
+                if($id){
+                   $data2['uid'] = $id;
+                   $uid = $Member->add($data2);
+                   if($uid){
+                        M()->commit();
+                        $this->success('新增成功', Cookie('__forward__'));
+                   }else{
+                        M()->rollback();
+                        $this->error('新增失败');
+                   }
+                }else{
+                   M()->rollback();
+                   $this->error('新增失败');
+                }
+            }else{
+                if(!$data1){
+                    $this->error($UcenterMember->getError());
+                }else {
+                    $this->error($Member->getError());
+                }
             }
         } else {
             $this->meta_title = '新增用户';

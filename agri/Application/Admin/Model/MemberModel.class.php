@@ -17,10 +17,10 @@ use Think\Model;
 
 class MemberModel extends Model {
 
-    protected $_validate = array(
-        array('nickname', '1,16', '昵称长度为1-16个字符', self::EXISTS_VALIDATE, 'length'),
-        array('nickname', '', '昵称被占用', self::EXISTS_VALIDATE, 'unique'), //用户名被占用
-    );
+//     protected $_validate = array(
+//         array('nickname', '1,16', '昵称长度为1-16个字符', self::EXISTS_VALIDATE, 'length'),
+//         array('nickname', '', '昵称被占用', self::EXISTS_VALIDATE, 'unique'), //用户名被占用
+//     );
 
     public function lists($status = 1, $order = 'uid DESC', $field = true){
         $map = array('status' => $status);
@@ -32,16 +32,10 @@ class MemberModel extends Model {
      * @param  integer $uid 用户ID
      * @return boolean      ture-登录成功，false-登录失败
      */
-    public function login($uid){
-        /* 检测是否在当前应用注册 */
-        $user = $this->field("uid,nickname")->find($uid);
-        if(!$user) {
-            $this->error = '用户不存在或已被禁用！'; //应用级别禁用
-            return false;
-        }
-
+    public function login($user){
+       
         //记录行为
-        action_log('user_login', 'member', $uid, $uid);
+        //action_log('user_login', 'member', $user['uid'], $user['uid']);
 
         /* 登录用户 */
         $this->autoLogin($user);
@@ -72,9 +66,4 @@ class MemberModel extends Model {
         session('user_auth_sign', data_auth_sign($auth));
 
     }
-
-    public function getNickName($uid){
-        return $this->where(array('uid'=>(int)$uid))->getField('nickname');
-    }
-
 }

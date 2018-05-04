@@ -29,7 +29,7 @@ class UcenterMemberModel extends Model{
 		/* 验证用户名 */
 		array('username', '6,10', -1, self::EXISTS_VALIDATE, 'length'), //用户名长度不合法
 		array('username', 'checkDenyMember', -2, self::EXISTS_VALIDATE, 'callback'), //用户名禁止注册
-		array('username', '', -3, self::EXISTS_VALIDATE, 'unique'), //用户名被占用
+		array('username', '', "dddd", self::EXISTS_VALIDATE, 'unique'), //用户名被占用
 
 		/* 验证密码 */
 		array('password', '6,10', -4, self::EXISTS_VALIDATE, 'length'), //密码长度不合法
@@ -41,9 +41,9 @@ class UcenterMemberModel extends Model{
 		array('email', '', -8, self::EXISTS_VALIDATE, 'unique'), //邮箱被占用
 
 		/* 验证手机号码 */
-		array('mobile', '//', -9, self::EXISTS_VALIDATE), //手机格式不正确 TODO:
+		array('mobile','/^1[34578]\d{9}$/','手机号码不对..1！',0,'regex',3), //手机格式不正确 TODO:
 		array('mobile', 'checkDenyMobile', -10, self::EXISTS_VALIDATE, 'callback'), //手机禁止注册
-		array('mobile', '', -11, self::EXISTS_VALIDATE, 'unique'), //手机号被占用
+		array('mobile', '','手机号码格式错误！', self::VALUE_VALIDATE, 'unique'), //手机号被占用
 	);
 
 	/* 用户模型自动完成 */
@@ -97,11 +97,7 @@ class UcenterMemberModel extends Model{
 	 * @return integer          注册成功-用户信息，注册失败-错误编号
 	 */
 	public function register(){
-	    $Member = D("Member");
-		$data1 = $this->create();
-        $data2 = $Member->create();
-        var_dump($data1);
-        var_dump($data2);
+	    
 		/* 添加用户 */
 		if($this->create($data)){
 			$uid = $this->add();
@@ -144,10 +140,10 @@ class UcenterMemberModel extends Model{
 			if(think_ucenter_md5($password, UC_AUTH_KEY) === $user['password']){
 			    $info = $this->info($user['id']);
 			    if(!$info['status']){
-			        return -1; //用户不存在或被禁用
+			        return $info['status']; //账号审核
 			    }
 				$this->updateLogin($user['id']); //更新用户登录信息
-				return $user['id']; //登录成功，返回用户ID
+				return $info; //登录成功，返回用户ID
 			} else {
 				return -2; //密码错误
 			}
@@ -163,10 +159,10 @@ class UcenterMemberModel extends Model{
 	 * @return array                用户信息
 	 */
 	public function info($uid){
-		$user = $this->where("id=".$uid)->field('id,username,email,mobile')->find();
+		$user = $this->where("id=".$uid)->find();
 		$userexd = D("Member")->where("uid=".$uid)->find();
 		$info = array();
-		if(is_array($user) && is_array($userexd) && $userexd['status'] = 1){
+		if(is_array($user) && is_array($userexd)){
 			foreach ($user as $key=>$val){
 			    $info[$key] = $val;
 			}

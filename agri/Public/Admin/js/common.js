@@ -286,7 +286,7 @@ function dialog(hide) {
 function viewImage(){
 	var file=$("#img")[0].files;   // 获取input上传的图片数据;
 	if(file){
-		$('#viewimage').empty();
+		$('#viewimg').empty();
 		for(var i=0;i<file.length;i++){
 			$('#viewimg').append('<img src="'+ window.URL.createObjectURL(file[i]) +'" alt="'+ file.name +'" style="max-height:70px;max-width:70px;margin-right: 10px;margin-top: 10px;">')
 		}
