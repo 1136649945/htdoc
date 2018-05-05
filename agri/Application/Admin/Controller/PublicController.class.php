@@ -12,7 +12,7 @@ use User\Api\UserApi;
 
 /**
  * 后台首页控制器
- * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ * @author 麦当苗儿 <zuojiazi@vip.qq.como>
  */
 class PublicController extends \Think\Controller {
 
@@ -34,8 +34,9 @@ class PublicController extends \Think\Controller {
                     $this->error("禁止登录！");
                 }
                 /* 登录用户 */
-                $Member = D('Member')->login($info);
-                $this->success('登录成功！', U('Index/index'));
+                if($info['status']){
+                    $this->success('登录成功！', U('Index/index'));
+                }
             } else { //登录失败
                 switch($info) {
                     case 0: $error = '账号审核中！'; break; //系统级别禁用
@@ -65,7 +66,8 @@ class PublicController extends \Think\Controller {
     /* 退出登录 */
     public function logout(){
         if(is_login()){
-            D('Member')->logout();
+            $User = new UserApi;
+            $User->logout();
             session('[destroy]');
             $this->success('退出成功！', U('login'));
         } else {

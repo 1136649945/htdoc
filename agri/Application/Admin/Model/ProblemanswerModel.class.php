@@ -7,14 +7,14 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace User\Model;
+namespace Admin\Model;
 use Think\Model;
 
 /**
- * 用户模型
- * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ * 文档基础模型
  */
-
-class MemberModel extends Model {
-
+class ProblemanswerModel extends Model{
+    public function getAnswer($field,$where,$order = 'pid,id'){
+        return $this->field($field)->where($where)->order($order)->select();
+    }
 }

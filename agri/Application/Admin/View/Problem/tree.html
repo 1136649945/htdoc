@@ -1,0 +1,26 @@
+<volist name="tree" id="list">
+	<dl class="cate-item">
+		<dt class="cf">
+			<div class="fold"><i></i></div>
+			<if condition="$list['reqid'] eq null "> 
+				<div class="order" style="width: 70px;"></div>
+			</if>
+			<div class="order">{$list['reqid']?'问题':'回复'}、{$i}</div>
+			<div class="order" style="width: 70px;"></div>
+			<div class="order" style="height: 70px;"><textarea style="height: 65px;width: 200px;overflow: auto;" disabled="disabled" >{$list.content}</textarea></div>
+		    <div class="order" style="position: absolute; right: 100px;">
+		    <if condition="$list['reqid'] eq null "> 
+				<a href="{:U('Problem/changeStatus?method=a&id='.$list['id'].'&hide='.($list['hide']?'0':'1'))}" class="ajax-get">{$list['hide']?'显示':'隐藏'}</a>
+			<else/>
+				<a href="{:U('Problem/changeStatus?method=p&id='.$list['id'].'&hide='.($list['hide']?'0':'1'))}" class="ajax-get">{$list['hide']?'显示':'隐藏'}</a>
+			</if>
+		     	
+		    </div>
+		</dt>
+		<notempty name="list['_']">
+			<dd>
+				{:R('Problem/tree', array($list['_']))}
+			</dd>
+		</notempty>
+	</dl>
+</volist>

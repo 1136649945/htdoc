@@ -36,7 +36,7 @@
 		<div class="form-item">
 			<label class="item-label">配置分组<span class="check-tips">（配置分组 用于批量设置 不分组则不会显示在系统设置中）</span></label>
 			<div class="controls">
-				<select name="group">
+				<select name="block">
 					<option value="0">不分组</option>
 					<volist name="Think.config.CONFIG_GROUP_LIST" id="group">
 						<option value="{$key}">{$group}</option>
@@ -79,7 +79,7 @@
 <block name="script">
 	<script type="text/javascript">
 		Think.setValue("type", {$info.type|default=0});
-		Think.setValue("group", {$info.group|default=0});
+		Think.setValue("block", {$info.block|default=0});
 		//导航高亮
 		highlight_subnav('{:U('Config/index')}');
 	</script>

@@ -23,8 +23,8 @@ class ConfigController extends AdminController {
         /* 查询条件初始化 */
         $map = array();
         $map  = array('status' => 1);
-        if(isset($_GET['group'])){
-            $map['group']   =   I('group',0);
+        if(isset($_GET['block'])){
+            $map['block']   =   I('block',0);
         }
         if(isset($_GET['name'])){
             $map['name']    =   array('like', '%'.(string)I('name').'%');
@@ -35,7 +35,7 @@ class ConfigController extends AdminController {
         Cookie('__forward__',$_SERVER['REQUEST_URI']);
 
         $this->assign('group',C('CONFIG_GROUP_LIST'));
-        $this->assign('group_id',I('get.group',0));
+        $this->assign('group_id',I('get.block',0));
         $this->assign('list', $list);
         $this->meta_title = '配置管理';
         $this->display();
@@ -142,7 +142,7 @@ class ConfigController extends AdminController {
     public function group() {
         $id     =   I('get.id',1);
         $type   =   C('CONFIG_GROUP_LIST');
-        $list   =   M("Config")->where(array('status'=>1,'group'=>$id))->field('id,name,title,extra,value,remark,type')->order('sort')->select();
+        $list   =   M("Config")->where(array('status'=>1,'block'=>$id))->field('id,name,title,extra,value,remark,type')->order('sort')->select();
         if($list) {
             $this->assign('list',$list);
         }

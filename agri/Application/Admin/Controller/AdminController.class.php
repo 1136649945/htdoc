@@ -145,7 +145,28 @@ class AdminController extends Controller {
             $this->error($msg['error'],$msg['url'],$msg['ajax']);
         }
     }
-
+    
+    /**
+     * 对数据表中的单行或多行记录执行修改 GET参数id为数字或逗号分隔的数字
+     *
+     * @param string $model 模型名称,供M函数使用的参数
+     * @param array  $data  修改的数据
+     * @param array  $where 查询时的where()方法的参数
+     * @param array  $msg   执行正确和错误的消息 array('success'=>'','error'=>'', 'url'=>'','ajax'=>false)
+     *                     url为跳转页面,ajax是否ajax方式(数字则为倒数计时秒数)
+     *
+     * @author 朱亚杰  <zhuyajie@topthink.net>
+     */
+    final protected function ajaxEditRow ( $model ,$data, $where ){
+        if( M($model)->where($where)->save($data)) {
+            $data['status'] = 1;
+            $data['info'] = "操作成功";
+        }else{
+            $data['status'] = 0;
+            $data['info'] = "操作失败";
+        }
+        return $data;
+    }
     /**
      * 禁用条目
      * @param string $model 模型名称,供D函数使用的参数
