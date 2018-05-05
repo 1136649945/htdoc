@@ -24,7 +24,7 @@ class ChannelpictureModel extends Model{
      */
     public function picture($files=true,$where="1=1"){
         /* 上传文件 */
-       return $this->cache(true,C('DATA_CACHE_TIME'))->field($files)->where($where)->order('sort')->select();
+       return $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($files)->where($where)->order('sort')->select();
     }
 
 }

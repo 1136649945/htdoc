@@ -21,7 +21,7 @@ class PictureModel extends Model{
 	 * @param $data
 	 */
 	public function picture($field=true,$id=array()){
-		return $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->select($id);
+		return $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->select($id);
 	}
 
 }

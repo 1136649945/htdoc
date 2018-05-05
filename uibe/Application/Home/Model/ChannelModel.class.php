@@ -22,7 +22,7 @@ class ChannelModel extends Model{
 	 * @author 麦当苗儿 <zuojiazi@vip.qq.com>
 	 */
 	public function lists($field = true,$where="1=1",$root=0){
-		$list = $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->where($where)->order('sort')->select();
+		$list = $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->where($where)->order('sort')->select();
 		return list_to_tree($list, 'id', 'pid', '_',$root);
 	}
 	/**
@@ -32,7 +32,7 @@ class ChannelModel extends Model{
 	 * @author 麦当苗儿 <zuojiazi@vip.qq.com>
 	 */
 	public function getChannel($field = true,$where="1=1"){
-	    return $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->where($where)->order('sort')->select();
+	    return $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->where($where)->order('sort')->select();
 	}
 
 }

@@ -55,7 +55,7 @@ class HomeController extends Controller {
             $channel = D('Channel')->getChannel("id,target,pid,url,".TITLE,"hide=0 and status=1 and (block=10 or block=1)");
             $this->assign('channelfs',$channel);
             //固定字段
-            $words = D("Words")->cache(true,C('DATA_CACHE_TIME'))->field("id,".TITLE)->order("id")->select();
+            $words = D("Words")->cache("UIBE",C('DATA_CACHE_TIME'))->field("id,".TITLE)->order("id")->select();
             $word = array();
             foreach ($words as $val){
                 $word["w".$val['id']] = $val[TITLE];

@@ -50,7 +50,7 @@ class CategoryModel extends Model{
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
     public function catinfo($where, $field = true){
-        return $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->where($where)->select();
+        return $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->where($where)->select();
     }
     /**
      * 获取分类详细信息

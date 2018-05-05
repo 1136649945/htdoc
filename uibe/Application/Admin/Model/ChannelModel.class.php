@@ -52,7 +52,7 @@ class ChannelModel extends Model {
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
     public function getChannel($field = true,$where="1=1"){
-        $data = $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->where($where)->order('sort')->select();
+        $data = $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->where($where)->order('sort')->select();
         $arr = array();
         if(is_array($data)){
             foreach ($data as $val){

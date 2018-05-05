@@ -26,6 +26,6 @@ class VideoModel extends Model{
      * @return array           文件上传成功后的信息
      */
     public function lists($field=true,$where="1=1"){
-         return $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->where($where)->select();
+         return $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->where($where)->select();
     }
 }

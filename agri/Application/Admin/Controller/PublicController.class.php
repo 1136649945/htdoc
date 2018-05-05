@@ -74,8 +74,10 @@ class PublicController extends \Think\Controller {
             $this->redirect('login');
         }
     }
-
- public function verify()
+    /**
+     * 验证码
+     */
+    public function verify()
     {
         $config = array(
             'useCurve' => false, // 是否画混淆曲线
@@ -88,5 +90,10 @@ class PublicController extends \Think\Controller {
         $verify = new \Think\Verify($config);
         $verify->entry(1);
     }
-
+    /**
+     * 清除用户信息查询缓存
+     */
+    public function clearMemberCache(){
+        S('MEMBER_CACHE',null);
+    }
 }

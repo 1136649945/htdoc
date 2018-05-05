@@ -16,7 +16,7 @@ use Think\Model;
 class DocumentModel extends Model{
 
 //     public function getdocument($field = true,$where="1=1",$limit="0,5",$order="create_time desc"){
-//         $document = $this->cache(true,C('DATA_CACHE_TIME'))->field($field)->where($where)->order($order)->limit($limit)->select();
+//         $document = $this->cache("UIBE",C('DATA_CACHE_TIME'))->field($field)->where($where)->order($order)->limit($limit)->select();
 //         $cover = array();
 //         if($field || strpos($field,"cover_id")){
 //             foreach ($document as $value){
@@ -54,7 +54,7 @@ class DocumentModel extends Model{
         if($limit){
             $sql = $sql." limit ".$limit;
         }
-        $data = $this->cache(true,C('DATA_CACHE_TIME'))->query($sql);
+        $data = $this->cache("UIBE",C('DATA_CACHE_TIME'))->query($sql);
         return $data;
     }
     /**
@@ -68,7 +68,7 @@ class DocumentModel extends Model{
         if($where){
             $sql = $sql."where ".$where;
         }
-        $data = $this->cache(true,C('DATA_CACHE_TIME'))->query($sql);
+        $data = $this->cache("UIBE",C('DATA_CACHE_TIME'))->query($sql);
         if(count($data)>0){
        // $this->where('id='.$data[0]['id'])->setInc('view');
         }

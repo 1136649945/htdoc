@@ -13,6 +13,7 @@
 				<a href="{:U('Problem/changeStatus?method=a&id='.$list['id'].'&hide='.($list['hide']?'0':'1'))}" class="ajax-get">{$list['hide']?'显示':'隐藏'}</a>
 			<else/>
 				<a href="{:U('Problem/changeStatus?method=p&id='.$list['id'].'&hide='.($list['hide']?'0':'1'))}" class="ajax-get">{$list['hide']?'显示':'隐藏'}</a>
+				<a href="{:U('Problem/detail?id='.$list['id'])}" >详情</a>
 			</if>
 		     	
 		    </div>

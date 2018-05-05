@@ -116,7 +116,16 @@ class UcenterMemberModel extends Model{
 			return -1; //用户不存在或被禁用
 		}
 	}
-
+	/**
+	 * 获取用户信息
+	 * @param  string  $uid         用户ID或用户名
+	 * @param  boolean $is_username 是否使用用户名查询
+	 * @return array                用户信息
+	 */
+	public function infoAll($sql){
+	   //return $this->cache("MEMBER_CACHE",C('MEMBER_DATA_CACHE_TIME'))->field($field)->join('LEFT JOIN __MEMBER__ ON __UCENTER_MEMBER__.id = __MEMBER__.uid where '.$wher)->select();
+	    return $this->query($sql);
+	}
 	/**
 	 * 检测用户信息
 	 * @param  string  $field  用户名

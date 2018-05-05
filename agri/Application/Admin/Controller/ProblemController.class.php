@@ -9,12 +9,14 @@
 
 namespace Admin\Controller;
 
+use User\Api\UserApi;
+use Think\Cache;
 /**
  * 提问回答控制器
  */
 class ProblemController extends AdminController{
     /**
-     * 问题管理
+     * 问题管理列表
      */
     public function index(){
         C('_SYS_GET_PROBLEM_TREE_', true); //标记系统获取分类树模板
@@ -23,6 +25,32 @@ class ProblemController extends AdminController{
         $this->assign('tree', $tree['data']);
         $this->assign('page', $tree['show']);
         $this->meta_title = '问题中心';
+        $this->display();
+    }
+    /**
+     * 问题详情
+     */
+    public function detail(){
+        $id = I("id",0);
+        $tree = $this->getTreeList(null,'id='.$id)['data'];
+        $id = array();
+        foreach ($tree as $val){
+            array_push($id, $val['reqid']);
+            array_push($id, $val['uid']);
+        }
+        $this->assign('tree', $tree);
+        if(count($id)>0){
+            $User = new UserApi();
+            $data = $User->infoAll('select u.id,m.nickname from __UCENTER_MEMBER__ u left join __MEMBER__ m on u.id=m.uid where u.id in('.arr2str($id,',').')');
+            $info = array();
+            foreach ($data as $val){
+                $info[$val['id']] = $val['nickname'] ;
+            }
+            var_dump($info);
+            $this->assign("userinfo",$info);
+        }
+        
+        $this->meta_title = '问题详情';
         $this->display();
     }
     /**
@@ -47,12 +75,13 @@ class ProblemController extends AdminController{
     public function changeStatus(){
         $method = I("method");
         $id = I('id',0);
+        $hide = I('hide',0);
         if ( !$id) {
             $info=array('status'=>0,'info'=>'请选择要操作的数据');
             $this->ajaxReturn($info,'json');
             return ;
         }
-        $data = array('hide'=>1);
+        $data = array('hide'=>$hide);
         $map['id'] =   array('eq',$id);
         $info = null;
         switch ( strtolower($method) ){

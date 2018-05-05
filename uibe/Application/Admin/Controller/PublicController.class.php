@@ -76,7 +76,9 @@ class PublicController extends \Think\Controller {
             $this->redirect('login');
         }
     }
-
+    /**
+     * 验证码
+     */
     public function verify()
     {
         $config = array(
@@ -90,5 +92,11 @@ class PublicController extends \Think\Controller {
         $verify = new \Think\Verify($config);
         $verify->entry(1);
     }
-
+    /**
+     * 清除网站缓存
+     */
+    public function clearCache(){
+        S('UIBE',null);
+        $this->ajaxReturn(array('status'=>1,'info'=>'清除成功！'),'json');
+    }
 }

@@ -54,7 +54,7 @@ class AboutController extends HomeController {
         if(in_array_case($category_id,array(101,102,103,104,105,106,107,108,109))){
             $this->assign("parcat",101);
             if($id==null){
-                $data = $Chan->cache(true,C('DATA_CACHE_TIME'))->query("select m.".TITLE." as title,m.category_id as cat_id,g.path as path,h.id as id from ".C("DB_PREFIX")."channel m left join ".C("DB_PREFIX")."channelpicture g on m.title=g.title left join ".C("DB_PREFIX")."category h  on g.title=h.title where m.pid=25");
+                $data = $Chan->cache("UIBE",C('DATA_CACHE_TIME'))->query("select m.".TITLE." as title,m.category_id as cat_id,g.path as path,h.id as id from ".C("DB_PREFIX")."channel m left join ".C("DB_PREFIX")."channelpicture g on m.title=g.title left join ".C("DB_PREFIX")."category h  on g.title=h.title where m.pid=25");
                 foreach ($data as $key=>$val){
                     $data[$key]['content'] = $Doc->doclists("m.category_id=".$data[$key]['id']." and m.display=1 and m.status=1","m.create_time desc");
                 }

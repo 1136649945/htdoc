@@ -12,6 +12,9 @@
  * 所有系统级别的配置
  */
 return array(
+    'SHOW_PAGE_TRACE' => true,
+    
+    'MEMBER_DATA_CACHE_TIME'   => 60, // 数据缓存时间
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',
