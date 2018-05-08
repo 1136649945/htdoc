@@ -7,20 +7,18 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Home\Controller;
+namespace Home\Logic;
 
 /**
- * 前台首页控制器
- * 主要获取首页聚合数据
+ * 文档模型子模型 - 文章模型
  */
-class IndexController extends HomeController {
+class ArticleLogic extends BaseLogic{
+	/* 自动验证规则 */
+	protected $_validate = array(
+		array('content', 'require', '内容不能为空！', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+	);
 
-	//系统首页
-    public function index($session=null){
-        $this->assign("session",$session);
-        $this->assign("value",S($session));
-        $this->ajaxReturn(array('info'=>session('sss'),'s'=>'s'),'json');
-        $this->display();
-    }
+	/* 自动完成规则 */
+	protected $_auto = array();
 
 }

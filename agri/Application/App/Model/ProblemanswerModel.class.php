@@ -7,20 +7,14 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Home\Controller;
+namespace Home\Model;
+use Think\Model;
 
 /**
- * 前台首页控制器
- * 主要获取首页聚合数据
+ * 文档基础模型
  */
-class IndexController extends HomeController {
-
-	//系统首页
-    public function index($session=null){
-        $this->assign("session",$session);
-        $this->assign("value",S($session));
-        $this->ajaxReturn(array('info'=>session('sss'),'s'=>'s'),'json');
-        $this->display();
+class ProblemanswerModel extends Model{
+    public function getAnswer($field,$where,$order = 'pid'){
+        return $this->field($field)->where($where)->order($order)->select();
     }
-
 }

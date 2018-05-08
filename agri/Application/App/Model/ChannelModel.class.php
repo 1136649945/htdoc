@@ -7,20 +7,25 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Home\Controller;
+namespace Home\Model;
+use Think\Model;
 
 /**
- * 前台首页控制器
- * 主要获取首页聚合数据
+ * 分类模型
  */
-class IndexController extends HomeController {
+class ChannelModel extends Model{
 
-	//系统首页
-    public function index($session=null){
-        $this->assign("session",$session);
-        $this->assign("value",S($session));
-        $this->ajaxReturn(array('info'=>session('sss'),'s'=>'s'),'json');
-        $this->display();
-    }
+	/**
+	 * 获取导航列表，支持多级导航
+	 * @param  boolean $field 要列出的字段
+	 * @return array          导航树
+	 * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+	 */
+	public function lists($field = true){
+		$map = array('status' => 1);
+		$list = $this->field($field)->where($map)->order('sort')->select();
+
+		return list_to_tree($list, 'id', 'pid', '_');
+	}
 
 }

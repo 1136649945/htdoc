@@ -31,6 +31,16 @@ class ChannelController extends AdminController {
         $this->meta_title = '导航管理';
         $this->display();
     }
+    /**
+     * 广告位置
+     */
+    public function channelgroup(){
+        /* 获取频道列表 */
+        $list = M('Channelgroup')->order('sort')->select();
+        $this->assign('list', $list);
+        $this->meta_title = '广告位置管理';
+        $this->display();
+    }
 
     /**
      * 添加频道
@@ -167,6 +177,74 @@ class ChannelController extends AdminController {
             }
         }else{
             $this->error('非法请求！');
+        }
+    }
+    /**
+     * 新增广告位置
+     * @param string $username
+     * @param string $password
+     * @param string $repassword
+     * @param string $email
+     */
+    public function addgroup($id=0){
+        $Channelgroup = M("Channelgroup");
+        if(IS_POST){
+            $return = array();
+            if($id){
+                $data = $Channelgroup->create();
+                if($data){
+                    $id = $Channelgroup->save($data);
+                    if($id!==false){
+                        $return['status']   =   1;
+                        $return['info']     =   '编辑成功！';
+                        $return['url'] = "/admin.php?s=/Channel/channelgroup";
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }else{
+                        $return['status']   =   0;
+                        $return['info']     =   '编辑失败！';
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }
+                }else{
+                    $return['status']   =   0;
+                    $return['info']     =   $Channelgroup->getError();
+                    $this->ajaxReturn($return,'json');
+                    return ;
+                }
+            }else{
+                $data = $Channelgroup->create();
+                if($data){
+                    $id = $Channelgroup->add($data);
+                    if($id){
+                        $return['status']   =   1;
+                        $return['info']     =   '保存成功！';
+                        $return['url'] = "/admin.php?s=/Channel/channelgroup";
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }else{
+                        $return['status']   =   0;
+                        $return['info']     =   '保存失败！';
+                        $this->ajaxReturn($return,'json');
+                        return ;
+                    }
+                }else{
+                    $return['status']   =   0;
+                    $return['info']     =   $Channelgroup->getError();
+                    $this->ajaxReturn($return,'json');
+                    return ;
+                }
+            }
+    
+        } else {
+            if($id){
+                $this->assign("info",$Channelgroup->find($id));
+                $this->meta_title = '编辑广告位置';
+                $this->display();
+            }else{
+                $this->meta_title = '新增广告位置';
+                $this->display();
+            }
         }
     }
 }

@@ -10,17 +10,9 @@
 namespace Home\Controller;
 
 /**
- * 前台首页控制器
- * 主要获取首页聚合数据
+ * 空模块，主要用于显示404页面，请不要删除
  */
-class IndexController extends HomeController {
-
-	//系统首页
-    public function index($session=null){
-        $this->assign("session",$session);
-        $this->assign("value",S($session));
-        $this->ajaxReturn(array('info'=>session('sss'),'s'=>'s'),'json');
-        $this->display();
-    }
-
+class EmptyController extends HomeController{
+	//没有任何方法，直接执行HomeController的_empty方法
+	//请不要删除该控制器
 }

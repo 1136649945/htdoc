@@ -13,11 +13,11 @@ namespace Admin\Controller;
  *
  * @author yangweijie <yangweijiester@gmail.com>
  */
-class ChannelimgController extends AdminController
+class ImageController extends AdminController
 {
 
     /**
-     * 导航图片首页
+     * 后台菜单首页
      *
      * @return none
      */
@@ -36,20 +36,20 @@ class ChannelimgController extends AdminController
         $Page->setConfig("theme", '<span class="rows">共 %TOTAL_ROW% 条记录</span> %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%');
         $data = $Picture->where($where)->order(array('block','sort','id'))->limit($Page->firstRow.','.$Page->listRows)->select();
         $this->assign('data', $data);
-        $group = M('Group')->where('hide=0 and (purpose=0 or purpose=1)')->order('sort')->field('id,title')->select();
-        $this->assign("block", $group);
-        $group = M('Group')->where('hide=0 and (purpose=0 or purpose=1)')->getField("id,title");
+        $group = M('Channelgroup')->order('sort')->field('id,title')->select();
+        $this->assign("block", $block);
         $this->assign("group", $group);
         $show = $Page->show();// 分页显示输出
         $this->assign('page',$show);// 赋值分页输出
         // 记录当前列表页的cookie
         Cookie('__forward__', $_SERVER['REQUEST_URI']);
-        $this->meta_title = '导航图片管理';
+        $this->meta_title = '首页导航图片管理';
         $this->display();
     }
     /**
-     * 
-     * 新增图片
+     * 新增菜单
+     *
+     * @author yangweijie <yangweijiester@gmail.com>
      */
     public function add()
     {
@@ -94,7 +94,7 @@ class ChannelimgController extends AdminController
                         unlink($path);
                     }
                     foreach ($info as $key => $value) {
-                        $data['path'] = substr(C('PICTURE_UPLOAD'), 1) . $value['savepath'] . $value['savename'];
+                        $data['path'] = C('PICTURE_UPLOAD')['rootPath'] . $value['savepath'] . $value['savename'];
                         $data[$key] = $value[$key];
                     }
                 }
@@ -112,7 +112,7 @@ class ChannelimgController extends AdminController
             /* 获取数据 */
             $info = D('Channelpicture')->field(true)->find($id);
             $this->assign('info', $info);
-            $group = M('Group')->where('hide=0 and (purpose=0 or purpose=1)')->order('sort')->field('id,title')->select();
+            $group = M('Channelgroup')->order('sort')->field('id,title')->select();
             $this->assign("block", $group);
             $this->meta_title = '编辑后台菜单';
             $this->display();

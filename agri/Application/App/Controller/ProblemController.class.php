@@ -10,17 +10,10 @@
 namespace Home\Controller;
 
 /**
- * 前台首页控制器
- * 主要获取首页聚合数据
+ * 提问回答控制器
  */
-class IndexController extends HomeController {
-
-	//系统首页
-    public function index($session=null){
-        $this->assign("session",$session);
-        $this->assign("value",S($session));
-        $this->ajaxReturn(array('info'=>session('sss'),'s'=>'s'),'json');
-        $this->display();
+class ProblemController extends HomeController{
+    public function getTreeList($field,$where,$order = 'id'){
+        return D("Problem")->getTree();
     }
-
 }

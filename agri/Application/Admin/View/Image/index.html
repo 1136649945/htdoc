@@ -15,7 +15,7 @@
 			<div class="layui-input-inline" style="width: 200px;">
 				<select name="block" style="margin-top: 5px;width: 200px;" id="select">
 				<option value="-1" >所有分类</option>
-				<volist name="block" id="vo">
+				<volist name="group" id="vo">
 					<option value="{$vo['id']}" >{$vo.title}</option>
 				</volist>
 				</select>
@@ -42,7 +42,7 @@
 				<tr style="height:80px;">
 					<td>{$vo.title}</td>
 					<td style="width: 200px;"><pre>{$vo.describe|htmlspecialchars_decode}</pre></td>
-					<td style="80px;"><img src="{:C('PICTURE_UPLOAD')['rootPath'].$vo['path']}" style="max-height: 70px;max-width: 70px;" /></td>
+					<td style="80px;"><img src="{$vo['path']}" style="max-height: 70px;max-width: 70px;" /></td>
 					<td>{$vo.link}</td>
 					<td>{$group[$vo['block']]}</td>
 					<td>{$vo.sort}</td>
@@ -104,7 +104,7 @@
 					<label class="layui-form-label">图片分类</label>
 					<div class="layui-input-inline" style="width: 100px;">
 						<select name="block" style="margin-top: 5px;width: 100px;">
-						<volist name="block" id="vo">
+						<volist name="group" id="vo">
 							<option value="{$vo['id']}" >{$vo.title}</option>
 						</volist>
 						</select>
@@ -145,9 +145,10 @@
 </block>
 
 <block name="script"> <script type="text/javascript">
+        highlight_subnav('{:U('index')}');
+        Think.setValue("block", {$block|default = 0});
         $(function() {
             //导航高亮
-            highlight_subnav('{:U('index')}');
             $('#select').change(function(){
             	var block = $(this).children('option:selected').val();
             	var url = '{:U(index)}';
