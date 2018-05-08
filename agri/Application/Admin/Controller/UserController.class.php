@@ -31,7 +31,7 @@ class UserController extends AdminController {
             }
         }
         $list   = $this->lists('Member', $map);
-        int_to_string($list);
+        int_to_string($list,array('status'=>array(1=>'正常',-1=>'删除',0=>'禁用',-2=>'待审核')));
         $this->assign('_list', $list);
         $this->meta_title = '用户信息';
         $this->display();
@@ -54,7 +54,7 @@ class UserController extends AdminController {
         }
     
         $list   = $this->lists('Member', $map);
-        int_to_string($list);
+        int_to_string($list,array('status'=>array(1=>'正常',-1=>'删除',0=>'禁用',-2=>'待审核')));
         $this->assign('_list', $list);
         $this->meta_title = '专家信息';
         $this->display();
@@ -67,7 +67,7 @@ class UserController extends AdminController {
      * @param string $repassword
      * @param string $email
      */
-    public function expertadd($id=null,$password=null,$repassword=null,$verify=null){
+    public function expertadd($id=null,$username=null,$password=null,$repassword=null,$verify=null){
         if(IS_POST){ 
             //注册专家
             $return = array();
@@ -78,6 +78,12 @@ class UserController extends AdminController {
             //                 $return['status']   =   0;
             //                 $this->ajaxReturn($return,'json');
             //             }
+            if(!$username){
+                $return['status']   =   0;
+                $return['info']     =   '用户名不能为空！';
+                $this->ajaxReturn($return,'json');
+                return ;
+            }
             if(!$password){
                 $return['status']   =   0;
                 $return['info']     =   '密码不能为空！';
@@ -143,7 +149,7 @@ class UserController extends AdminController {
                 $data2 = $Member->create();
                 if($data1 && $data2){
                     M()->startTrans();
-                    $data1['password'] = think_encrypt( $data1['password'], C("DATA_AUTH_KEY"));
+                    $data1['password'] = think_encrypt( $data1['password']);
                     $id = $UcenterMember->add($data1);
                     if($id){
                         $data2['uid'] = $id;
@@ -153,6 +159,7 @@ class UserController extends AdminController {
                         $uid = $Member->add($data2);
                         if($uid){
                             M()->commit();
+                            D('AuthGroup')->addToGroup($id,4);
                             $return['status']   =   1;
                             $return['info']     =   '新增成功！';
                             $return['url'] = "/admin.php?s=/User/expert";
@@ -188,12 +195,14 @@ class UserController extends AdminController {
             }
             
         } else {
+            $group = D("Problemgroup");
+            $this->assign("group",$group->getGroupCache("id,title","status=1"));
             if($id){
                 $this->meta_title = '编辑专家';
                 $User = new UserApi;
                 $info = $User->info($id);
                 if(is_array($info)){
-                    $info['password'] = think_decrypt($info['password'], C("DATA_AUTH_KEY"));
+                    $info['password'] = think_decrypt($info['password']);
                     $this->assign("info",$info);
                 }
                 $this->display();

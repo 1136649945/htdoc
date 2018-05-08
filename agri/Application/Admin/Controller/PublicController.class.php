@@ -39,9 +39,11 @@ class PublicController extends \Think\Controller {
                 }
             } else { //登录失败
                 switch($info) {
-                    case 0: $error = '账号审核中！'; break; //系统级别禁用
-                    case -1: $error = '用户不存在！'; break; //系统级别禁用
-                    case -2: $error = '密码错误！'; break;
+                    case 0: $error = '账号被禁用！'; break; //系统级别禁用
+                    case -1: $error = '账号被删除！'; break; //系统级别禁用
+                    case -2: $error = '账号审核中！'; break;
+                    case -3: $error = '密码错误！'; break;
+                    case -4: $error = '账号不存在！'; break;
                     default: $error = '未知错误！'; break; // 0-接口参数错误（调试阶段使用）
                 }
                 $this->error($error);

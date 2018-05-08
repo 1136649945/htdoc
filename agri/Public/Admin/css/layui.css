@@ -1908,6 +1908,7 @@ color
 
 .layui-form-item {
 	clear: both;
+    margin-bottom: 15px;
 	*zoom: 1
 }
 

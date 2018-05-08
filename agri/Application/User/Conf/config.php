@@ -15,5 +15,5 @@
 define('UC_APP_ID', 1); //应用ID
 define('UC_API_TYPE', 'Model'); //可选值 Model / Service
 define('UC_AUTH_KEY', 'x+J)2H[kA`1,Mi}RE_9CuF{WGNs=U&oy$!:tz%*-'); //加密KEY
-define('UC_DB_DSN', 'mysql://root:root@127.0.0.1:3306/agri'); // 数据库连接，使用Model方式调用API必须配置此项
+define('UC_DB_DSN', 'mysql://zhou1136649945:qwe8623q@127.0.0.1:3306/zhou1136649945'); // 数据库连接，使用Model方式调用API必须配置此项
 define('UC_TABLE_PREFIX', 'a_'); // 数据表前缀，使用Model方式调用API必须配置此项

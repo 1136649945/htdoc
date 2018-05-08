@@ -1,0 +1,51 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{$info['id']?'编辑':'新增'}问题分类</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+    	<input type="hidden" name="id" value="{$info.id}" /> 
+        <div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" >名称</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="title" maxlength="80"
+						value="{$info.title}">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" >排序</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="sort"
+						onkeyup="value=value.replace(/[^\d]/g,'')" value="{$info.sort}">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" >状态</label>
+				<div class="layui-input-inline">
+					<select name="status" class="layui-input">
+						<option value="1">启用</option>
+						<option value="0">禁用</option>
+					</select>
+				</div>
+			</div>
+		</div>
+        <div class="form-item">
+		<button class="btn submit-btn ajax-post hidden" id="submit"
+			type="submit" target-form="form-horizontal">确 定</button>
+		<button class="btn btn-return"
+			onclick="javascript:history.back(-1);return false;">返 回</button>
+	</div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+    	Think.setValue("status", {$info.status|default=1});
+    </script>
+</block>

@@ -80,10 +80,8 @@ class AuthGroupModel extends Model {
             $Access->addAll($add);
         }
         if ($Access->getDbError()) {
-            if( count($uid_arr)==1 && count($gid)==1 ){
                 //单个添加时定制错误提示
-                $this->error = "不能重复添加";
-            }
+            $this->error = "不能重复添加";
             return false;
         }else{
             return true;

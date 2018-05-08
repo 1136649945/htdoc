@@ -116,7 +116,12 @@
 		<div class="layui-inline">
 			<label class="layui-form-label" style="width: 215px;">擅长领域</label>
 			<div class="layui-input-inline">
-				<input type="text" class="layui-input" name="areas" value="{$info.areas}">
+				<select name="areas" class="layui-input">
+					<option value="0">全部</option>
+					<volist name="group" id="vo">
+						<option value="{$vo.id}">{$vo.title}</option>
+					</volist>
+				</select>
 			</div>
 		</div>
 		<div class="layui-inline">
@@ -201,4 +206,5 @@
     //导航高亮
     highlight_subnav('{:U('User/expert')}');
     Think.setValue("sex", {$info.sex|default=0});
+    Think.setValue("areas", {$info.areas|default=0});
 </script> </block>

@@ -54,7 +54,7 @@ class UcenterMemberModel extends Model{
 		$user = $this->where($map)->find();
 		if(is_array($user)){
 			/* 验证用户密码 */
-			if(think_ucenter_md5($password, UC_AUTH_KEY) === $user['password']){
+			if(think_encrypt($password) === $user['password']){
 			    $info = $this->info($user['id']);
 			    if(!$info['status']){
 			        return $info['status']; //账号审核
@@ -63,10 +63,10 @@ class UcenterMemberModel extends Model{
 				$this->autoLogin($info);
 				return $info; //登录成功，返回用户ID
 			} else {
-				return -2; //密码错误
+				return -3; //密码错误
 			}
 		} else {
-			return -1; //用户不存在或被禁用
+			return -4; //用户不存在或被禁用
 		}
 	}
 	

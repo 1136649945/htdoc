@@ -36,5 +36,40 @@ class UcenterMemberModel extends Model{
 	    /* 验证手机号码 */
 	    array('telephone','/(^[0-9]{3,4}\-[0-9]{3,8}$)|(^[0-9]{3,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)/',-12,self::VALUE_VALIDATE,'regex'), //手机格式不正确 TODO:
 	);
+	
+	/**
+	 * 检测用户名是不是被禁止注册
+	 * @param  string $username 用户名
+	 * @return boolean          ture - 未禁用，false - 禁止注册
+	 */
+	protected function checkDenyMember($username){
+	    return true; //TODO: 暂不限制，下一个版本完善
+	}
+	
+	/**
+	 * 检测邮箱是不是被禁止注册
+	 * @param  string $email 邮箱
+	 * @return boolean       ture - 未禁用，false - 禁止注册
+	 */
+	protected function checkDenyEmail($email){
+	    return true; //TODO: 暂不限制，下一个版本完善
+	}
+	
+	/**
+	 * 检测手机是不是被禁止注册
+	 * @param  string $mobile 手机
+	 * @return boolean        ture - 未禁用，false - 禁止注册
+	 */
+	protected function checkDenyMobile($mobile){
+	    return true; //TODO: 暂不限制，下一个版本完善
+	}
+	
+	/**
+	 * 根据配置指定用户状态
+	 * @return integer 用户状态
+	 */
+	protected function getStatus(){
+	    return true; //TODO: 暂不限制，下一个版本完善
+	}
 
 }

@@ -20,12 +20,6 @@ class AdminController extends Controller {
      * 后台控制器初始化
      */
     protected function _initialize(){
-        // 获取当前用户ID
-        if(defined('UID')) return ;
-        define('UID',is_login());
-        if( !UID ){// 还没登录 跳转到登录页面
-            $this->redirect('Public/login');
-        }
         /* 读取数据库中的配置 */
         $config =   S('DB_CONFIG_DATA');
         if(!$config){
@@ -33,7 +27,12 @@ class AdminController extends Controller {
             S('DB_CONFIG_DATA',$config);
         }
         C($config); //添加配置
-
+        // 获取当前用户ID
+        if(defined('UID')) return ;
+        define('UID',is_login());
+        if( !UID ){// 还没登录 跳转到登录页面
+            $this->redirect('Public/login');
+        }
         // 是否是超级管理员
         define('IS_ROOT',   is_administrator());
         if(!IS_ROOT && C('ADMIN_ALLOW_IP')){
