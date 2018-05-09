@@ -12,17 +12,6 @@ use Think\Model;
  * 会员模型
  */
 class UcenterMemberModel extends Model{
-	/**
-	 * 数据表前缀
-	 * @var string
-	 */
-	protected $tablePrefix = UC_TABLE_PREFIX;
-
-	/**
-	 * 数据库连接
-	 * @var string
-	 */
-	protected $connection = UC_DB_DSN;
 
 	/**
 	 * 用户登录认证
@@ -31,7 +20,7 @@ class UcenterMemberModel extends Model{
 	 * @param  integer $type     用户名类型 （1-用户名，2-邮箱，3-手机，4-UID）
 	 * @return integer           登录成功-用户ID，登录失败-错误编号
 	 */
-	public function login($username, $password, $type = 1){
+	public function login($type = 1,$username, $password){
 		$map = array();
 		switch ($type) {
 			case 1:
@@ -46,6 +35,9 @@ class UcenterMemberModel extends Model{
 			case 4:
 				$map['id'] = $username;
 				break;
+			case 5:
+			    $map['id'] = $username;
+			    break;
 			default:
 				return 0; //参数错误
 		}
@@ -76,7 +68,7 @@ class UcenterMemberModel extends Model{
 	 */
 	public function logout(){
 	    session('user_auth', null);
-	    session('user_auth_sign', null);
+	    S(session_id(),null);
 	}
 	
 	/**
@@ -88,11 +80,11 @@ class UcenterMemberModel extends Model{
 	    $auth = array(
 	        'uid'             => $user['uid'],
 	        'username'        => $user['nickname'],
+	        'role'        => $user['role'],
+	        'mlevel'        => $user['mlevel'],
 	    );
-	
+	    S(session_id(),$auth);
 	    session('user_auth', $auth);
-	    session('user_auth_sign', data_auth_sign($auth));
-	
 	}
 	/**
 	 * 获取用户信息
@@ -191,7 +183,6 @@ class UcenterMemberModel extends Model{
 		}
 		return false;
 	}
-
 	/**
 	 * 验证用户密码
 	 * @param int $uid 用户id
@@ -200,11 +191,21 @@ class UcenterMemberModel extends Model{
 	 * @author huajie <banhuajie@163.com>
 	 */
 	protected function verifyUser($uid, $password_in){
-		$password = $this->getFieldById($uid, 'password');
-		if(think_encrypt($password_in) === $password){
-			return true;
-		}
-		return false;
+	    $password = $this->getFieldById($uid, 'password');
+	    if(think_encrypt($password_in) === $password){
+	        return true;
+	    }
+	    return false;
+	}
+	/**
+	 * 验证用户
+	 * @param int $uid 用户id
+	 * @param string $password_in 密码
+	 * @return true 验证成功，false 验证失败
+	 * @author huajie <banhuajie@163.com>
+	 */
+	public function verify($unionid=-1){
+		return $this->field('id')->where(array('unionid'=>$unionid))->find()['id'];
 	}
 
 }

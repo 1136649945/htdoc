@@ -13,8 +13,8 @@
  */
 return array(
     'SHOW_PAGE_TRACE' => true,
-    
-    'DATA_CACHE_TIME'   => 1, // 数据缓存时间
+    // 数据缓存时间
+    'DATA_CACHE_TIME'   => 1, 
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',
