@@ -17,6 +17,7 @@ class IndexController extends HomeController {
 
 	//系统首页
     public function index($session=null){
+        var_dump($expression)
         $this->assign("session",$session);
         $this->assign("value",S($session));
         $this->ajaxReturn(array('info'=>session('sss'),'s'=>'s'),'json');

@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use Think\Controller;
+use App\Logic\WXLoginHelper;
 /**
  * 前台首页控制器
  * 主要获取首页聚合数据
@@ -40,7 +41,29 @@ class PublicController extends Controller {
             $this->ajaxReturn(array("status"=>1),'json');
         }
     }
+    // 注册或更新用户
+    public function thirdlogin($code, $rawData, $signature, $encryptedData, $iv) {
+        if(IS_POST){
+            $WXLogin = new WXLoginHelper();
+            $data = $WXLogin->checkLogin($code, $rawData, $signature, $encryptedData, $iv);
+            $this->ajaxReturn($data,'json');
+        }
+    }
+    private function get_contents($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $response =  curl_exec($ch);
+        curl_close($ch);
     
+        //-------请求为空
+        if(empty($response)){
+            exit("50001");
+        }
+    
+        return $response;
+    }
     // 注册或更新用户
     /**
      * 注册或更新用户
