@@ -47,7 +47,7 @@
 			<td>{$vo.score}</td>
 			<td>{$vo.login}</td>
 			<td>{$vo.last_login_time}</td>
-			<td>{$vo.areas}</td>
+			<td>{$vo.areas_text}</td>
 			<td>{$vo.status_text}</td>
 			<td><eq name="vo.status" value="1">
 				<a href="{:U('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" class="ajax-get">禁用</a>

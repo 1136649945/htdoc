@@ -52,9 +52,13 @@ class UserController extends AdminController {
                 $map['nickname']    =   array('like', '%'.(string)$nickname.'%');
             }
         }
-    
+        $group = D("Problemgroup")->getGroupCache("id,title","status=1");
+        $group1 = array("全部");
+        foreach ($group as $val){
+            $group1[$val['id']] = $val['title'];
+        }
         $list   = $this->lists('Member', $map);
-        int_to_string($list,array('status'=>array(1=>'正常',-1=>'删除',0=>'禁用',-2=>'待审核')));
+        int_to_string($list,array('status'=>array(1=>'正常',-1=>'删除',0=>'禁用',-2=>'待审核'),'areas'=>$group1));
         $this->assign('_list', $list);
         $this->meta_title = '专家信息';
         $this->display();

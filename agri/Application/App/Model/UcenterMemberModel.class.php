@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
-namespace User\Model;
+namespace App\Model;
 use Think\Model;
 /**
  * 会员模型
@@ -36,7 +36,7 @@ class UcenterMemberModel extends Model{
 				$map['id'] = $username;
 				break;
 			case 5:
-			    $map['id'] = $username;
+			    $map['openid'] = $username;
 			    break;
 			default:
 				return 0; //参数错误
@@ -46,9 +46,9 @@ class UcenterMemberModel extends Model{
 		$user = $this->where($map)->find();
 		if(is_array($user)){
 			/* 验证用户密码 */
-			if(think_encrypt($password) === $user['password']){
+			if($type===5 || think_encrypt($password) === $user['password']){
 			    $info = $this->info($user['id']);
-			    if(!$info['status']){
+			    if(1!=$info['status']){
 			        return $info['status']; //账号审核
 			    }
 				$this->updateLogin($user['id']); //更新用户登录信息
@@ -83,7 +83,7 @@ class UcenterMemberModel extends Model{
 	        'role'        => $user['role'],
 	        'mlevel'        => $user['mlevel'],
 	    );
-	    S(session_id(),$auth);
+	    S(session_id(),$auth,C("APP_SESSION"));
 	    session('user_auth', $auth);
 	}
 	/**
@@ -204,8 +204,8 @@ class UcenterMemberModel extends Model{
 	 * @return true 验证成功，false 验证失败
 	 * @author huajie <banhuajie@163.com>
 	 */
-	public function verify($unionid=-1){
-		return $this->field('id')->where(array('unionid'=>$unionid))->find()['id'];
+	public function verify($openid=-1){
+		return $this->field('id')->where(array('openid'=>$openid))->find()['id'];
 	}
 
 }
