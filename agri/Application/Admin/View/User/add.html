@@ -4,41 +4,112 @@
     <div class="main-title">
         <h2>新增用户</h2>
     </div>
-    <form action="{:U()}" method="post" class="form-horizontal">
-        <div class="form-item">
-            <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
-            <div class="controls">
-                <input type="text" class="text input-large" name="username" value="">
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">密码<span class="check-tips">（用户密码不能少于6位）</span></label>
-            <div class="controls">
-                <input type="password" class="text input-large" name="password" value="">
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">确认密码</label>
-            <div class="controls">
-                <input type="password" class="text input-large" name="repassword" value="">
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">邮箱<span class="check-tips">（用户邮箱，用于找回密码等安全操作）</span></label>
-            <div class="controls">
-                <input type="text" class="text input-large" name="email" value="">
-            </div>
-        </div>
-        <div class="form-item">
-            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
-            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
-        </div>
-    </form>
+    <form action="#" class="form-horizontal"> 
+        <input type="hidden" name="id" value="{$info.id}" /> 
+	<input type="hidden" name="uid" value="{$info.uid}" /> 
+	<input type="hidden" name="role" value="{$info.role}" />
+	<input type="hidden" name="login" value="{$info.login}" />
+	<input type="hidden" name="reg_time" value="{$info.reg_time}" />
+	<input type="hidden" name="status"  />
+	<input type="hidden" name="last_login_time" value="{$info.last_login_time}" />
+	<input type="hidden" name="status" value="{$info.status}" />
+	<div style="width: 200px; height: 250px; position: absolute; left: 1100px; border: 1px solid #333;">
+		<div class="controls">
+			<div class="upload-img-box">
+				<notempty name="info['photo']">
+					<div class="upload-pre-item"><img style="max-height: 200px;max-width: 200px;" src="{$info['photo']}"/></div>
+				</notempty>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">用户名（英文加数字6-10位）</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" 
+					value="{$info.username}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">昵称（显示）</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input"  value="{$info.nickname}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">姓名（5个字内）</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" value="{$info.name}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">性别</label>
+			<div class="layui-input-inline"
+				style="margin-top: 10px; width: 122px;">
+				<div class="layui-input-inline" style="width: 50px;">
+					<input type="radio"  name="gender" value="1">男
+				</div>
+				<div class="layui-input-inline" style="width: 50px;">
+					<input type="radio"  name="gender" value="0">女
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">手机号</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" value="{$info.mobile}">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">电话</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" value="{$info.telephone}">
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">等级</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" value="{$info.mlevel}"/>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">专业</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" value="{$info.specialty}"/>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">积分</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="score" value="{$info.score}"
+					/>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 135px;">注册时间</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="score" value="{$info.last_login_time}"
+					/>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-return"
+			onclick="javascript:history.back(-1);return false;">返 回</button>
+  </form> 
 </block>
 
 <block name="script">
     <script type="text/javascript">
         //导航高亮
         highlight_subnav('{:U('User/index')}');
+        Think.setValue("gender", {$info.gender|default=0});
     </script>
 </block>

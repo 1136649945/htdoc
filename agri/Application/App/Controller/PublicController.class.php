@@ -32,6 +32,7 @@ class PublicController extends Controller {
                 $this->ajaxReturn(array('status'=>$info,'info'=>$this->showErrorMessage($info)),'json');
             }
         }
+        var_dump(msubstr(" 周鹏辉ss撒飒飒",0,30));
     }
     /**
      * 退出登录
@@ -93,7 +94,7 @@ class PublicController extends Controller {
         M()->startTrans();
         $id = D('UcenterMember')->add($data1);
         if($id){
-            $data2 = array("uid"=>$id,"gender"=>$data['gender'],"nickname"=>$data['nickName'],"gender"=>$data['gender'],"photo"=>$data['avatarUrl'],"role"=>"会员","reg_time"=>time_format(),"last_login_time"=>time_format(),"status"=>-2);
+            $data2 = array("uid"=>$id,"gender"=>$data['gender'],"nickname"=>msubstr($data['nickName'],0,30, "utf-8", false),"gender"=>$data['gender'],"photo"=>$data['avatarUrl'],"role"=>"会员","reg_time"=>time_format(),"last_login_time"=>time_format(),"status"=>-2);
             $uid = D("Member")->add($data2);
             if($uid){
                 M()->commit();

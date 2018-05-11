@@ -54,7 +54,7 @@ class UserApi {
         if(isset($list[$key])){ //已缓存，直接使用
             $name = $list[$key];
         } else { //调用接口获取用户信息
-            $User = new User\Api\UserApi();
+            $User = new \User\Api\UserApi();
             $info = $User->info($uid);
             if($info && isset($info[1])){
                 $name = $list[$key] = $info[1];

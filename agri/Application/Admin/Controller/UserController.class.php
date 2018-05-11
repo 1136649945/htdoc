@@ -381,28 +381,16 @@ class UserController extends AdminController {
         }
     }
 
-    public function add($username = '', $password = '', $repassword = '', $email = ''){
-        if(IS_POST){
-            /* 检测密码 */
-            if($password != $repassword){
-                $this->error('密码和重复密码不一致！');
+    public function add($id=-1){
+        if($id){
+            $User = new UserApi;
+            $info = $User->info($id);
+            if(is_array($info)){
+                $info['password'] = think_decrypt($info['password']);
+                $this->assign("info",$info);
             }
-
-            /* 调用注册接口注册用户 */
-            $User   =   new UserApi;
-            $uid    =   $User->register($username, $password, $email);
-            if(0 < $uid){ //注册成功
-                $user = array('uid' => $uid, 'nickname' => $username, 'status' => 1);
-                if(!M('Member')->add($user)){
-                    $this->error('用户添加失败！');
-                } else {
-                    $this->success('用户添加成功！',U('index'));
-                }
-            } else { //注册失败，显示错误信息
-                $this->error($this->showRegError($uid));
-            }
-        } else {
-            $this->meta_title = '新增用户';
+            $this->display();
+            $this->meta_title = '用户详情';
             $this->display();
         }
     }

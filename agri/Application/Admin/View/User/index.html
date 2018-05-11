@@ -53,6 +53,7 @@
 				<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
 				</eq>
                 <a href="{:U('User/changeStatus?method=deleteUser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+                <a href="{:U('User/add?id='.$vo['uid'])}" class="confirm">详情</a>
                 </td>
 		</tr>
 		</volist>
