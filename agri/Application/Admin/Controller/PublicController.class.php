@@ -76,6 +76,7 @@ class PublicController extends \Think\Controller {
             $this->redirect('login');
         }
     }
+    
     /**
      * 验证码
      */

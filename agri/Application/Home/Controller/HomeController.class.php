@@ -23,14 +23,16 @@ class HomeController extends PHPOfficeController {
 
 
     protected function _initialize(){
-        /* 读取站点配置 */
-        $config = api('Config/lists');
-        C($config); //添加配置
+    /* 读取数据库中的配置 */
+        $config =   S('DB_CONFIG_DATA');
+        if(!$config){
+            $config =   api('Config/lists');
+            S('DB_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
+        }
 
         if(!C('WEB_SITE_CLOSE')){
             $this->error('站点已经关闭，请稍后访问~');
         }
-       // $this->word2html("E://lang.docx", "E://lang.html");
     }
 
 	/* 用户登录检测 */

@@ -28,7 +28,8 @@ class PublicController extends Controller {
             $UcenterMember = D('UcenterMember');
             $info = $UcenterMember->login(1,$username, $password);
             if(is_array($info)){
-                $this->ajaxReturn(array('status'=>1,'info'=>session_id()),'json');
+                $info['session'] = session_id();
+                $this->ajaxReturn($info,'json');
             }else{
                 $this->ajaxReturn(array('status'=>$info,'info'=>$this->showErrorMessage($info)),'json');
             }
@@ -44,6 +45,7 @@ class PublicController extends Controller {
             $this->ajaxReturn(array("status"=>1),'json');
         }
     }
+    
     // 注册或更新用户
     /**
      * 注册或更新用户

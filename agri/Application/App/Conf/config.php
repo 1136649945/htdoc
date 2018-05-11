@@ -13,9 +13,6 @@
  */
 return array(
 
-    //APP SESSION时间
-    'APP_SESSION' => 60,
-
     /* 数据缓存设置 */
     'DATA_CACHE_PREFIX' => 'onethink_', // 缓存前缀
     'DATA_CACHE_TYPE'   => 'File', // 数据缓存类型

@@ -24,7 +24,7 @@ class AdminController extends Controller {
         $config =   S('DB_CONFIG_DATA');
         if(!$config){
             $config =   api('Config/lists');
-            S('DB_CONFIG_DATA',$config);
+            S('DB_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
         }
         C($config); //添加配置
         // 获取当前用户ID

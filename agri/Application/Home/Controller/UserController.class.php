@@ -86,7 +86,28 @@ class UserController extends HomeController {
 			$this->display();
 		}
 	}
-
+	/**
+	 * 签到
+	 */
+	public function signin(){
+	    /**
+	     * $auth = array(
+	     'uid'             => $user['uid'],
+	     'username'        => $user['nickname'],
+	     'role'        => $user['role'],
+	     'mlevel'        => $user['mlevel'],
+	     );
+	     */
+	    $auth = session("user_auth");
+	    if($auth && $auth['uid']){
+	        $uid = $auth['uid'];
+	        $User = new UserApi;
+	        $res = $User->singin($uid,C("SING_IN_SCORE"));
+	        $this->ajaxReturn(array("status"=>$res),'json');
+	    }else{
+	        $this->ajaxReturn(array("status"=>0),'json');
+	    }
+	}
 	/* 退出登录 */
 	public function logout(){
 		if(is_login()){
