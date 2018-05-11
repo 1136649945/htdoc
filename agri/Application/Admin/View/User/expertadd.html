@@ -9,6 +9,7 @@
 	<input type="hidden" name="id" value="{$info.id}" /> 
 	<input type="hidden" name="uid" value="{$info.uid}" /> 
 	<input type="hidden" name="role" value="{$info.role}" />
+	<input type="hidden" name="pcode" value="{$info.pcode}" />
 	<input type="hidden" name="login" value="{$info.login}" />
 	<input type="hidden" name="reg_time" value="{$info.reg_time}" />
 	<input type="hidden" name="status"  />
@@ -20,7 +21,7 @@
 			<input type="hidden" name="photo" id="cover_id_photo" value="{$info.photo}" />
 			<div class="upload-img-box">
 				<notempty name="info['photo']">
-					<div class="upload-pre-item"><img style="max-height: 200px;max-width: 200px;" src=".{$info['photo']}"/></div>
+					<div class="upload-pre-item"><img style="max-height: 200px;max-width: 200px;" src="{$info['photo']}"/></div>
 				</notempty>
 			</div>
 		</div>
@@ -150,6 +151,15 @@
 		</div>
 	</div>
 	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">推荐码(系统自动生成)</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" name="code"
+					maxlength="25" value="{$info.code}"disabled="disabled"/>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
 		<label class="layui-form-label" style="width: 135px;">简历</label>
 	</div>
 
@@ -188,8 +198,8 @@
 	    	var data = $.parseJSON(data);
 	    	var src = '';
 	        if(data.status){
-	        	$("#cover_id_photo").val(data.path);
-	        	src = data.url || '__ROOT__' + data.path
+	        	$("#cover_id_photo").val(data.download.path);
+	        	src = data.url || '__ROOT__' + data.download.path
 	        	$("#cover_id_photo").parent().find('.upload-img-box').html(
 	        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
 	        	);

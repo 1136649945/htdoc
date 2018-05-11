@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use Think\Controller;
+use Think\Model;
 /**
  * 前台首页控制器
  * 主要获取首页聚合数据
@@ -32,7 +33,6 @@ class PublicController extends Controller {
                 $this->ajaxReturn(array('status'=>$info,'info'=>$this->showErrorMessage($info)),'json');
             }
         }
-        var_dump(msubstr(" 周鹏辉ss撒飒飒",0,30));
     }
     /**
      * 退出登录
@@ -91,20 +91,29 @@ class PublicController extends Controller {
          *  "avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoD7n7hPKo7IoW2enDDrBbvhzlXicbUsBgDDbDGWLrHicKsd8FbKiaj3v5NnDarymjypU3rnhVDCULlw/132"
          */
         $data1 = array("openid"=>$data['openid']);
-        M()->startTrans();
-        $id = D('UcenterMember')->add($data1);
-        if($id){
-            $data2 = array("uid"=>$id,"gender"=>$data['gender'],"nickname"=>msubstr($data['nickName'],0,30, "utf-8", false),"gender"=>$data['gender'],"photo"=>$data['avatarUrl'],"role"=>"会员","reg_time"=>time_format(),"last_login_time"=>time_format(),"status"=>-2);
-            $uid = D("Member")->add($data2);
-            if($uid){
-                M()->commit();
-                return $uid;
+        $M = new Model();
+        $roolback = true;
+        $M->startTrans();
+        try{
+            $id = D('UcenterMember')->add($data1);
+            D('UcenterMember')->where(array("id"=>$id))->save(array("username"=>C("USERNAMEPIX").$id));
+            if($id){
+                $data2 = array("uid"=>$id,'code'=>substr($id.C("RECOMMEND"), 0,C("RECOMMENDLEN")),"gender"=>$data['gender'],"nickname"=>msubstr($data['nickName'],0,30, "utf-8", false),"gender"=>$data['gender'],"photo"=>$data['avatarUrl'],"role"=>2,"reg_time"=>time_format(),"last_login_time"=>time_format(),"status"=>-2);
+                $uid = D("Member")->add($data2);
+                if($uid){
+                    M()->commit();
+                    return $uid;
+                }else{
+                    M()->rollback();
+                    return 0;
+                }
             }else{
                 M()->rollback();
                 return 0;
             }
-        }else{
-            M()->rollback();
+        }catch (\Exception $e){
+            $roolback = false;
+            $M->rollback();
             return 0;
         }
     }

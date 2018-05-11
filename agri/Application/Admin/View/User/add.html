@@ -2,17 +2,9 @@
 
 <block name="body">
     <div class="main-title">
-        <h2>新增用户</h2>
+        <h2>会员详情</h2>
     </div>
     <form action="#" class="form-horizontal"> 
-        <input type="hidden" name="id" value="{$info.id}" /> 
-	<input type="hidden" name="uid" value="{$info.uid}" /> 
-	<input type="hidden" name="role" value="{$info.role}" />
-	<input type="hidden" name="login" value="{$info.login}" />
-	<input type="hidden" name="reg_time" value="{$info.reg_time}" />
-	<input type="hidden" name="status"  />
-	<input type="hidden" name="last_login_time" value="{$info.last_login_time}" />
-	<input type="hidden" name="status" value="{$info.status}" />
 	<div style="width: 200px; height: 250px; position: absolute; left: 1100px; border: 1px solid #333;">
 		<div class="controls">
 			<div class="upload-img-box">
@@ -79,24 +71,34 @@
 			</div>
 		</div>
 		<div class="layui-inline">
-			<label class="layui-form-label" style="width: 135px;">专业</label>
+			<label class="layui-form-label" style="width: 135px;">注册时间</label>
 			<div class="layui-input-inline">
-				<input type="text" class="layui-input" value="{$info.specialty}"/>
+				<input type="text" class="layui-input" value="{$info.last_login_time}"
+					/>
 			</div>
 		</div>
+		
 	</div>
 	<div class="layui-form-item">
 		<div class="layui-inline">
 			<label class="layui-form-label" style="width: 215px;">积分</label>
 			<div class="layui-input-inline">
-				<input type="text" class="layui-input" name="score" value="{$info.score}"
+				<input type="text" class="layui-input" value="{$info.score}"
 					/>
 			</div>
 		</div>
 		<div class="layui-inline">
-			<label class="layui-form-label" style="width: 135px;">注册时间</label>
+			<label class="layui-form-label" style="width: 135px;">推荐码</label>
 			<div class="layui-input-inline">
-				<input type="text" class="layui-input" name="score" value="{$info.last_login_time}"
+				<input type="text" class="layui-input" value="{$info.code}"/>
+			</div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label" style="width: 215px;">推荐人推荐码</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" value="{$info.pcode}"
 					/>
 			</div>
 		</div>

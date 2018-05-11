@@ -16,13 +16,14 @@ use Think\Upload;
  * 负责图片的上传
  */
 
-class ChannelimgModel extends Model{
+class PictureModel extends Model{
     /**
      * 自动完成
      * @var array
      */
     protected $_auto = array(
-        array('hide', 0, self::MODEL_INSERT),
+        array('status', 1, self::MODEL_INSERT),
+        array('create_time', NOW_TIME, self::MODEL_INSERT),
     );
 
     /**
@@ -35,9 +36,26 @@ class ChannelimgModel extends Model{
      */
     public function upload($files, $setting, $driver = 'Local', $config = null){
         /* 上传文件 */
+        $setting['callback'] = array($this, 'isFile');
+		$setting['removeTrash'] = array($this, 'removeTrash');
         $Upload = new Upload($setting, $driver, $config);
-        $info = $Upload->upload($files);
-        if($info){
+        $info   = $Upload->upload($files);
+        if($info){ //文件上传成功，记录文件信息
+            foreach ($info as $key => &$value) {
+                /* 已经存在文件记录 */
+                if(isset($value['id']) && is_numeric($value['id'])){
+                    continue;
+                }
+
+                /* 记录文件信息 */
+                $value['path'] = substr($setting['rootPath'], 1).$value['savepath'].$value['savename'];	//在模板里的url路径
+                if($this->create($value) && ($id = $this->add())){
+                    $value['id'] = $id;
+                } else {
+                    //TODO: 文件上传成功，但是记录文件信息失败，需记录日志
+                    unset($info[$key]);
+                }
+            }
             return $info; //文件上传成功
         } else {
             $this->error = $Upload->getError();

@@ -38,7 +38,7 @@ class ImageController extends AdminController
         $this->assign('data', $data);
         $group = M('Channelgroup')->order('sort')->field('id,title')->select();
         $this->assign("block", $block);
-        $this->assign("group", $group);
+        $this->assign("group", arr2map($group,"id","title"));
         $show = $Page->show();// 分页显示输出
         $this->assign('page',$show);// 赋值分页输出
         // 记录当前列表页的cookie

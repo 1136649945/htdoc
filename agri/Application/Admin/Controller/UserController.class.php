@@ -9,6 +9,7 @@
 
 namespace Admin\Controller;
 use User\Api\UserApi;
+use Think\Model;
 
 /**
  * 后台用户控制器
@@ -22,7 +23,7 @@ class UserController extends AdminController {
      */
     public function index(){
         $nickname       =   I('get.nickname');
-        $map['role']  =   array('eq','会员');
+        $map['role']  =   array('eq',2);
         if($nickname){
             if(is_numeric($nickname)){
                 $map['uid|nickname']=   array(intval($nickname),array('like','%'.$nickname.'%'),'_multi'=>true);
@@ -44,7 +45,7 @@ class UserController extends AdminController {
         $nickname       =   I('nickname');
         $map['status']  =   array('egt',0);
         $map['uid']  =   array('neq',C("USER_ADMINISTRATOR"));
-        $map['role']  =   array('eq',"专家");
+        $map['role']  =   array('eq',1);
         if($nickname){
             if(is_numeric($nickname)){
                 $map['uid|nickname']=   array(intval($nickname),array('like','%'.$nickname.'%'),'_multi'=>true);
@@ -53,12 +54,10 @@ class UserController extends AdminController {
             }
         }
         $group = D("Problemgroup")->getGroupCache("id,title","status=1");
-        $group1 = array("全部");
-        foreach ($group as $val){
-            $group1[$val['id']] = $val['title'];
-        }
         $list   = $this->lists('Member', $map);
-        int_to_string($list,array('status'=>array(1=>'正常',-1=>'删除',0=>'禁用',-2=>'待审核'),'areas'=>$group1));
+        $map = arr2map($group,"id","title");
+        $map[0] = "全部";
+        int_to_string($list,array('status'=>array(1=>'正常',-1=>'删除',0=>'禁用',-2=>'待审核'),'areas'=>$map));
         $this->assign('_list', $list);
         $this->meta_title = '专家信息';
         $this->display();
@@ -157,7 +156,8 @@ class UserController extends AdminController {
                     $id = $UcenterMember->add($data1);
                     if($id){
                         $data2['uid'] = $id;
-                        $data2['role'] = "专家";
+                        $data2['role'] = 1;
+                        $data2['code'] = substr($id.C("RECOMMEND"), 0,C("RECOMMENDLEN"));
                         $data2['reg_time'] = date("Y-m-d H:i:s");
                         $data2['last_login_time'] = date("Y-m-d H:i:s");
                         $uid = $Member->add($data2);
@@ -371,7 +371,7 @@ class UserController extends AdminController {
                 $this->forbid('Member', $map );
                 break;
             case 'resumeuser':
-                $this->resume('Member', $map );
+                $this->resumeuser($id );
                 break;
             case 'deleteuser':
                 $this->delete('Member', $map );
@@ -380,13 +380,56 @@ class UserController extends AdminController {
                 $this->error('参数非法');
         }
     }
-
+    /**
+     * 会员审核通过
+     * @param unknown $id
+     */
+    private function resumeuser($id){
+        $msg   = array_merge( array( 'success'=>'操作成功！', 'error'=>'操作失败！', 'url'=>'' ,'ajax'=>IS_AJAX) , (array)$msg );
+        $id  = is_array($id) ? $id : explode(',',$id);
+        $Member = D("Member");
+        $uidpcode = arr2map($Member->field("uid,pcode")->select(),"uid","pcode");
+        $uidcode = arr2map($Member->field("uid,code")->select(),"code","uid");
+        $M = new Model();
+        $M->startTrans();
+        $roolback = true;
+        try {
+            foreach ($id as $val){
+                $res = $M->table(C('DB_PREFIX').'member')->where(array("uid"=>$val))->save(array('status'=>1));
+                if($res){
+                    $pcode = $uidpcode[$val];
+                    if($pcode){
+                        $res = $M->table(C('DB_PREFIX')."score")->field("id")->where(array("gattr1"=>$pcode."|".$val,"gattr2"=>"r"))->find();
+                        if(!$res){
+                            $res = $M->table(C('DB_PREFIX').'member')->where(array("code"=>$pcode))->setInc("score",C("AGRI_RECOMMEND_SCORE"));
+                            if($res){
+                                if($uidcode[$pcode]){
+                                    $M->table(C('DB_PREFIX')."score")->add(array("gattr1"=>$pcode."|".$val,"gattr2"=>"r","uid"=>$uidcode[$pcode],"create_time"=>time_format(),"remark"=>"推荐用户注册，用户注册通过","dv"=>1,"score"=>C("AGRI_RECOMMEND_SCORE")));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }catch (\Exception $e){
+            $roolback = false;
+            $M->rollback();
+            $this->error($e->getMessage(),$msg['url'],$msg['ajax']);
+        }
+        if($roolback){
+            $M->commit();
+        }
+        $this->success($msg['success'],$msg['url'],$msg['ajax']);
+    }
+    /**
+     * 会员
+     * @param unknown $id
+     */
     public function add($id=-1){
         if($id){
             $User = new UserApi;
             $info = $User->info($id);
             if(is_array($info)){
-                $info['password'] = think_decrypt($info['password']);
                 $this->assign("info",$info);
             }
             $this->display();

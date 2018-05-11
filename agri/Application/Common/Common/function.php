@@ -62,6 +62,23 @@ function arr2str($arr, $glue = ','){
 }
 
 /**
+ * 数组转换为map  k,v
+ * @param  array  $arr  要连接的数组
+ * @param  string $k,$v 分割符
+ * @return string
+ * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ */
+function arr2map($arr, $k=-1,$v=-1){
+    if($k && $v && is_array($arr)){
+        $map = array();
+        foreach ($arr as $val){
+            $map[$val[$k]] = $val[$v];
+        }
+        return $map;
+    }
+}
+
+/**
  * 字符串截取，支持中文和其他编码
  * @static
  * @access public

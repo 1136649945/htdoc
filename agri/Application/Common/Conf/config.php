@@ -20,7 +20,12 @@ return array(
     'DEFAULT_MODULE'     => 'Home',
     'MODULE_DENY_LIST'   => array('Common','User','Admin','App','Install'),
     //'MODULE_ALLOW_LIST'  => array('Home','Admin'),
-
+    'RECOMMEND'=>"DXYKJYX",//推荐码
+    'RECOMMENDLEN'=>8,//推荐码长度
+    
+    'USERNAMEPIX'=>"DXYKJ",//登录用户名
+    'USERNAMELEN'=>8,//登录用户名长度
+    
     /* 系统数据加密设置 */
     'DATA_AUTH_KEY' => 'x+J)2H[kA`1,Mi}RE_9CuF{WGNs=U&oy$!:tz%*-', //默认数据加密KEY
 
