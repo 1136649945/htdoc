@@ -20,18 +20,6 @@ class UserApi extends Api{
     }
 
     /**
-     * 注册一个新用户
-     * @param  string $username 用户名
-     * @param  string $password 用户密码
-     * @param  string $email    用户邮箱
-     * @param  string $mobile   用户手机号码
-     * @return integer          注册成功-用户信息，注册失败-错误编号
-     */
-    public function register($data1,$data2){
-        return $this->model->register($data1,$data2);
-    }
-
-    /**
      * 用户登录认证
      * @param  string  $username 用户名
      * @param  string  $password 用户密码
@@ -54,6 +42,18 @@ class UserApi extends Api{
     }
 
     /**
+     * 注册一个新用户
+     * @param  string $username 用户名
+     * @param  string $password 用户密码
+     * @param  string $email    用户邮箱
+     * @param  string $mobile   用户手机号码
+     * @return integer          注册成功-用户信息，注册失败-错误编号
+     */
+    public function register($data){
+        return $this->model->register($data);
+    }
+    
+    /**
      * 获取用户信息
      * @param  string  $uid         用户ID或用户名
      * @param  boolean $is_username 是否使用用户名查询
@@ -62,6 +62,15 @@ class UserApi extends Api{
     public function info($uid){
         return $this->model->info($uid);
     }
+    /**
+     * 获取所有用户信息
+     * @param  string  $uid         用户ID或用户名
+     * @param  boolean $is_username 是否使用用户名查询
+     * @return array                用户信息
+     */
+    public function infoAll(){
+        return $this->model->infoAll();
+    }
     
     /**
      * 签到功能
@@ -69,8 +78,8 @@ class UserApi extends Api{
      * @param  boolean $is_username 是否使用用户名查询
      * @return array                用户信息
      */
-    public function singin($uid,$score){
-        return $this->model->singin($uid,$score);
+    public function singin($uid){
+        return $this->model->singin($uid);
     }
 
 
@@ -82,14 +91,29 @@ class UserApi extends Api{
      * @return true 修改成功，false 修改失败
      * @author huajie <banhuajie@163.com>
      */
-    public function updateInfo($uid, $password, $data){
-        if($this->model->updateUserFields($uid, $password, $data) !== false){
-            $return['status'] = true;
-        }else{
-            $return['status'] = false;
-            $return['info'] = $this->model->getError();
-        }
-        return $return;
+    public function updateUserFields($id, $data){
+        return $this->model->updateUserFields($id, $data);
     }
-
+    /**
+     * 更新用户信息
+     * @param int $uid 用户id
+     * @param string $password 密码，用来验证
+     * @param array $data 修改的字段数组
+     * @return true 修改成功，false 修改失败
+     * @author huajie <banhuajie@163.com>
+     */
+    public function updateMemberFields($id, $data){
+        return $this->model->updateMemberFields($id, $data);
+    }
+    /**
+     * 验证用户是否存在
+     * @param int $uid 用户id
+     * @param string $password_in 密码
+     * @return true 验证成功，false 验证失败
+     * @author huajie <banhuajie@163.com>
+     */
+    public function existenceUser($where){
+        return $this->model->existenceUser($where);
+    }
+    
 }

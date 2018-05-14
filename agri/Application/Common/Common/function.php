@@ -261,7 +261,24 @@ function list_to_tree($list, $pk='id', $pid = 'pid', $child = '_child', $root = 
     }
     return $tree;
 }
+/**
+ * 数组按照key移除
+ * @param unknown $data
+ * @param unknown $key
+ * @return unknown
+ */
+function array_remove($data, $key){
+    if(!array_key_exists($key, $data)){
+        return $data;
+    }
+    $keys = array_keys($data);
+    $index = array_search($key, $keys);
+    if($index !== FALSE){
+        array_splice($data, $index, 1);
+    }
+    return $data;
 
+}
 /**
  * 将list_to_tree的树还原成列表
  * @param  array $tree  原来的树

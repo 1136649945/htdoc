@@ -7,14 +7,17 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace App\Controller;
+namespace Admin\Model;
+use Think\Model;
 
-use User\Api\UserApi;
 /**
- * 用户控制器
- * 包括用户中心，用户登录及注册
+ * 问题图片，语音
  */
-class UserController extends AppController {
-
-
+class ProblemgModel extends Model{
+    /**
+     * 问题图片，语音
+     */
+    public function getProblemg($id){
+        $this->where(array("pid"=>array("in"=>$id)))->order("pid,doctype,id")->select();
+    }
 }

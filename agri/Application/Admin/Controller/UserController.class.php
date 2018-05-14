@@ -37,6 +37,7 @@ class UserController extends AdminController {
         $this->meta_title = '用户信息';
         $this->display();
     }
+    
     /**
      * 专家管理首页
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
@@ -107,7 +108,7 @@ class UserController extends AdminController {
                 $data2 = $Member->create();
                 if($data1 && $data2){
                     M()->startTrans();
-                    $data1['password'] = think_encrypt( $data1['password'], C("DATA_AUTH_KEY"));
+                    $data1['password'] = think_encrypt( $data1['password']);
                     $id = $UcenterMember->save($data1);
                     if($id!==false){
                         $uid = $Member->save($data2);
@@ -151,37 +152,20 @@ class UserController extends AdminController {
                 $data1 = $UcenterMember->create();
                 $data2 = $Member->create();
                 if($data1 && $data2){
-                    M()->startTrans();
-                    $data1['password'] = think_encrypt( $data1['password']);
-                    $id = $UcenterMember->add($data1);
-                    if($id){
-                        $data2['uid'] = $id;
-                        $data2['role'] = 1;
-                        $data2['code'] = substr($id.C("RECOMMEND"), 0,C("RECOMMENDLEN"));
-                        $data2['reg_time'] = date("Y-m-d H:i:s");
-                        $data2['last_login_time'] = date("Y-m-d H:i:s");
-                        $uid = $Member->add($data2);
-                        if($uid){
-                            M()->commit();
-                            D('AuthGroup')->addToGroup($id,4);
-                            $return['status']   =   1;
-                            $return['info']     =   '新增成功！';
-                            $return['url'] = "/admin.php?s=/User/expert";
-                            $this->ajaxReturn($return,'json');
-                            return ;
-                        }else{
-                            M()->rollback();
-                            $return['status']   =   0;
-                            $return['info']     =   '新增失败！';
-                            $this->ajaxReturn($return,'json');
-                            return ;
-                        }
-                    }else{
-                        M()->rollback();
-                        $return['status']   =   0;
-                        $return['info']     =   '新增失败！';
-                        $this->ajaxReturn($return,'json');
-                        return ;
+                   $data = array_merge($data1,$data2);
+                   $data['password'] = think_encrypt( $data['password']);
+                   $data['role'] = 1;
+                   $User = new UserApi();
+                   $info = $User->register($data);
+                   if($info["id"]){
+                       D('AuthGroup')->addToGroup($info["id"],4);
+                       $return['status']   =   1;
+                       $return['info']     =   '新增成功！';
+                       $return['url'] = "/admin.php?s=/User/expert";
+                       $this->ajaxReturn($return,'json');
+                   }else{
+                       $this->ajaxReturn($info,'json');
+                       return ;
                     }
                 }else{
                     if(!$data1){

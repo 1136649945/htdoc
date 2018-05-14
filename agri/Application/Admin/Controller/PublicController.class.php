@@ -29,24 +29,14 @@ class PublicController extends \Think\Controller {
             /* 调用UC登录接口登录 */
             $User = new UserApi;
             $info = $User->login($username, $password);
-            if(is_array($info)){ //UC登录成功
+            if($info["status"]){
                 if($info['uid']!=C("USER_ADMINISTRATOR")){
                     $this->error("禁止登录！");
-                }
-                /* 登录用户 */
-                if($info['status']){
+                }else{
                     $this->success('登录成功！', U('Index/index'));
                 }
-            } else { //登录失败
-                switch($info) {
-                    case 0: $error = '账号被禁用！'; break; //系统级别禁用
-                    case -1: $error = '账号被删除！'; break; //系统级别禁用
-                    case -2: $error = '账号审核中！'; break;
-                    case -3: $error = '密码错误！'; break;
-                    case -4: $error = '账号不存在！'; break;
-                    default: $error = '未知错误！'; break; // 0-接口参数错误（调试阶段使用）
-                }
-                $this->error($error);
+            }else{
+                $this->error($info["info"].$info["status"]);
             }
         } else {
             if(is_login()){
@@ -56,10 +46,9 @@ class PublicController extends \Think\Controller {
                 $config	=	S('DB_CONFIG_DATA');
                 if(!$config){
                     $config	=	D('Config')->lists();
-                    S('DB_CONFIG_DATA',$config);
+                    S('DB_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
                 }
                 C($config); //添加配置
-                
                 $this->display();
             }
         }
@@ -99,4 +88,5 @@ class PublicController extends \Think\Controller {
     public function clearMemberCache(){
         S('MEMBER_CACHE',null);
     }
+    
 }

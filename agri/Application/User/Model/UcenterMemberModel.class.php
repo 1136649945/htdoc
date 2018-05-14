@@ -31,7 +31,7 @@ class UcenterMemberModel extends Model{
 	 * @param  integer $type     用户名类型 （1-用户名，2-邮箱，3-手机，4-UID）
 	 * @return integer           登录成功-用户ID，登录失败-错误编号
 	 */
-	public function login($type = 1,$username, $password){
+	public function login($username, $password,$type = 1){
 		$map = array();
 		switch ($type) {
 			case 1:
@@ -65,6 +65,7 @@ class UcenterMemberModel extends Model{
 			    }
 				$this->updateLogin($user['id']); //更新用户登录信息
 				$this->autoLogin($info);
+				$info["info"] = "登录成功！";
 				return $info; //登录成功，返回用户ID
 			} else {
 				//密码错误
@@ -77,6 +78,25 @@ class UcenterMemberModel extends Model{
 	}
 	
 	/**
+	 * 自动登录用户
+	 * @param  integer $user 用户信息数组
+	 */
+	private function autoLogin($user){
+	    /* 记录登录SESSION和COOKIES */
+	    $auth = array(
+	        'uid'             => $user['uid'],
+	        'username'        => $user['nickname'],
+	        'mlevel'        => $user['mlevel'],
+	        'role'        => $user['role'],
+	    );
+	    S(session_id(),$auth,C("APP_SESSION"));
+	    session('user_auth', $auth);
+	    session('user_auth_sign', data_auth_sign($auth));
+	
+	}
+	
+	
+	/**
 	 * 注销当前用户
 	 * @return void
 	 */
@@ -86,26 +106,41 @@ class UcenterMemberModel extends Model{
 	    S(session_id(),null);
 	}
 	
+	
 	/**
-	 * 自动登录用户
-	 * @param  integer $user 用户信息数组
+	 * 
+	 * @param unknown $data1
+	 * @param unknown $data2
 	 */
-	private function autoLogin($user){
-	    /* 记录登录SESSION和COOKIES */
-	    $auth = array(
-	        'uid'             => $user['uid'],
-	        'username'        => $user['nickname'],
-	    );
-	    S(session_id(),$auth,C("APP_SESSION"));
-	    session('user_auth', $auth);
-	    session('user_auth_sign', data_auth_sign($auth));
-	
-	}
-	
-	public function register($data1,$data2){
-	    if($data1 && $data2){
-            
+	public function register($data){
+	    if($data){
+	        $M = new Model();
+	        $M->startTrans();
+	        $roll = true;
+	        try{
+	           $data["reg_time"] = time_format();
+	           $data["last_login_time"] = time_format();
+    	       $id =  D("UcenterMember")->add($data);
+    	       if(!$data["username"]){
+        	       D("UcenterMember")->where(array("id"=>$id))->save(array("username"=>C("USERNAMEPIX").$id));
+    	       }
+    	       $data['code'] = substr($id.C("RECOMMEND"), 0,C("RECOMMENDLEN"));
+    	       $data['uid'] = $id;
+    	       $data['id'] = $id;
+    	       D("Member")->add($data);
+	        }catch (\Exception $e){
+	            $roll = false;
+	            $M->rollback();
+	            $message = $e->getMessage();
+	        }
+	        if($roll){
+	            $M->commit();
+	            return $data;
+	        }else{
+	            return array("id"=>0,"info"=>$message);
+	        }
         }
+        return array("id"=>0,"info"=>"没有传入数据");
 	}
 	/**
 	 * 获取用户信息
@@ -130,11 +165,20 @@ class UcenterMemberModel extends Model{
 		}
 	}
 	/**
+	 * 获取所有用户信息
+	 * @param  string  $uid         用户ID或用户名
+	 * @param  boolean $is_username 是否使用用户名查询
+	 * @return array                用户信息
+	 */
+	public function infoAll(){
+	    return D("Member")->cache("MEMBER_CACHE",C("DATA_CACHE_TIME"))->field("uid,nickname")->select();
+	}
+	/**
 	 * 签到
 	 * @param unknown $uid
 	 * @param unknown $score
 	 */
-	public function singin($uid,$score){
+	public function singin($uid){
         if($uid){
             $Member = D("Member");
             $info = $this->info($uid);
@@ -144,9 +188,9 @@ class UcenterMemberModel extends Model{
                     if($now==$info['last_sing']){
                         return 2;
                     }else{
-                        $Member->where(array("uid"=>$uid))->setInc("score",$score);
+                        $Member->where(array("uid"=>$uid))->setInc("score",C("SING_IN_SCORE"));
                         $Member->where(array("uid"=>$uid))->setField("last_sing",$now);
-                        M("Score")->add(array("gattr1"=>$uid,"gattr2"=>"s","uid"=>$uid,"create_time"=>time_format(),"remark"=>"签到","dv"=>1,"score"=>$score));
+                        M("Score")->add(array("gattr1"=>$uid,"gattr2"=>"s","uid"=>$uid,"create_time"=>time_format(),"remark"=>"签到","dv"=>1,"score"=>C("SING_IN_SCORE")));
                         return 1;
                     }
                 }else{
@@ -200,7 +244,7 @@ class UcenterMemberModel extends Model{
 	}
 	
 	/**
-	 * 验证用户密码
+	 * 验证用户是否存在
 	 * @param int $uid 用户id
 	 * @param string $password_in 密码
 	 * @return true 验证成功，false 验证失败

@@ -14,7 +14,15 @@ use Think\Model;
  * 文档基础模型
  */
 class ProblemanswerModel extends Model{
-    public function getAnswer($field,$where,$order = 'pid,id'){
-        return $this->field($field)->where($where)->order($order)->select();
+    /**
+     * 获取回答
+     * @param unknown $arr
+     * @param string $order
+     */
+    public function getAnswer($arr){
+        if(is_array($arr) && count($arr)){
+            $cond['pid']=array('in',$arr);
+            return $this->where($cond)->order("pid,id")->select();
+        }
     }
 }

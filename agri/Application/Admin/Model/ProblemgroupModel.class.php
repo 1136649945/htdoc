@@ -43,18 +43,4 @@ class ProblemgroupModel extends Model{
     public function getGroupCache($field=true,$where="1=1",$order="sort"){
        return $this->cache('AGRI',C('DATA_CACHE_TIME'))->field($field)->where($where)->order($order)->select();
     }
-    /**
-     * 获取分组
-     * @param unknown $field
-     * @param unknown $where
-     * @param unknown $ord
-     */
-    public function getGroupCacheMap($k='id',$v='title',$field=true,$where="1=1",$order="sort"){
-        $data = $this->getGroupCache($field,$where,$order);
-        $map = array();
-        foreach ($data as $val){
-            $map[$val[$k]] = $val[$v];
-        }
-        return $map;
-    }
 }

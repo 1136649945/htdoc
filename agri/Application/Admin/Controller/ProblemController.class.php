@@ -17,10 +17,10 @@ class ProblemController extends AdminController{
     /**
      * 问题管理列表
      */
-    public function index(){
+    public function index($p=1){
         C('_SYS_GET_PROBLEM_TREE_', true); //标记系统获取分类树模板
         $field = array('p'=>'id,reqid,content,hide','a'=>'id,pid,content,hide');
-        $tree = $this->getTreeList($field);
+        $tree = D("Problem")->getTree($field,$order = 'id',$p,C("LIST_ROWS"));
         $this->assign('tree', $tree['data']);
         $this->assign('page', $tree['show']);
         $this->meta_title = '问题中心';
@@ -30,25 +30,25 @@ class ProblemController extends AdminController{
      * 问题详情
      */
     public function detail(){
-        $group = D("Problemgroup");
-        $info = $group->getGroupCacheMap('id','title',"id,title","status=1");
-        $this->assign("group",$info);
         $id = I("id",0);
-        $tree = $this->getTreeList(null,'id='.$id)['data'];
-        $id = array();
-        foreach ($tree as $val){
-            array_push($id, $val['reqid']);
-            array_push($id, $val['uid']);
+        $Problem = D("Problem")->getProblem($id);
+        $arr = array();
+        foreach ($Problem as $val){
+            array_push($arr, (int)$val["id"]);
         }
-        $this->assign('tree', $tree);
-        if(count($id)>0){
+        $Problema = D("Problemanswer")->getAnswer($arr);
+        var_dump($Problema);
+        
+        
+        
+        
+        if($id){
+            //问题分类
+            $this->assign("group",arr2map(D("Problemgroup")->getGroupCache("id,title","status=1"),"id","title"));
+            //用户信息
             $User = new UserApi();
-            $data = $User->infoAll('select u.id,m.nickname from __UCENTER_MEMBER__ u left join __MEMBER__ m on u.id=m.uid where u.id in('.arr2str($id,',').')');
-            $info = array();
-            foreach ($data as $val){
-                $info[$val['id']] = $val['nickname'] ;
-            }
-            $this->assign("userinfo",$info);
+            $data = $User->infoAll();
+            $this->assign("userinfo",arr2map($data,"uid","nickname"));
         }
         $this->meta_title = '问题详情';
         $this->display();
@@ -64,10 +64,6 @@ class ProblemController extends AdminController{
         $this->display('tree');
     }
     
-    
-    public function getTreeList($field,$where,$order = 'id'){
-        return D("Problem")->getTree($field,$where,$order = 'id');
-    }
     
     /**
      * 问题分类列表

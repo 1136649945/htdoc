@@ -9,12 +9,12 @@
 
 namespace App\Controller;
 
-use User\Api\UserApi;
 /**
- * 用户控制器
- * 包括用户中心，用户登录及注册
+ * 提问回答控制器
  */
-class UserController extends AppController {
-
-
+class ProblemController extends AppController{
+    public function getTreeList($field,$where,$order = 'id'){
+        return D("Problem")->getTree();
+    }
+    
 }
