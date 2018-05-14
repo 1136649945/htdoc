@@ -41,9 +41,10 @@
 	<!-- 语音 -->
 	<notempty name="list['_audio']">
 		<volist name="list['_audio']" id="audio">
-			<div class="layui-form-item">
+			<!-- <div class="layui-form-item">
 				<audio src="{$audio['path']}"></audio>
-			</div>
+			</div> -->
+    		<audio src="{$audio['path']}" preload="none"></audio>
 		</volist>
 	</notempty>
   	<div class="layui-form-item layui-form-text">

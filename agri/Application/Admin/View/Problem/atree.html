@@ -34,9 +34,7 @@
 		<!-- 语音 -->
 		<notempty name="vo['_audio']">
 			<volist name="vo['_audio']" id="audio">
-				<div class="layui-form-item">
-					<audio src="{$audio['path']}"></audio>
-				</div>
+				<audio src="{$audio['path']}" preload="none"></audio>
 			</volist>
 		</notempty>
 		<div class="layui-form layui-form-pane" >
