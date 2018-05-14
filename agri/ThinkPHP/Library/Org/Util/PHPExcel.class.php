@@ -27,7 +27,11 @@
 
 
 /** PHPExcel root directory */
-require(LIB_PATH . 'Org/Util/PHPExcel/PHPExcel/Autoloader.php');
+if (!defined('PHPEXCEL_ROOT')) {
+    define('PHPEXCEL_ROOT', dirname(__FILE__) . '/');
+    require(PHPEXCEL_ROOT . 'PHPExcel/Autoloader.php');
+}
+
 
 /**
  * PHPExcel

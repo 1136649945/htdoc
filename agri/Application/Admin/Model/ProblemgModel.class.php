@@ -17,7 +17,10 @@ class ProblemgModel extends Model{
     /**
      * 问题图片，语音
      */
-    public function getProblemg($id){
-        $this->where(array("pid"=>array("in"=>$id)))->order("pid,doctype,id")->select();
+    public function getProblemg($arr){
+        if(is_array($arr) && count($arr)){
+            $cond['pid']=array('in',$arr);
+            return $this->where($cond)->order("pid,doctype,id")->select();
+        }
     }
 }

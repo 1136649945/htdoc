@@ -71,6 +71,15 @@ class UserApi extends Api{
     public function infoAll(){
         return $this->model->infoAll();
     }
+    /**
+     * 获取所有用户信息
+     * @param  string  $uid         用户ID或用户名
+     * @param  boolean $is_username 是否使用用户名查询
+     * @return array                用户信息
+     */
+    public function getAll($sql){
+        return $this->model->getAll($sql);
+    }
     
     /**
      * 签到功能

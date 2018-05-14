@@ -19,7 +19,7 @@ class ProblemController extends AdminController{
      */
     public function index($p=1){
         C('_SYS_GET_PROBLEM_TREE_', true); //标记系统获取分类树模板
-        $field = array('p'=>'id,reqid,content,hide','a'=>'id,pid,content,hide');
+        $field = array('p'=>'id,title,reqid,content,hide','a'=>'id,pid,content,hide');
         $tree = D("Problem")->getTree($field,$order = 'id',$p,C("LIST_ROWS"));
         $this->assign('tree', $tree['data']);
         $this->assign('page', $tree['show']);
@@ -36,12 +36,49 @@ class ProblemController extends AdminController{
         foreach ($Problem as $val){
             array_push($arr, (int)$val["id"]);
         }
-        $Problema = D("Problemanswer")->getAnswer($arr);
-        var_dump($Problema);
-        
-        
-        
-        
+        $Problema = D("Problemanswer")->getAnswer(array_unique($arr));
+        foreach ($Problema as $val){
+            array_push($arr, (int)$val["id"]);
+        }
+        $Problemg = D("Problemg")->getProblemg(array_unique($arr));
+        foreach ($Problem as &$v){
+            $temp = array();//回答
+            foreach ($Problema as $k=>&$va){
+                $temp1 = array();//图片
+                $temp2 = array();//语音
+                foreach ($Problemg as $val){
+                    if($va["id"]==$val["pid"]){
+                        if($val["doctype"]==3){
+                            array_push($temp1, $val);
+                        }
+                        if($val["doctype"]==4){
+                            array_push($temp2, $val);
+                        }
+                    }
+                }
+                $va["_img"] = $temp1;
+                $va["_audio"] = $temp2;
+                if($v["id"]==$va["pid"]){
+                    array_push($temp, $va);
+                }
+            }
+            $v["_a"] = $temp;
+            $temp1 = array();//图片
+            $temp2 = array();//语音
+            foreach ($Problemg as $val){
+                if($v["id"]==$val["pid"]){
+                    if($val["doctype"]==1){
+                        array_push($temp1, $val);
+                    }
+                    if($val["doctype"]==2){
+                        array_push($temp2, $val);
+                    }
+                }
+            }
+            $v["_img"] = $temp1;
+            $v["_audio"] = $temp2;
+        }
+        $this->assign("tree",list_to_tree($Problem));     
         if($id){
             //问题分类
             $this->assign("group",arr2map(D("Problemgroup")->getGroupCache("id,title","status=1"),"id","title"));
@@ -63,7 +100,33 @@ class ProblemController extends AdminController{
         $this->assign('tree', $tree);
         $this->display('tree');
     }
-    
+    /**
+     * 显示分类树，仅支持内部调
+     * @param  array $tree 分类树
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function atree($list = null){
+        $this->assign('list', $list);
+        $this->display("atree");
+    }
+    /**
+     * 显示分类树，仅支持内部调
+     * @param  array $tree 分类树
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function ptree($list = null){
+        $this->assign('list', $list);
+        $this->display("ptree");
+    }
+    /**
+     * 显示分类树，仅支持内部调
+     * @param  array $tree 分类树
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function ctree($list = null){
+        $this->assign('list', $list);
+        $this->display("ctree");
+    }
     
     /**
      * 问题分类列表

@@ -135,15 +135,18 @@
 	</div>
 	<div class="layui-form-item">
 		<div class="layui-inline">
-			<label class="layui-form-label" style="width: 215px;">现工作地点</label>
+			<label class="layui-form-label" style="width: 215px;">学历</label>
 			<div class="layui-input-inline">
-				<input type="text" class="layui-input" name="worksplace"
-					maxlength="25" value="{$info.worksplace}">
+				<select name="education" class="layui-input">
+					<option value="大专">大专</option>
+					<option value="本科">本科</option>
+					<option value="研究生">研究生</option>
+				</select>
 			</div>
 		</div>
 
 		<div class="layui-inline">
-			<label class="layui-form-label" style="width: 135px;">地区</label>
+			<label class="layui-form-label" style="width: 135px;">地区(支持两级：市-区/省-市)</label>
 			<div class="layui-input-inline">
 				<input type="text" class="layui-input" name="region" maxlength="25"
 					value="{$info.region}">
@@ -218,4 +221,6 @@
     Think.setValue("gender", {$info.gender|default=0});
     Think.setValue("areas", {$info.areas|default=0});
     Think.setValue("status", {$info.status|default=1});
+    Think.setValue("education", {$info.education|default="本科"});
+    
 </script> </block>

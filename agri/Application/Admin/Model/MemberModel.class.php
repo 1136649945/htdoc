@@ -20,7 +20,7 @@ class MemberModel extends Model {
     protected $_validate = array(
         array('name', '0,5', -20, self::EXISTS_VALIDATE, 'length'),//姓名长度
         array('specialty', '0,10', -21, self::EXISTS_VALIDATE, 'length'),//专业长度
-        array('worksplace', '0,25', -22, self::EXISTS_VALIDATE, 'length'),//工作地
+        array('education', '0,25', -22, self::EXISTS_VALIDATE, 'length'),//学历
         array('nickName', '0,10', -23, self::EXISTS_VALIDATE, 'length'),//昵称
         array('region', '0,25', -24, self::EXISTS_VALIDATE, 'length'),//地区
         

@@ -5,7 +5,8 @@
 			<if condition="$list['reqid'] eq null "> 
 				<div class="order" style="width: 70px;"></div>
 			</if>
-			<div class="order">{$list['reqid']?'问题':'回复'}、{$i}</div>
+			<!-- <div class="order">{$list['reqid']?'问题':'回复'}、{$i}</div> -->
+			<div class="order">{$list['title']}</div>
 			<div class="order" style="width: 70px;"></div>
 			<div class="order" style="height: 70px;"><textarea style="height: 65px;width: 200px;overflow: auto;" disabled="disabled" >{$list.content}</textarea></div>
 		    <div class="order" style="position: absolute; right: 100px;">

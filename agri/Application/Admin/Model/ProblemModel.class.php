@@ -38,36 +38,36 @@ class ProblemModel extends Model{
         $data['show'] = $Page->show();// 分页显示输出
         //查询数据
         $data['data'] = $this->field($fieldp)->where("pid=0")->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
-        if(is_array($data['data']) && count($data['data'])>0){
-            $id = array();
-            foreach ($data['data'] as $val){
-                //获取所有主表数据id
-                array_push($id, $val['id']);
-            }
-            if(count($id)>0){
-                $fielda = true;
-                if($field['a']){
-                    //获取回答要查询字段
-                    $fielda = $field['a'];
-                }
-               //查询子表数据
-               $answer = D("Problemanswer")->getAnswer($id);
-               if(is_array($answer) && count($answer)>0){
-                   foreach ($data['data'] as $key=>$val){
-                       $dataTemp = array();
-                       foreach ($answer as $aval){
-                           if($aval['pid']==$val['id']){
-                               //回答的是当前问题就取出来
-                               array_push($dataTemp, $aval);
-                               //移除
-                               array_shift($answer);
-                           }
-                       }
-                       $data['data'][$key]['_'] = $dataTemp;
-                   }
-               }
-            }
-        }
+//         if(is_array($data['data']) && count($data['data'])>0){
+//             $id = array();
+//             foreach ($data['data'] as $val){
+//                 //获取所有主表数据id
+//                 array_push($id, $val['id']);
+//             }
+//             if(count($id)>0){
+//                 $fielda = true;
+//                 if($field['a']){
+//                     //获取回答要查询字段
+//                     $fielda = $field['a'];
+//                 }
+//                //查询子表数据
+//                $answer = D("Problemanswer")->getAnswer($id);
+//                if(is_array($answer) && count($answer)>0){
+//                    foreach ($data['data'] as $key=>$val){
+//                        $dataTemp = array();
+//                        foreach ($answer as $aval){
+//                            if($aval['pid']==$val['id']){
+//                                //回答的是当前问题就取出来
+//                                array_push($dataTemp, $aval);
+//                                //移除
+//                                array_shift($answer);
+//                            }
+//                        }
+//                        $data['data'][$key]['_'] = $dataTemp;
+//                    }
+//                }
+//             }
+//         }
         return $data;
     }
     /**

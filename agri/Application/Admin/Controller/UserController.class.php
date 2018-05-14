@@ -365,6 +365,36 @@ class UserController extends AdminController {
         }
     }
     /**
+     * 会员状态修改
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    public function export(){
+        if(C('USER_ADMINISTRATOR')!=is_login()){
+            $this->error("超级管理员执行该操作!");
+        }
+        $title = array("用户名","邮箱","手机号","姓名","昵称","性别","擅长领域","等级","专业","学历","地区","积分","注册时间");
+        $User = new UserApi;
+        $info = $User->getAll("select m.username,m.email,m.mobile,
+            g.name,g.nickname,g.gender,g.areas,g.mlevel,g.specialty,
+            g.education,g.region,g.score,g.reg_time from "
+            .C("DB_PREFIX")."ucenter_member m, ".C("DB_PREFIX")."member g where m.id=g.uid and g.role='1'");
+       if(is_array($info) && count($info)>0){
+           //问题分类
+           $group = arr2map(D("Problemgroup")->getGroupCache("id,title"),"id","title");
+           foreach ($info as &$val){
+               $val["gender"] = $val["gender"]?"男":"女";
+               $val["areas"] = $group[$val["areas"]];
+           }
+           array_unshift($info, $title);
+           $this->write($info);
+       }else{
+           $this->error("没有任何数据需要导出！");
+       }
+    }
+    
+    
+    
+    /**
      * 会员审核通过
      * @param unknown $id
      */
@@ -416,7 +446,6 @@ class UserController extends AdminController {
             if(is_array($info)){
                 $this->assign("info",$info);
             }
-            $this->display();
             $this->meta_title = '用户详情';
             $this->display();
         }

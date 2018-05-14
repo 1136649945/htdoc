@@ -1,0 +1,55 @@
+<!-- 问题 -->
+<div class="main-title cf">
+    <h2>问题详情</h2>
+</div>
+<div class="layui-form-item">
+	<div class="layui-inline">
+		<label class="layui-form-label" >提问者：</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" value="{$userinfo[$list['reqid']]}" disabled="disabled"/>
+		</div>
+	</div>
+	<div class="layui-inline">
+		<label class="layui-form-label" >提问时间：</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" value="{$list.create_time}" disabled="disabled"/>
+		</div>
+	</div>
+	<div class="layui-inline">
+		<label class="layui-form-label" >问题分类：</label>
+		<div class="layui-input-inline">
+			<input type="text" class="layui-input" value="{$group[$list['block']]}" disabled="disabled"/>
+		</div>
+	</div>
+	<a href="{:U('Problem/changeStatus?method=p&id='.$list['id'].'&hide='.($list['hide']?'0':'1'))}" class="ajax-get">{$list['hide']?'显示该提问':'隐藏该提问'}</a>
+</div>
+<div class="layui-form layui-form-pane" >
+	<div class="layui-form-item">
+	    <label class="layui-form-label">标题</label>
+	    <div class="layui-input-block">
+	      <input type="text" class="layui-input" value="{$list.title}" disabled="disabled">
+	    </div>
+  	</div>
+  	<!-- 图片 -->
+  	<div class="layui-form-item">
+	  	<notempty name="list['_img']">
+		<volist name="list['_img']" id="img">
+			<img style="margin-right: 10px; max-height: 70px; max-width: 70px;" src="{$img['path']}"/>
+		</volist>
+		</notempty>
+	</div>
+	<!-- 语音 -->
+	<notempty name="list['_audio']">
+		<volist name="list['_audio']" id="audio">
+			<div class="layui-form-item">
+				<audio src="{$audio['path']}"></audio>
+			</div>
+		</volist>
+	</notempty>
+  	<div class="layui-form-item layui-form-text">
+	    <label class="layui-form-label">问题详情</label>
+	    <div class="layui-input-block">
+	      <textarea class="layui-textarea" disabled="disabled">{$list.content}</textarea>
+	    </div>
+ 		</div>
+</div>

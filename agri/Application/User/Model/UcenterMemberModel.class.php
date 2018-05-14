@@ -174,6 +174,15 @@ class UcenterMemberModel extends Model{
 	    return D("Member")->cache("MEMBER_CACHE",C("DATA_CACHE_TIME"))->field("uid,nickname")->select();
 	}
 	/**
+	 * 获取所有用户信息
+	 * @param  string  $uid         用户ID或用户名
+	 * @param  boolean $is_username 是否使用用户名查询
+	 * @return array                用户信息
+	 */
+	public function getAll($sql){
+	    return D("Member")->query($sql);
+	}
+	/**
 	 * 签到
 	 * @param unknown $uid
 	 * @param unknown $score

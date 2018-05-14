@@ -10,7 +10,7 @@
            
             <button class="btn ajax-post" url="{:U('changeStatus?method=resumeUser')}" target-form="ids">启 用</button>
             <button class="btn ajax-post" url="{:U('changeStatus?method=forbidUser')}" target-form="ids">禁 用</button>
-            <button class="btn ajax-post confirm" url="{:U('changeStatus?method=deleteUser')}" target-form="ids">删 除</button>
+           <!--  <button class="btn ajax-post confirm" url="{:U('changeStatus?method=deleteUser')}" target-form="ids">删 除</button> -->
         </div>
 
         <!-- 高级搜索 -->
@@ -52,7 +52,7 @@
 				<else/>
 				<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
 				</eq>
-                <a href="{:U('User/changeStatus?method=deleteUser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+                <!-- <a href="{:U('User/changeStatus?method=deleteUser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a> -->
                 <a href="{:U('User/add?id='.$vo['uid'])}" class="confirm">详情</a>
                 </td>
 		</tr>

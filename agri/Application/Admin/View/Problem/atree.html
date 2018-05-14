@@ -1,0 +1,52 @@
+<!-- 问题回复 -->
+<div style="margin-left: 100px;">
+	<notempty name="list">
+	<div class="main-title cf">
+   	 	<h2>回复详情</h2>
+	</div>
+	<volist name="list" id="vo">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<h3>回复{$i}</h3>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" >回复者：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" value="{$userinfo[$vo['answerid']]}" disabled="disabled"/>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label" >回复时间：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" value="{$list.create_time}" disabled="disabled"/>
+				</div>
+			</div>
+			<a href="{:U('Problem/changeStatus?method=a&id='.$vo['id'].'&hide='.($vo['hide']?'0':'1'))}" class="ajax-get">{$vo['hide']?'显示该回复':'隐藏该回复'}</a>
+		</div>
+		<!-- 图片 -->
+	  	<div class="layui-form-item">
+		  	<notempty name="vo['_img']">
+			<volist name="vo['_img']" id="img">
+				<img style="margin-right: 10px; max-height: 70px; max-width: 70px;" src="{$img['path']}"/>
+			</volist>
+			</notempty>
+		</div>
+		<!-- 语音 -->
+		<notempty name="vo['_audio']">
+			<volist name="vo['_audio']" id="audio">
+				<div class="layui-form-item">
+					<audio src="{$audio['path']}"></audio>
+				</div>
+			</volist>
+		</notempty>
+		<div class="layui-form layui-form-pane" >
+		  	<div class="layui-form-item layui-form-text">
+			    <label class="layui-form-label">回复详情</label>
+			    <div class="layui-input-block">
+			      <textarea class="layui-textarea" disabled="disabled">{$vo.content}</textarea>
+			    </div>
+	  		</div>
+		</div>
+	</volist>
+	</notempty>
+</div>
