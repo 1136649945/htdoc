@@ -1,0 +1,18 @@
+<!--pages/company/company.wxml-->
+<view class='company'>
+  <view class='com-top'>
+    <image src='../../images/star.png'></image>
+    推荐列表
+    <navigator url=''>查看更多</navigator>
+  </view>
+  <view class='com-box'>
+    <view class='list' wx:for="{{companyArr}}" wx:for-index="i"  wx:for-item="items">
+      <view class='num'>{{items.id}}</view>
+      <view class='com-cont'>
+        <view class='com-tit'>{{items.title}}</view>
+        <view class='com-date'>推荐时间：{{items.date}}</view>
+      </view>
+      <view class='trade'>{{items.trade}}</view>
+    </view>
+  </view>
+</view>

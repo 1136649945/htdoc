@@ -1,0 +1,8 @@
+/* pages/revert/revert.wxss */
+/* .revert-form{} */
+.revert-text{width:86%;margin:8% 5%;border:solid 2rpx #848484;border-radius: 5rpx;padding: 2%;}
+.btns{background-color: #f4a60c;border:none;color: #fff;}
+.voice-btn{width: 90%;}
+.pic-btn{width: 90%;margin-top: 30rpx;}
+
+.refer{font-size: 32rpx;color:#fff;background-color: #4ac372;text-align: center;height:75rpx;line-height: 75rpx;width: 180rpx;letter-spacing: 2rpx;margin: 80rpx auto;border:none;}

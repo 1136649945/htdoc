@@ -1,0 +1,12 @@
+/* pages/company/company.wxss */
+.company{background-color: #f6f6f6;}
+.com-top{padding: 40rpx 30rpx;font-size: 40rpx;color:#4ac372;overflow: hidden;}
+.com-top image{width: 40rpx;height: 40rpx;margin-bottom: -3rpx;}
+.com-top navigator{float: right;font-size: 30rpx;color: #aaa;border:solid 2rpx #4ac372;padding: 5rpx 15rpx;border-radius: 15rpx;margin-top: 5rpx;}
+.list{background-color: #fff;padding: 40rpx 160rpx 40rpx 130rpx;position: relative;margin-bottom: 10rpx;}
+.num{position:absolute;top:28rpx;left:40rpx;font-size:88rpx;color:#4ac372;font-style: italic;}
+.trade{position:absolute;top:75rpx;right:40rpx;font-size:32rpx;color: #4ac372;}
+.com-tit{font-size: 36rpx;color:#7c7c7c;
+  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
+.com-date{font-size: 30rpx;color:#aaa;margin-top: 15rpx;}

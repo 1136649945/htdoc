@@ -1,0 +1,13 @@
+<!--pages/details/details.wxml-->
+<view class='page' data-id="{{id}}">
+  <view class='title'>{{title}}</view>
+  <view class='date'>
+    发布时间：{{date}}
+  </view>
+
+
+<import src="../wxParse/wxParse.wxml"/> 
+<!--  展示你解析的内容  -->
+<template class="details" is="wxParse" data="{{wxParseData:article.nodes}}"/>  <!-- str为你data中的数据变量 -->
+
+</view>

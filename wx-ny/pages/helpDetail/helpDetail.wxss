@@ -1,0 +1,4 @@
+/* pages/helpDetail/helpDetail.wxss */
+.help{padding: 30rpx;}
+.help-h{font-size: 30rpx;color: #666;margin: 10rpx 0;line-height: 1.5;border-bottom: dashed 2rpx #666;padding: 10rpx 0;}
+.help-cont{font-size: 28rpx;color: #919191;margin-top: 20rpx;margin-bottom: 35rpx;line-height: 1.5;text-indent: 2em;}

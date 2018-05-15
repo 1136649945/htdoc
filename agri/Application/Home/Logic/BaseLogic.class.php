@@ -35,7 +35,7 @@ class BaseLogic extends Model{
 	 * @return array       当前模型详细信息
 	 */
 	public function detail($id){
-		$data = $this->field(true)->find($id);
+		$data = $this->cache("DOCUMENT_D_".$id,C("DOCUMET_D_CACHE"))->field(true)->find($id);
 		if(!$data){
 			$this->error = '获取详细信息出错！';
 			return false;

@@ -1,0 +1,9 @@
+/* pages/perData/perData.wxss */
+.data-form{padding: 50rpx;display: block}
+.one-img{text-align: center;width:220rpx;height:220rpx;margin:0 auto;position:relative;}
+.per-data{width: 220rpx;height: 220rpx;border-radius: 50%;}
+.per-add{width: 70rpx;height: 70rpx;position: absolute;top:-10rpx;right: 0;}
+.one{border-bottom:solid 2rpx #f3f3f4;padding: 30rpx 0;}
+.one view{font-size: 32rpx;color:#7a7a7a;margin-bottom: 15rpx;}
+.one .picker,.one input{font-size: 28rpx;color:#bcbcbc;}
+.modify-data{font-size: 36rpx;color:#fff;background-color: #4ac372;text-align: center;height:75rpx;line-height: 75rpx;width: 240rpx;letter-spacing: 2rpx;margin-top: 80rpx;border:none;}

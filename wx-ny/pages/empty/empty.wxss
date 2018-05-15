@@ -1,0 +1,4 @@
+/* pages/empty/empty.wxss */
+.empty{text-align: center;margin-top: 40%;}
+.empty image{width: 220rpx;height: 220rpx;}
+.empty view{font-size: 36rpx;color:#808080;margin-top: 30rpx;}

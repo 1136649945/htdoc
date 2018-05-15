@@ -1,0 +1,22 @@
+/* pages/personal/personal.wxss */
+.personal{width:100%;}
+.roof{width: 100%;background-color: #4ac372;overflow: hidden;position: relative;padding: 90rpx 0 130rpx;}
+.portrait{float:left;width:150rpx;height: 150rpx;border-radius: 50%;margin-left: 30rpx;}
+.inform{float: left;color:#fff;padding-left: 10rpx;min-width: 30%;text-align: center;}
+.username{margin-top: 20rpx;font-size: 36rpx;}
+.level{font-size: 30rpx;margin-top: 10rpx;}
+.level image{width: 30rpx;height: 29rpx;}
+.weather{float: right;color:#fff;font-size: 30rpx;margin-right: 10rpx;}
+.c{margin-left: 55rpx;}
+.condition image{width: 45rpx;height: 34rpx;}
+.sign{position: absolute;right:0;bottom: 100rpx;font-size: 36rpx;color:#4ac372;background-color: #fff;height: 70rpx;line-height:70rpx;border-top-left-radius: 70rpx;border-bottom-left-radius: 70rpx;width: 180rpx;text-align: center;}
+.sign.current{background-color: #4ac372;color: #fff;}
+
+.mine-box{width: 100%;background-color: #f8f8f8;padding: 10rpx 0;}
+.mine{width:100%;height:100rpx;line-height:100rpx;overflow: hidden;background-color: #fff;margin: 5rpx 0;}
+.mine-icon{float:left;width: 40rpx;height: 43rpx;margin-left: 40rpx;margin-top: 28rpx;}
+.mine text{float:left;font-size: 32rpx;color:#a4a4a4;margin-left: 60rpx;}
+.mine-push{float: right;width: 26rpx;height: 43rpx;margin-right: 40rpx;margin-top: 28rpx;}
+
+.func-box{padding: 0 0 1rpx;}
+

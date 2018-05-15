@@ -25,10 +25,10 @@ class HomeController extends Controller {
     protected function _initialize(){
     /* 读取数据库中的配置 */
         /* 读取站点配置 */
-        $config =   S('HOME_CONFIG_DATA');
+        $config =   S('DB_CONFIG_DATA');
         if(!$config){
             $config =   api('Config/lists');
-            S('HOME_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
+            S('DB_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
         }
         C($config); //添加配置
         if(!C('WEB_SITE_CLOSE')){
@@ -38,5 +38,13 @@ class HomeController extends Controller {
         if( !is_login() ){// 还没登录 跳转到登录页面
             $this->ajaxReturn(array("status"=>0,"info"=>"你还没有登录！"));
         }
+    }
+    // 获取用户协议
+    public function userProtocol() {
+        $datail = D("Document")->detail(3);
+        var_dump($datail);
+//         $this->ajaxReturn($datail,'json') ;
+//         if(IS_POST){
+//         }
     }
 }

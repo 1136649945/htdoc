@@ -1,0 +1,81 @@
+<!--pages/experts/experts.wxml-->
+<view class='experts-box'>
+  <view class='exp-head'>
+    <view class='exp-inform'>
+      <image src='../../images/portrait.jpg'></image>
+      <view class='exp-cont'>
+        <view class='exp-name'>
+          <text>{{name}}</text>{{post}}
+        </view>
+        <view class='exp-p1'>擅长：{{good}}</view>
+        <view class='exp-p2'>专家单位：{{unit}}</view>
+      </view>
+    </view>
+    <view class='exp-icon'>
+      <image src='../../images/exp01.png'></image>
+      <text>已解答：{{solve}}</text>
+      <image src='../../images/exp02.png'></image>
+      <text>级别：{{level}}</text>
+      <image src='../../images/exp03.png'></image>
+      <text>地区：{{area}}</text>
+    </view>
+  </view>
+  <view class='pro'>
+    <view class='pro-h'>
+      <text></text>
+      个人成就
+    </view>
+    <view class='pro-text'>
+      {{achievement}}
+    </view>
+  </view>
+  <view class='pro'>
+    <view class='pro-h'>
+      <text></text>
+      专家介绍
+    </view>
+    <view class='pro-text'>
+      {{introduction}}
+    </view>
+  </view>
+  <view class='pro'>
+    <view class='pro-h'>
+      <text></text>
+      已解答问题
+    </view>
+    <view class='pro-ask'>
+      <view class='reply-cont'>
+        <view class='reply-head'>
+          <image src='../../images/portrait_small.jpg'></image>
+          <text class='rep-name'>宣景宏</text>
+          <text class='rep-type'>生产技术·蔬菜（专家）</text>
+          <text class='rep-date'>5小时前</text>
+        </view>
+        <view class='reply-p'>一般是病害，最常见的是青枯病，主要在结果初期发病。开始植株白天萎蔫，晚上恢复，最后逐渐死亡，并且会传染至整个田块。</view>
+        <view class='after'>
+          <text>追答</text>
+          发病原因与品种抗病性、重茬种植、天气高温高湿有关。
+        </view>
+        <view class='after'>
+          <text>追答</text>
+          发病原因与品种抗病性、重茬种植、天气高温高湿有关。
+        </view>
+        <view class='after'>
+          <text>追答</text>
+          发病原因与品种抗病性、重茬种植、天气高温高湿有关。
+        </view>
+      </view>
+      <view class='voice-box'>
+        <view class='voice' wx:for="{{voiceArr}}" wx:for-index="index" wx:for-item="items">
+          {{items.date}}
+          <progress percent="{{items.num/items.total*100}}" active-mode="backwards"/>
+          <view class='voice-r'>
+            {{items.num}}S
+            <text class='shu'></text>
+            <image src='../../images/play.png'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,40 @@
+/* pages/reply/reply.wxss */
+.reply{background-color: #f3f3f3;color:#7a7a7a;position: relative;}
+.head-box{background-color: #fff;padding: 70rpx 50rpx;overflow: hidden;margin-bottom: 10rpx;}
+.pic-img{float: left;width: 200rpx;height: 200rpx;border-radius: 50%;margin-right:60rpx;}
+.pic-cont{float: left;margin-top: 50rpx;}
+.pic-cont{margin: 20rpx 0;font-size: 30rpx;color:#7a7a7a;}
+.pic-cont view{margin: 12rpx 0;}
+.pic-cont .pic-addr{color:#4ac372;font-size: 36rpx;margin-bottom:40rpx;}
+.pic-cont image{width: 40rpx;height: 40rpx;margin-right: 20rpx;margin-bottom: -5rpx;}
+.pro{background-color: #fff;padding: 30rpx 40rpx;margin-bottom: 10rpx;font-size: 36rpx;}
+.pro image{width:55rpx;height: 55rpx;margin-bottom: -12rpx;margin-right: 20rpx;}
+.reply-imgs{background-color: #fff;overflow: hidden;padding: 30rpx 20rpx;margin-bottom: 10rpx;}
+.reply-imgs image{width: 23%;margin: 1%;float: left;height: 138rpx;}
+.reply-text{background-color: #fff;padding:30rpx;margin-bottom: 10rpx;}
+.reply-text view{font-size: 36rpx;color:#666;}
+.reply-text view text{font-size: 26rpx;color:#7a7a7a;margin-left: 30rpx;}
+.reply-text .num{text-align: right;font-size: 28rpx;color: #dcdcdc;}
+.reply-text textarea{font-size: 30rpx;color: #7a7a7a;}
+.pro image.ting,
+.pro image.yuyin{width: 40rpx;height: 39rpx;margin-left: 15rpx;margin-bottom: -5rpx;}
+.reply-cont{padding: 30rpx 40rpx;}
+/* .reply-head{} */
+.reply-head image{width: 70rpx;height: 70rpx;border-radius: 50%;margin-bottom: -22rpx;}
+.rep-name{margin-left: 15rpx;margin-right: 15rpx;font-size: 28rpx;color:#4b4b4b;}
+.rep-type{margin-right: 15rpx;font-size: 26rpx;color:#4b4b4b;}
+.rep-date{font-size: 28rpx;color: #4ac372;}
+.reply-p{font-size: 28rpx;color:#a5a5a5;line-height: 1.5;margin: 50rpx 0;}
+.after{font-size: 24rpx;color: #4ac372;}
+.after text{font-size: 26rpx;margin-right: 10rpx;padding: 2rpx 12rpx;border:solid 2rpx #4ac372;border-radius: 15rpx;}
+.voice-box{padding: 10rpx 30rpx 50rpx;background-color: #fff;margin-bottom: 10rpx;}
+.voice{font-size: 30rpx;color: #c5c5c5;margin: 20rpx 0;position: relative;}
+.voice progress{color: #4ac372;border-radius: 10rpx;width: 55%;position: absolute;left: 160rpx;top:15rpx;}
+.voice image{width: 27rpx;height: 32rpx;margin-bottom: -3rpx;}
+.voice-r{position: absolute;right: 0;top:0;}
+.voice .shu{width:2rpx;height: 24rpx;display: inline-block;background-color: #c5c5c5;margin-right: 15rpx;}
+
+
+.revert{background-color: #fff;padding: 50rpx 30rpx;text-align: right;}
+
+.editor{width: 100rpx;height: 100rpx;text-align: right;}

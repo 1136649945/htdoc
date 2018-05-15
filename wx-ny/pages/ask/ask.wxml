@@ -1,0 +1,73 @@
+<!--pages/ask/ask.wxml-->
+<view class='ask-box'>
+  <view class='ask-head'>
+      <view class='ask_l'>
+        <image src='{{imgUrl}}'></image>
+        <view>{{name}}</view>
+      </view>
+      <view class='ask-mid'>
+        <view class='mid-title'>{{title}}</view>
+        <view class='mid-type'>{{type}} | {{species}}</view>
+        <view class='mid-p'>{{cont}}</view>
+      </view>
+      <view class='ask-addr'>
+        <view>
+          <text class='city'>{{city}}</text>
+          <text class='area'>{{area}}</text>
+        </view>
+        <button class='tiwen'>提问</button>
+      </view>
+      <view class='ask-date'>
+        <view class='date'>{{date}}</view>
+        <view class='heng'>
+          <text style='width:{{dateW}}rpx'></text>
+          <text style='width:{{dateW}}rpx'></text>
+        </view>
+      </view>
+  </view>
+  <view class='ask-choose'>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{areaArr}}">
+      <view class="picker">
+        {{areaArr[index]}}
+        <image class='pic-img' src='../../images/disclosure.png'></image>
+      </view>
+    </picker>
+    <picker bindchange="bindPicker2Change" value="{{index2}}" range="{{categoryArr}}">
+      <view class="picker">
+        {{categoryArr[index2]}}
+        <image class='pic-img' src='../../images/disclosure.png'></image>
+      </view>
+    </picker>
+    <picker bindchange="bindPicker3Change" value="{{index3}}" range="{{varietiesArr}}">
+      <view class="picker">
+        {{varietiesArr[index3]}}
+        <image class='pic-img' src='../../images/disclosure.png'></image>
+      </view>
+    </picker>
+    <picker bindchange="bindPicker4Change" value="{{index4}}" range="{{goodArr}}">
+      <view class="picker">
+        {{goodArr[index4]}}
+        <image class='pic-img' src='../../images/disclosure.png'></image>
+      </view>
+    </picker>
+  </view>
+  <view class='ask-h'>
+      <image src='../../images/shu.png'></image>
+      解答专家
+    </view>
+  <view class='ask-list'>
+    <view class='asks' wx:for="{{askArr}}" wx:for-index="i" wx:for-item="items" bindtap='goexperts'>
+      <image class='ask-img' src='{{items.imgUrl}}'></image>
+      <view class='ask-cont'>
+        <view class='ask-name'><text>{{items.name}}</text>{{items.post}}</view>
+        <view class='ask-p2'>擅长：{{items.good}}</view>
+        <view class='ask-p3'>专家单位：{{items.unit}}</view>
+        <view class='ask-num'>{{items.num}}人购买</view>
+      </view>
+      <view class='counsel'>
+        <image src='../../images/counsel.png'></image>
+        <view>咨询</view>
+      </view>
+    </view>
+  </view>
+</view>

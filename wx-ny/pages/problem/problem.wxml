@@ -1,0 +1,37 @@
+<!--pages/problem/problem.wxml-->
+<view class="swiper-container">
+  <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange">
+    <block wx:for="{{imgUrls}}" wx:for-index="index" wx:key='uniue'>
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="dots">
+    <block wx:for="{{imgUrls}}" wx:for-index="index" wx:key='uniue'>
+      <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+    </block>
+  </view>
+</view>
+<view class='problem-box'>
+  <view class='problem' wx:for="{{proArr}}" wx:for-index="i" wx:for-item="items">
+    <navigator url='../reply/reply' hover-class="none" bindtap='goreply'>
+      <image class='pro-img' src='{{items.imgUrl}}'></image> 
+      <view class='pro-cont'>
+        <view class='pro-title'>
+          <view class="{{items.sign==1 ? 'active':''}}">{{items.title}}</view>
+          <text wx:if='{{items.sign==1}}'>Hot</text>
+        </view>
+        <view class='pro-addr'>
+          <text>[生产技术·蔬菜]</text>
+          {{items.addr}}
+        </view>
+        <view class='pro-date'>
+          <image src='../../images/reference.png'></image>
+          推荐  |   {{items.date}}
+        </view>
+      </view>
+      <view class="fast-recovery {{items.sign==1 ? 'active':''}}">快速回复</view> 
+    </navigator>
+  </view>
+</view>

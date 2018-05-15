@@ -25,11 +25,12 @@ class AppController extends Controller {
     protected function _initialize(){
     /* 读取数据库中的配置 */
         /* 读取站点配置 */
-        $config =   S('HOME_CONFIG_DATA');
+        $config =   S('DB_CONFIG_DATA');
         if(!$config){
             $config =   api('Config/lists');
-            S('HOME_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
+            S('DB_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
         }
+        var_dump($config);
         C($config); //添加配置
         if(!C('WEB_SITE_CLOSE')){
             $this->ajaxReturn(array("status"=>0,"info"=>"站点已经关闭，请稍后访问~"));

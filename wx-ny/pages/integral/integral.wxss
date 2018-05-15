@@ -1,0 +1,11 @@
+/* pages/integral/integral.wxss */
+.integral-box{padding: 0 25rpx;}
+.integral{padding: 50rpx 0;border-bottom:dashed 2rpx #bfbfbf;}
+.title{font-size: 34rpx;color:#878787;line-height: 1.5;}
+.title text{display: inline-block;color:#fff;background-color: #f4a60c;border-radius: 8rpx;width: 46rpx;height: 46rpx;line-height: 46rpx;text-align: center;margin-right: 10rpx;}
+.title text.odd{background-color: #4ac372;}
+.integ{font-size: 32rpx;color:#666;margin: 10rpx 0;}
+.integ text{font-size: 34rpx;color:#4ac372;}
+.integ text.odd{color:#f4a60c;}
+.date{font-size: 30rpx;color: #aeaeae;}
+.usable{width: 60%;text-align:center;margin: 80rpx auto;height: 80rpx;line-height: 80rpx;background-color: #4ac372;color:#fff;font-size: 36rpx;border-radius: 40rpx;letter-spacing: 2rpx;border: none;}

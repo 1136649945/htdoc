@@ -1,0 +1,8 @@
+<!--pages/help/help.wxml-->
+<view class='help-box'>
+  <navigator class='help' url='{{items.url}}' wx:for="{{helpArr}}" wx:for-index="index"
+  wx:for-item="items">
+    <text>{{index+1}}.</text>
+    {{items.title}}
+  </navigator>
+</view>

@@ -67,7 +67,7 @@ class DocumentModel extends Model{
      */
     public function listCount($category, $status = 1){
         $map = $this->listMap($category, $status);
-        return $this->where($map)->count('id');
+        return $this->cache("DOCUMENT_L_".$category,C("DOCUMET_D_CACHE"))->where($map)->count('id');
     }
 
     /**
@@ -77,7 +77,7 @@ class DocumentModel extends Model{
      */
     public function detail($id){
         /* 获取基础数据 */
-        $info = $this->field(true)->find($id);
+        $info = $this->cache("DOCUMENT_M_".$id,C("DOCUMET_D_CACHE"))->field(true)->find($id);
         if ( !$info ) {
             $this->error = '文档不存在';
             return false;

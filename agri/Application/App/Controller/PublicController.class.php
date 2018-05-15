@@ -95,5 +95,4 @@ class PublicController extends Controller {
             $this->ajaxReturn(array('verify'=>think_encrypt($authnum),'session'=>session_id()),'json') ;
         }
     }
-   
 }

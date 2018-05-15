@@ -1,0 +1,7 @@
+/* pages/details/details.wxss */
+@import "../wxParse/wxParse.wxss";
+.page{padding: 30rpx;}
+.page view{font-size: 30rpx;color: #919191;}
+.page .title{width: 100%;text-align: center;font-size: 36rpx;color: #919191;}
+.page .date{width: 100%;text-align: center;font-size: 26rpx;color: #4ac372;margin-top: 15rpx;margin-bottom: 30rpx;}
+/* .page .details{width: 100%;font-size: 30rpx;color: #919191;} */

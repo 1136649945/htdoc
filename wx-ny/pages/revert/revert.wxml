@@ -1,0 +1,7 @@
+<!--pages/revert/revert.wxml-->
+<form bindsubmit='formSubmit' class='revert-form'>
+  <textarea class='revert-text'></textarea>
+  <button class='btns voice-btn'>语音</button>
+  <button class='btns pic-btn'>上传图片</button>
+  <button class='refer'>提交</button>
+</form>

@@ -1,0 +1,53 @@
+<!--pages/system/system.wxml-->
+<view class='system'>
+  <image class='bg' src='../../images/bg.jpg'></image>
+  <view class='nav-box'>
+    <view class='navs'>
+      <view class='nav' wx:for="{{navArr}}" wx:for-index="i" wx:for-item="items">
+        <navigator url='{{items.navUrl}}' hover-class='none'>
+          <image src='{{items.imgSrc}}'></image>
+          <view>{{items.cont}}</view>
+        </navigator>
+         <view style="display: {{i==3 ? 'none':'block'}}" class='nav-shu'></view>
+      </view>
+    </view>
+  </view>
+  <view class='search'>
+    <image class='seek' src='../../images/search.png'></image>
+    <text>|</text>
+    <input value='' placeholder='请输入查询自己的问题名称'/>
+    <image class='close' src='../../images/close.png'></image>
+  </view>
+  <view class='news'>
+    <image src='../../images/shu.png'></image>
+    最新问题
+    <view class='news-more' bindtap='goproblem'>
+      <image src='../../images/more.png'></image>
+      更多
+    </view>
+  </view>
+
+  <view class='problem-box'>
+    <view class='problem' wx:for="{{proArr}}" wx:for-index="i" wx:for-item="items">
+      <navigator url='../reply/reply'>
+        <image class='pro-img' src='{{items.imgUrl}}'></image> 
+        <view class='pro-cont'>
+          <view class='pro-title'>
+            <view class="{{items.sign==1 ? 'active':''}}">{{items.title}}</view>
+            <text wx:if='{{items.sign==1}}'>Hot</text>
+          </view>
+          <view class='pro-addr'>
+            <text>[生产技术·蔬菜]</text>
+            {{items.addr}}
+          </view>
+          <view class='pro-date'>
+            <image src='../../images/reference.png'></image>
+            推荐  |   {{items.date}}
+          </view>
+        </view>
+        <view class="fast-recovery {{items.sign==1 ? 'active':''}}">快速回复</view> 
+      </navigator>
+    </view>
+  </view>
+
+</view>

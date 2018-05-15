@@ -1,0 +1,50 @@
+/* pages/ask/ask.wxss */
+.ask-box{background-color: #f6f6f6;}
+.ask-head{background-color: #fff;padding: 40rpx 0 20rpx;margin-bottom: 5rpx;}
+.ask_l{position: absolute;top:40rpx;left:30rpx;width: 140rpx;text-align: center;}
+.ask_l image{width: 140rpx;height: 140rpx;border-radius: 50%;}
+.ask_l view{font-size: 28rpx;color:#a2a2a2;}
+.ask-mid{padding-left: 195rpx;padding-right: 20rpx;}
+.mid-title{font-size: 30rpx;color: #4ac372;width: 65%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.mid-type{font-size: 24rpx;color: #a2a2a2;margin-top:20rpx;margin-bottom: 20rpx;}
+.mid-p{font-size: 26rpx;color: #a2a2a2;line-height: 1.5;margin-bottom: 30rpx;
+    display: block;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;/** 将对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical;/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2;/** 显示的行数 **/
+    overflow: hidden;/** 隐藏超出的内容 **/
+}
+.ask-addr{position: absolute;right:20rpx;top:40rpx;}
+.ask-addr view{font-size: 28rpx;color:#f4a60c;}
+.ask-addr view text{margin: 0 10rpx;}
+.tiwen{font-size: 26rpx;color:#fff;background-color: #4ac372;text-align: center;display:block;height:50rpx;line-height:50rpx;width:110rpx;border-radius: 25rpx;margin-top: 10rpx;border:none;}
+.ask-date{text-align: right;padding: 0 20rpx;font-size: 28rpx;color: #4ac372;position: relative;margin-bottom: 30rpx;}
+.heng{position: absolute;right: 20rpx;top:20rpx;}
+.date{display: inline-block;} 
+.heng text{display: inline-block;height: 5rpx;background-color: #f4a60c;}
+.heng text:last-child{background-color: #4ac372;}
+.ask-choose{background-color: #fff;padding: 20rpx 30rpx 20rpx 15rpx;overflow: hidden;margin-bottom: 12rpx;}
+.picker{width: 25%;float: left;text-align: center;font-size: 28rpx;color:#a5a5a5;}
+.pic-img{width: 37rpx;height: 20rpx;float: right;margin-top: 10rpx;margin-right: 8rpx;}
+
+.ask-h{padding: 30rpx;background-color: #fff;font-size:36rpx;color:#4ac372;margin-bottom: 5rpx;}
+.ask-h image{width: 7rpx;height: 36rpx;margin-bottom: -3rpx;margin-right: 10rpx;}
+.asks{background-color: #fff;margin-bottom: 5rpx;padding: 30rpx 0;position: relative;}
+.ask-img{position:absolute;top:35rpx;left:30rpx;width: 140rpx;height: 140rpx;border-radius: 50%;border:solid 2rpx #4ac372;}
+.counsel{position: absolute;top:60rpx;right: 30rpx;font-size: 30rpx;color: #4ac372;width: 70rpx;text-align: center;}
+.counsel image{width: 50rpx;height: 50rpx;}
+.ask-cont{padding-left: 195rpx;padding-right: 115rpx;}
+.ask-name{font-size: 28rpx;color:#a5a5a5;}
+.ask-name text{font-size: 32rpx;color:#4ac372;margin-right: 15rpx;}
+.ask-p2{font-size: 28rpx;color:#a5a5a5;margin: 5rpx 0;}
+.ask-p3{font-size: 28rpx;color:#a5a5a5;}
+.ask-num{font-size: 26rpx;color:#f4a60c;margin-top: 5rpx;}
+
+
+

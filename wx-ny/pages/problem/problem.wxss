@@ -1,0 +1,41 @@
+/* pages/problem/problem.wxss */
+.swiper{height: 225rpx;width: 100%;}
+.swiper image{height: 100%;width: 100%;}
+.swiper-container{position: relative;}
+.swiper-container .dots{  
+  position: absolute;  
+  left: 0;  
+  right: 0;  
+  bottom: 18rpx;  
+  display: flex;
+  justify-content: center;
+}
+.swiper-container .dots .dot{
+  margin: 0 7rpx;  
+  width: 22rpx;
+  height: 22rpx;  
+  background: #fff;  
+  border-radius: 11rpx;  
+  transition: all .6s;  
+}
+.swiper-container .dots .dot.active{background: #4ac372;}
+
+.problem-box{width: 100%;background-color: #fff;}
+/*#fafafa*/
+.problem{border-bottom: dashed 2rpx #c9c9c9;margin: 0 20rpx;padding: 30rpx 0;position: relative;}
+.pro-img{width: 160rpx;height: 102rpx;position: absolute;top:50rpx;left: 5rpx;}
+.pro-cont{padding-left: 185rpx;padding-right: 175rpx;}
+.pro-title{font-size: 30rpx;color:#666;position: relative;}
+.pro-title view{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pro-title view.active{margin-right:50rpx;}
+.pro-title text{font-size: 26rpx;color: #ff9257;position: absolute;top:-10rpx;right: 0;}
+.pro-addr{font-size: 26rpx;color: #848484;margin: 10rpx 0;}
+.pro-addr text{font-size: 28rpx;color: #4ac372;}
+.pro-date{font-size: 26rpx;color:#b4b4b4;}
+.pro-date image{width: 30rpx;height: 34rpx;margin-bottom: -5rpx;}
+.fast-recovery{width:160rpx;text-align:center;font-size: 30rpx;color:#fff;background-color: #4ac372;position: absolute;right: 5rpx;top:75rpx;height: 60rpx;line-height: 60rpx;border-radius: 10rpx;}
+.fast-recovery.active{background-color: #f4a60c;}

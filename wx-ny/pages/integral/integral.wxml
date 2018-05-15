@@ -1,0 +1,16 @@
+<!--pages/integral/integral.wxml-->
+<view class='integral-box'>
+  <view class='integral' wx:for="{{integralArr}}" wx:for-index="i" wx:for-item="items">
+    <view class='title'>
+      <text class="{{i%2==1?'odd':''}}">{{items.id}}</text>
+      {{items.title}}
+    </view>
+    <view class='integ'>
+      推荐积分：<text class="{{i%2==1?'odd':''}}">{{items.num}}</text>
+    </view>
+    <view class='date'>
+      推荐时间：{{items.date}}
+    </view>
+  </view>
+</view>
+<button class='usable'>可用积分</button>

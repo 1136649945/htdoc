@@ -1,0 +1,156 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{margin:0; padding:0}
+ul{list-style:none}
+.kfsc-header{ height:80px; position:relative;  background-color:#FFF; font:12px/1.5 "微软雅黑"; border-bottom:1px solid #dedede}
+.kfsc-header i{background:url(../images/3.png) no-repeat; width:64px; height:64px; position:absolute; top:6px; left:10px; background-size:64px}
+.kfsc-footer{ height:30px;  background-color:#FFF; font:12px/1.5 "微软雅黑"; margin: 0 auto;}
+.kfsc-footer p{text-align:center; color:#219898; line-height:30px;}
+.kfsc-footer:before{content: '';clear: both;display: block;}
+.kfsc-header h1{ color:#219898;line-height:80px; font-size:32px; margin-left:80px;}
+.kfsc-r-he h2{padding:10px}
+.fl{float:left}
+.fr{float:right}
+.ov-hi{overflow:hidden}
+.ov-au{overflow:auto}
+.kfsc-box{width:100%; font:12px/1.5 "微软雅黑";}
+.kfsc-left{width:15%; height:100%; border-right:1px solid #dedede}
+.kfsc-right{ width:85%; height:100%; margin-left:-1px;}
+.sc-le-ss{text-align:center}
+.sc-le-ss input[type="text"]{width:86%; padding:6px; border:1px solid #dedede; margin-top:10px}
+.sc-le-ss input[type="text"]:focus{outline:none}
+.update-ul li{font-size:12px; color:#666}
+.thinktree-default {
+    margin: 6px;
+    unselectable: on;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+	height:93%;
+}
+
+/*滚动条-start*/
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #dedede; 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background:#dedede; 
+    -webkit-box-shadow: inset 0 0 6px #dedede; 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+background:#dedede;
+}
+/*滚动条-end*/
+
+
+.thinktree-default .thinktree-showline > li:first-child > div:only-child .tree-icon-switch {
+    background-position: 0 0;
+}
+.thinktree-default div {height: 20px;white-space: nowrap;}
+.thinktree-showline li > div:only-child .tree-icon-switch {
+    background-position: 0 -20px;
+}
+.thinktree-default .thinktree-showline > li:first-child > div .tree-icon-switch {
+    background-position: -40px 0;
+}
+.thinktree-default .thinktree-showline li .tree-icon-switch {
+    background-position: -40px -20px;
+}
+.thinktree-default li .tree-icon-switch {
+    background-position: -80px -60px;
+}
+.thinktree-default i {
+    width: 20px;
+    background-image: url(../images/tree.png);
+    display: inline-block;
+}
+.thinktree-default li > div:only-child .tree-icon-item {
+    background-position: -100px -20px;
+}
+.thinktree-default li .tree-icon-item {
+    background-position: -60px -20px;
+}
+.thinktree-default .thinktree-showline li:last-child > div:only-child .tree-icon-switch {
+    background-position: 0 -40px;
+}
+.thinktree-default .thinktree-showline li > ul {
+    background: url(../images/tree-line.png) repeat-y 0 0 transparent;
+}
+.thinktree-default .thinktree-showline li:last-child > ul {
+    background: none;
+}
+.thinktree-default .thinktree-showline li:last-child > div .tree-icon-switch {
+    background-position: -40px -40px;
+}
+.thinktree-default li > ul {
+    padding-left: 20px;
+}
+.thinktree-default i, .thinktree-default a, .thinktree-default span {
+    height: 20px;
+    line-height: 20px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.thinktree-default a, .thinktree-default span {
+    color:#666;
+    padding: 0 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+	text-decoration:none;
+}
+.kfsc-right h2{
+	font-size:24px;
+	padding:10px 10px;
+}
+.kfsc-xhx{
+	height:1px;
+	border-bottom:1px solid #dedede;
+	margin-left:10px;
+	margin-right:10px;
+	word-wrap:break-word;
+	white-space:pre-wrap;
+}
+.kfsc-r-ma{
+	margin:10px 10px 0 10px;
+}
+.kfsc-r-ma p{
+	word-wrap:break-word;
+	white-space:pre-wrap;
+	color:#666;
+	line-height:20px;
+	text-indent:2em;
+}
+.mt20{
+	margin-top:20px
+}
+.kfsc-r-ma b{
+	font-size:14px;
+}
+.kfsc-to-update ul{
+	margin-left:60px;
+	list-style:circle;
+	line-height:30px;
+}
+.update-ul{
+	background-color:salmon;
+	border-left:2px solid #000;
+	margin-top:10px;
+}
+.kfsc-to-update{
+	margin-bottom:40px;
+}
+.thinktree-default .thinktree-showline li .tree-icon-switch-jia{background-position:-20px 20px}

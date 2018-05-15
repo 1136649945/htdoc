@@ -1,0 +1,43 @@
+<!--pages/login/login.wxml-->
+<view class="login-container">
+  <view class="center">
+    <image src="../../images/logo.png" class="login_logo"></image>
+  </view>
+  <form bindsubmit="formSubmit" class='log-form'>
+    <view class='one'>
+      <image src='../../images/user.png' class='log-left'></image>
+      <input class="input" name="username" value="{{username}}"
+      placeholder="用户名/邮箱/手机号"  placeholder-class="input-placeholder" />
+      <image src='../../images/push.png' class='log-right'></image>
+    </view>
+    <view class='one'>
+      <image src='../../images/password.png' class='log-left'></image>
+       <input class="input" name="password" value="{{password}}"
+      placeholder="请输入您的密码" placeholder-class="input-placeholder" 
+      password="true" />
+      <image src='../../images/OFF.png' class='log-right'></image>
+    </view>
+    <view class='log-btn'>
+      <button formType="submit" size="mini" plain="true" class="login-btn"
+        hover-class="other-button-hover" hover-class="btn-hover"> 登 录 </button>
+    </view>
+    <view class='reg-btn'>
+      <navigator url='/pages/reg/reg' class="login-btn"> 立 即 注 册 </navigator>
+       <!-- <button formType="submit" size="mini" plain="true" class="login-btn" 
+        hover-class="other-button-hover" hover-class="btn-hover" url="/pages/reg/reg"> 立 即 注 册 </button> -->
+    </view>
+    <view class='box'>
+      <text class='forget-pw'>忘记密码？</text>
+      <view class='quick-log'>
+        <image src='../../images/weixin.png'></image>
+        <text>快捷登录</text>
+      </view>
+    </view>
+  </form>
+  <view class="log-com">
+    <text>技术支持：北京德兴源科技有限公司</text>
+  </view>
+  <view class="log-version">
+    <text>版本：V1.0</text>
+  </view>
+</view>

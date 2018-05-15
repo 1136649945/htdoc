@@ -1,0 +1,28 @@
+<!--pages/learn/learn.wxml-->
+<view class='container'>
+  <view class='search'>
+    <input class='learn-search' placeholder='搜索'/>
+  </view>
+  <view class='nav-box'>
+    <view class='nav'>
+      <view wx:for="{{learnNav}}" wx:for-index="i" wx:for-item="items" data-id="{{i}}" class="{{currentItem==items.id?'current':''}}" bindtap="navLearn">
+      {{items.navName}}
+      <text class='nav-shu' wx:if="{{i == 3}}"></text>
+      <text class="nav-shu {{currentItem == i ? 'active' : ''}}" wx:else>|</text>
+      </view>
+    </view>
+  </view>
+  <view class='learn-box'>
+    <view wx:for="{{learnArr}}" wx:for-index="i" wx:for-item="items" class='learn' data-id="{{items.id}}">
+    <navigator url="/pages/details/details?id={{items.id}}">
+      <image class="learn-img" src='{{items.imgUrl}}'></image>
+      <view class='learn-cont'>
+        <view class='lc-title'>{{items.title}}</view>
+        <view class='lc-date'>{{items.date}}</view>
+        <view class='lc-cont'>{{items.cont}}</view>
+      </view>
+      <image class='learn-push' src='../../images/icon_learn.png'></image>
+      </navigator>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+/* pages/learn/learn.wxss */
+.container{width: 100%;height: 100%;background-color: #f6f6f6;}
+.search{width: 100%;background-color: #fff;padding: 20rpx 0;}
+.learn-search{font-size:34rpx;display:block;width: 84%;margin: 0 4%;background-color: #f6f6f6;height: 80rpx;border-radius: 80rpx;padding: 0 4%;letter-spacing: 5rpx;}
+.nav-box{width:100%;padding: 20rpx 0;background-color: #fff;margin-top: 10rpx;}
+ .nav{width: 88%;margin: 0 6%;border:solid 3rpx #4ac372;border-radius: 6rpx;padding:0;overflow: hidden;height: 75rpx;line-height: 75rpx;}
+ .nav view{display: block;float:left;width: 25%;height: 100%;text-align: center;font-size: 30rpx;background-color: #4ac372;color: #fff;position: relative;}
+ .nav view.current{background-color:#fff;color:#4ac372;}
+ .nav text.nav-shu{font-size:20rpx;position: absolute;right:-2rpx;top:0;}
+.nav text.nav-shu.active{color:#fff;}
+.learn-box{width: 100%;}
+.learn{position:relative;width: 100%;background-color: #fff;margin:10rpx 0;padding: 40rpx 0;}
+ .learn-img{position:absolute;top:46rpx;left: 30rpx;width: 165rpx;height: 138rpx;}
+ .learn-cont{padding-left: 225rpx;padding-right:90rpx;}
+ .learn-push{position:absolute;top:90rpx;right: 30rpx;width: 30rpx;height: 55rpx;}
+.lc-title{font-size:30rpx;color:#909090;}
+.lc-date{font-size:26rpx;color:#4ac372;margin: 5rpx 0;}
+.lc-cont{font-size:28rpx;color:#b5b5b5;line-height: 1.2em;}
+.lc-title{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.lc-cont{
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/
+}
+

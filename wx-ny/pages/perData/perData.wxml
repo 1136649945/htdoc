@@ -1,0 +1,44 @@
+<!--pages/perData/perData.wxml-->
+<form bindsubmit="formSubmit" class='data-form'>
+  <view class='one-img'>
+    <!-- <input type='hidden' value='{{imgSrc}}' />  -->
+    <image src='{{imgSrc}}' id='local-img' class='per-data'></image>
+    <image class='per-add' src='../../images/icon-Plus.png' bindtap='bindPhotoTap'></image>
+  </view>
+  <view class='one'>
+    <view>名称</view>
+    <input value='梁通' />
+  </view>
+  <view class='one'>
+    <view>工作单位</view>
+    <input value='北京德兴源科技有限公司' />
+  </view>
+  <view class='one'>
+    <view>学历</view>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{levelArray}}">
+      <text class="picker">{{levelArray[index]}}</text>
+    </picker>
+    <!-- <input value='大学' /> -->
+  </view>
+  <view class='one'>
+    <view>擅长</view>
+    <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{multiArray}}">
+      <text class="picker">{{multiArray[index2]}}</text>
+    </picker>
+    <!-- <input value='大田作物' /> -->
+  </view>
+  <view class='one'>
+    <view>联系电话</view>
+    <input value='18513821781' />
+  </view>
+  <view class='one'>
+    <view>联系地址</view>
+    <input value='北京市丰台区张仪村路4号院' />
+  </view>
+  <view class='one'>
+    <view>电子邮箱</view>
+    <input value='404210518@QQ.COM' />
+  </view>
+
+  <button class='modify-data'>修改资料</button>
+</form>

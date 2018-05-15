@@ -1,0 +1,21 @@
+<!--pages/recommend/recommend.wxml-->
+<view class='recommend'>
+  <image class='banner' src='../../images/recommend-banner.jpg'></image>
+  <view class='join'>期待您的加入</view>
+  <view class='code'>
+    <view class='code-title'>推荐邀请码</view>
+    <!-- <input type='hidden' value='{{code}}'></input> -->
+    <view class='code-box'>
+      <text wx:for="{{codeArr}}" wx:for-index="i" wx:for-item="items">{{items}}</text>
+    </view>
+    <view class='code-p'>申请注册即可轻松找到专家！</view>
+    <button class='copy' bindtap='codeCopy'>复制邀请码</button>
+  </view>
+  <view class='plan'>
+    <view class='plan-l'>
+      <view class='p1'>推荐邀请赚积分计划</view>
+      <view class='p2'>扫码关注农业专家系统</view>
+    </view>
+    <image class='plan-img' src='../../images/code.jpg'></image>
+  </view>
+</view>

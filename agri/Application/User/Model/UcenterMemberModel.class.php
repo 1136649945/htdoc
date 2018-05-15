@@ -135,6 +135,8 @@ class UcenterMemberModel extends Model{
 	        }
 	        if($roll){
 	            $M->commit();
+	            //用户注册完成清空缓存
+	            S("MEMBER_CACHE",null);
 	            return $data;
 	        }else{
 	            return array("id"=>0,"info"=>$message);

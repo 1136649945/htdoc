@@ -1,0 +1,42 @@
+<!--pages/article/article.wxml-->
+<view class='article'>
+  <form bindsubmit="formSubmit" class='article-form'>
+    <view class='one one-tit'>
+      <input placeholder='文章标题' value=''></input>
+    </view>
+    <view class='one one-tex'>
+      <textarea placeholder='点击此处编辑文章内容'></textarea>
+    </view>
+    <view class='one one-type'>
+      <text>所属类别</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeArr}}">
+        <view class="picker">
+          {{typeArr[index]}}
+          <image src='../../images/disclosure.png'></image>
+        </view>
+      </picker>
+    </view>
+    <view class='one one-integral'>
+      <text>是否需要积分</text>
+      <checkbox-group bindchange="checkboxChange">
+        <label class="checkbox" wx:for="{{integral}}" wx:for-index="i" wx:for-item="items">
+          <checkbox value="{{items.name}}" checked="{{items.checked}}"/>{{items.value}}
+        </label>
+      </checkbox-group>
+    </view>
+    <view class='one one-date'>
+      <text>发布时间</text>
+      <picker mode="date" value="{{date}}" start="2018-01-01" end="2019-01-01" bindchange="bindDateChange">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+    </view>
+    <view class='upload-pic'>
+      <!-- <input type='hidden' value='{{imgSrc}}' />  -->
+      <image class='per-add per-data' id='local-img' class='per-data' src='{{imgSrc}}' bindtap='bindPhotoTap'></image>
+      <view>上传封面图片</view>
+    </view>
+    <button class='published'>发表文章</button>
+  </form>
+</view>

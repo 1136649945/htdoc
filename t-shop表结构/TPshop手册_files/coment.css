@@ -1,0 +1,387 @@
+﻿#ds-thread {
+    clear: both;
+    position: relative;
+    overflow: visible;
+    _zoom: 1;
+}
+#ds-reset, #ds-related-reads {
+    font-weight: normal;
+    font-size: 13px;
+    font-size-adjust: none;
+    color: #333;
+    line-height: 1;
+    text-align: left;
+}
+#ds-reset *, #ds-related-reads * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+#ds-reset div, #ds-related-reads div, #ds-reset ul, #ds-related-reads ul, #ds-reset ol, #ds-related-reads ol, #ds-reset li, #ds-related-reads li, #ds-reset ul li, #ds-related-reads ul li, #ds-reset ol li, #ds-related-reads ol li, #ds-reset iframe, #ds-related-reads iframe, #ds-reset h1, #ds-related-reads h1, #ds-reset h2, #ds-related-reads h2, #ds-reset h3, #ds-related-reads h3, #ds-reset h4, #ds-related-reads h4, #ds-reset h5, #ds-related-reads h5, #ds-reset h6, #ds-related-reads h6, #ds-reset p, #ds-related-reads p, #ds-reset img, #ds-related-reads img, #ds-reset blockquote, #ds-related-reads blockquote, #ds-reset a, #ds-related-reads a, #ds-reset span, #ds-related-reads span, #ds-reset pre, #ds-related-reads pre, #ds-reset code, #ds-related-reads code, #ds-reset strong, #ds-related-reads strong, #ds-reset sub, #ds-related-reads sub, #ds-reset sup, #ds-related-reads sup, #ds-reset fieldset, #ds-related-reads fieldset, #ds-reset form, #ds-related-reads form, #ds-reset label, #ds-related-reads label, #ds-reset input, #ds-related-reads input, #ds-reset textarea, #ds-related-reads textarea, #ds-reset header, #ds-related-reads header, #ds-reset section, #ds-related-reads section, #ds-reset article, #ds-related-reads article, #ds-reset select, #ds-related-reads select {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    font: inherit;
+    line-height: inherit;
+    background: none;
+    width: auto;
+    height: auto;
+    float: none;
+    overflow: visible;
+    transition: none;
+}
+#ds-reset ul, #ds-related-reads ul, #ds-reset ol, #ds-related-reads ol, #ds-reset ul li, #ds-related-reads ul li, #ds-reset ol li, #ds-related-reads ol li {
+    list-style: none;
+    display: block;
+}
+#ds-thread #ds-reset ul, #ds-thread #ds-reset ul li {
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+#ds-thread #ds-reset .ds-comments {
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.13);
+    overflow: hidden;
+}
+#ds-thread #ds-reset li.ds-post {
+    width: 100%;
+    overflow: hidden;
+    clear: both;
+    border-top: 1px solid rgba(0,0,0,0.13);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#ds-thread #ds-reset .ds-post-self {
+    position: relative;
+    padding: 10px;
+    border-top: 1px solid rgba(255,255,255,0.7);
+
+}
+#ds-reset .ds-avatar {
+    box-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    position: relative;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+    float: left;
+}
+#ds-reset .ds-avatar img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    max-width: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.22);
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+#ds-thread #ds-reset .ds-comment-body {
+    padding-left: 60px;
+}
+#ds-thread #ds-reset .ds-post-self:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+#ds-thread #ds-reset .ds-comment-header {
+    padding-top: 1px;
+}
+#ds-thread #ds-reset .ds-user-name {
+    color: #777;
+    font-size: 13px;
+    margin-right: 8px;
+}
+#ds-reset span, #ds-related-reads span, #ds-reset strong, #ds-related-reads strong, #ds-reset label, #ds-related-reads label, #ds-reset input, #ds-related-reads input {
+    display: inline;
+    margin: 0;
+}
+#ds-reset p, #ds-related-reads p {
+    text-indent: 0;
+    clear: none;
+}
+#ds-thread #ds-reset .ds-comment-body p {
+    font-size: 13px;
+    line-height: 1.5em;
+    margin: .5em 0;
+    word-wrap: break-word;
+}
+#ds-thread #ds-reset .ds-comment-footer {
+    line-height: 1.5em;
+}
+#ds-thread #ds-reset .ds-time {
+    font-size: 12px;
+    margin-right: 8px;
+    color: #999;
+    _zoom: 1;
+}
+#ds-thread #ds-reset .ds-replybox {
+    width: auto;
+    font-size: 12px;
+    z-index: 3;
+    margin: 8px 0;
+    padding: 0 0 0 60px;
+    position: relative;
+    _zoom: 1;
+}
+#ds-reset .ds-avatar {
+    box-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    position: relative;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+    float: left;
+}
+#ds-thread #ds-reset a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #777;
+    background-color: transparent;
+    -webkit-transition: color .15s linear;
+    -moz-transition: color .15s linear;
+    transition: color .15s linear;
+}
+#ds-thread #ds-reset .ds-replybox .ds-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#ds-reset span, #ds-related-reads span, #ds-reset strong, #ds-related-reads strong, #ds-reset label, #ds-related-reads label, #ds-reset input, #ds-related-reads input {
+    display: inline;
+    margin: 0;
+}
+#ds-reset input, #ds-related-reads input, #ds-reset button, #ds-related-reads button {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+#ds-reset .ds-rounded-top {
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+#ds-thread #ds-reset .ds-textarea-wrapper {
+    position: relative;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding-right: 20px;
+    background: #fff url(../images/bg_sprites.png) 0 -90px repeat-x;
+    overflow: hidden;
+}
+#ds-thread #ds-reset .ds-textarea-wrapper textarea {
+    box-shadow: none;
+    -webkit-appearance: none;
+    overflow: auto;
+    padding: 10px;
+    height: 54px;
+    margin: 0;
+    resize: none;
+    color: #999;
+    width: 100%;
+}
+#ds-thread #ds-reset .ds-textarea-wrapper textarea, #ds-thread #ds-reset .ds-textarea-wrapper .ds-hidden-text {
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    border: none;
+}
+#ds-thread #ds-reset .ds-textarea-wrapper .ds-hidden-text {
+    word-wrap: break-word;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+}
+#ds-thread #ds-reset .ds-textarea-wrapper textarea, #ds-thread #ds-reset .ds-textarea-wrapper .ds-hidden-text {
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    border: 1px solid #ccc;
+}
+#ds-thread #ds-reset .ds-post-toolbar {
+    position: relative;
+    width: 100%;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+}
+#ds-reset .ds-gradient-bg {
+    background: url(../images/bg_sprites.png) 0 -60px repeat-x;
+}
+#ds-thread #ds-reset .ds-post-options {
+    position: relative;
+    padding: 10px 0;
+}
+#ds-thread #ds-reset button {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+#ds-reset input[type=button], #ds-related-reads input[type=button], #ds-reset input[type=submit], #ds-related-reads input[type=submit], #ds-reset input[type=reset], #ds-related-reads input[type=reset], #ds-reset button, #ds-related-reads button {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#ds-thread #ds-reset .ds-post-button {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    height: 32px;
+    width: 100px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom-color: #aaa;
+    border-bottom-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    background-color: #e6e6e6;
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), color-stop(25%, #fcfcfc), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(#fcfcfc, #fcfcfc 25%, #e6e6e6);
+    background-image: -moz-linear-gradient(top, #fcfcfc, #fcfcfc 25%, #e6e6e6);
+    background-image: -ms-linear-gradient(#fcfcfc, #fcfcfc 25%, #e6e6e6);
+    background-image: linear-gradient(#fcfcfc, #fcfcfc 25%, #e6e6e6);
+    -webkit-transition: all .15s linear;
+    -moz-transition: all .15s linear;
+    transition: all .15s linear;
+    box-shadow: inset 0 0 1px #fff;
+}
+#ds-thread #ds-reset .ds-comment-body {
+    padding-left: 60px;
+}
+#ds-reset .ds-post-toolbar .ds-post-options .chaketest_txt{
+    background: white;
+    height: 26px;
+    margin-top: 1px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding: 0 4px;
+}
+#ds-reset .ds-post-toolbar .ds-post-options .chaketest_fa{
+    width: 100px;
+    height: 30px;
+    margin-top: 0px;
+    margin-right: 10px;
+}
+#ds-thread #ds-reset .ds-paginator {
+    text-align: right;
+    padding-bottom: 15px;
+    clear: both;
+    line-height: 1em;
+}
+#ds-thread #ds-reset .ds-paginator div.ds-border {
+    border-top: 1px solid rgba(255,255,255,0.7);
+    margin-bottom: 15px;
+}
+#ds-thread #ds-reset .ds-paginator a.ds-current {
+    color: #d32;
+    border: 1px solid #ccc;
+}
+#ds-thread #ds-reset .ds-paginator a {
+    font-size: 12px;
+    margin: 0 3px;
+    padding: 2px 5px;
+    border: 1px solid transparent;
+}
+#ds-thread #ds-reset .ds-paginator a:hover, #ds-thread #ds-reset .ds-paginator a.ds-current {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: rgba(0,0,0,0.03);
+}
+#tabbar #ds-thread{
+    width: 706px;
+}
+#tabbar{
+    margin-bottom: 10px;
+    border: 1px solid #D4D4D4;
+    background-color: #FFF;
+    padding: 6px;
+    width: 706px;
+    margin: 0 auto;
+}
+.tabbar .tab-nav {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #72B939;
+    border-bottom: 1px solid #D4D4D4;
+    background-color: #F4F4F4;
+}
+.tabbar .tab-nav .item {
+    float: left;
+    padding: 0 20px;
+    height: 40px;
+    cursor: pointer;
+    border-right: 1px solid #D4D4D4;
+}
+.tabbar .tab-nav .selected {
+    margin-top: -1px;
+    height: 39px;
+    color: #333;
+    border-top: 3px solid #72B939;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+    background-color: #FFF;
+}
+.cf:after {
+    display: block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    content: ".";
+}
+
+#ds-thread .ds-paginator .dataTables_paginate ul.pagination{
+	margin: 0 auto !important;
+	display: table;
+	overflow: hidden !important;
+}
+#ds-thread .ds-paginator .dataTables_paginate ul.pagination li{
+	float: left;
+	border: 1px solid #ccc !important;
+	margin-right: 5px !important;
+	border-radius: 4px !important;
+}
+#ds-thread .ds-paginator .dataTables_paginate ul.pagination li:hover{
+	background-color: rgba(0,0,0,0.03) !important;
+	color: #d32 !important;
+}
+#ds-thread .ds-paginator .dataTables_paginate ul.pagination li a:hover{
+	background-color: rgba(255,255,255,0) !important;
+}
+#ds-thread .ds-paginator .dataTables_paginate ul.pagination .active{
+	color: #d32 !important;
+	background-color: rgba(0,0,0,0.03) !important;
+}
+.ds-comment-header .reply-btn{
+    color: #72B939 !important;
+    float: right !important;
+}
+.ds-comment-header .reply-btn i{
+    display: inline-block;
+    margin-left: 3px;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border: 5px solid #FFF;
+    border-top-color: #72B939;
+    border-bottom-width: 0;
+    color: #72B939;
+}
+.form2_replay{
+    margin-top: 10px !important;
+    display: none;
+}
+.dpmt10{
+    margin-top: 10px !important;
+}

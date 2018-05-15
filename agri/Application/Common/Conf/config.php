@@ -17,6 +17,10 @@ return array(
     'APP_SESSION' => 60,
     // 数据缓存时间
     'DATA_CACHE_TIME'   => 10, 
+    //文章详情数据缓存时间
+    'DOCUMET_D_CACHE'   => 60,
+    //文章列表数据缓存时间
+    'DOCUMET_L_CACHE'   => 60,
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',

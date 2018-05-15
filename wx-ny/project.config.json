@@ -1,0 +1,148 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.94",
+	"appid": "wx2d37a95245474f6d",
+	"projectname": "wx-ny2",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "注册",
+					"pathName": "pages/reg/reg",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/personal/personal",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "详情",
+					"pathName": "pages/details/details",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人资料",
+					"pathName": "pages/perData/perData",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "空页面",
+					"pathName": "pages/empty/empty",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发表文章",
+					"pathName": "pages/article/article",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "系统",
+					"pathName": "pages/system/system",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "问题中心",
+					"pathName": "pages/problem/problem",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "回复",
+					"pathName": "pages/reply/reply",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "推荐邀请",
+					"pathName": "pages/recommend/recommend",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "专家回复",
+					"pathName": "pages/reply/reply",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发表文章",
+					"pathName": "pages/article/article",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "提问",
+					"pathName": "pages/ask/ask",
+					"query": ""
+				},
+				{
+					"id": 14,
+					"name": "回复2",
+					"pathName": "pages/revert/revert",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "专家信息",
+					"pathName": "pages/experts/experts",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关于系统",
+					"pathName": "pages/Absystem/Absystem",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "帮助中心",
+					"pathName": "pages/help/help",
+					"query": ""
+				}
+			]
+		}
+	}
+}

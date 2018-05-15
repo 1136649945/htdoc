@@ -75,13 +75,6 @@ class UserController extends AdminController {
         if(IS_POST){ 
             //注册专家
             $return = array();
-            /* 检测验证码 */
-            //             if(!check_verify($verify)){
-            //                 $this->error('验证码输入错误！');
-            //                 $return['info']     =   '验证码输入错误！';
-            //                 $return['status']   =   0;
-            //                 $this->ajaxReturn($return,'json');
-            //             }
             if(!$username){
                 $return['status']   =   0;
                 $return['info']     =   '用户名不能为空！';
@@ -117,6 +110,8 @@ class UserController extends AdminController {
                             $return['status']   =   1;
                             $return['info']     =   '编辑成功！';
                             $return['url'] = "/admin.php?s=/User/expert";
+                             //成功清除缓存
+                            S("MEMBER_CACHE",null);
                             $this->ajaxReturn($return,'json');
                             return ;
                         }else{
@@ -162,6 +157,8 @@ class UserController extends AdminController {
                        $return['status']   =   1;
                        $return['info']     =   '新增成功！';
                        $return['url'] = "/admin.php?s=/User/expert";
+                       //成功清除缓存
+                       S("MEMBER_CACHE",null);
                        $this->ajaxReturn($return,'json');
                    }else{
                        $this->ajaxReturn($info,'json');
@@ -404,6 +401,7 @@ class UserController extends AdminController {
         $Member = D("Member");
         $uidpcode = arr2map($Member->field("uid,pcode")->select(),"uid","pcode");
         $uidcode = arr2map($Member->field("uid,code")->select(),"code","uid");
+        $nickname = arr2map((new UserApi())->infoAll(),"uid","nickname")[$id];
         $M = new Model();
         $M->startTrans();
         $roolback = true;
@@ -418,7 +416,7 @@ class UserController extends AdminController {
                             $res = $M->table(C('DB_PREFIX').'member')->where(array("code"=>$pcode))->setInc("score",C("AGRI_RECOMMEND_SCORE"));
                             if($res){
                                 if($uidcode[$pcode]){
-                                    $M->table(C('DB_PREFIX')."score")->add(array("gattr1"=>$pcode."|".$val,"gattr2"=>"r","uid"=>$uidcode[$pcode],"create_time"=>time_format(),"remark"=>"推荐用户注册，用户注册通过","dv"=>1,"score"=>C("AGRI_RECOMMEND_SCORE")));
+                                    $M->table(C('DB_PREFIX')."score")->add(array("gattr1"=>$pcode."|".$val,"gattr2"=>"r","uid"=>$uidcode[$pcode],"create_time"=>time_format(),"remark"=>"推荐".$nickname."会员注册成功","dv"=>1,"score"=>C("AGRI_RECOMMEND_SCORE")));
                                 }
                             }
                         }

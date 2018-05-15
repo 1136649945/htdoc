@@ -1,0 +1,21 @@
+/* pages/login/login.wxss */
+.login-container{padding: 10px;}
+.login_logo{width: 321rpx;height: 150rpx;}
+.center{text-align: center;margin-top: 10%;}
+.log-form{width: 70%;margin:0 6% 6%;padding:10% 8% 15%;display: block;border-bottom: solid 1rpx #919191;}
+.one{padding: 5rpx 20rpx;border-bottom: solid 1rpx #b5b5b5;overflow: hidden;margin: 20rpx 0;}
+.one input{float: left;margin: 0 10rpx 0 15rpx;font-size: 30rpx;}
+.log-left{width: 36rpx;height: 40rpx;float: left;margin-top: 0;}
+.log-right{width: 40rpx;height: 24rpx;float: right;margin-top: 15rpx;}
+.log-btn{display:block;margin-top: 90rpx;}
+.reg-btn{display:block;margin: 30rpx 0;}
+.log-btn button,
+.reg-btn button,.reg-btn navigator{font-size:36rpx;color:#fff;display: block;width: 100%;height: 80rpx;line-height:78rpx;border:solid 1rpx #4ac372;background-color: #4ac372;border-radius: 80rpx;}
+.reg-btn button,.reg-btn navigator{text-align:center;color:#4ac372;border:solid 1rpx #4ac372;background-color: transparent;}
+.box{overflow: hidden;padding: 0 20rpx;margin-top:-20rpx;font-size: 28rpx;}
+.forget-log{float: left;}
+.quick-log{float: right;}
+.quick-log text{color:#4ac372;}
+.quick-log image{width: 28rpx;height: 28rpx;margin-bottom: -5rpx;margin-right: 20rpx;}
+.log-com{text-align: center;font-size: 30rpx;color: #6a6a6a;margin-bottom: 3%;}
+.log-version{text-align: center;font-size: 28rpx;color:#919191;}

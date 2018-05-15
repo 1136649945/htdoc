@@ -51,6 +51,7 @@ class ConfigController extends AdminController {
             $data = $Config->create();
             if($data){
                 if($Config->add()){
+                    //清楚缓存
                     S('DB_CONFIG_DATA',null);
                     $this->success('新增成功', U('index'));
                 } else {
@@ -76,6 +77,7 @@ class ConfigController extends AdminController {
             $data = $Config->create();
             if($data){
                 if($Config->save()){
+                    //清楚缓存
                     S('DB_CONFIG_DATA',null);
                     //记录行为
                     action_log('update_config','config',$data['id'],UID);

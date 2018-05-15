@@ -8,7 +8,6 @@
 // +----------------------------------------------------------------------
 
 namespace Admin\Controller;
-use Admin\Model\AuthGroupModel;
 
 /**
  * 模型管理控制器
@@ -124,7 +123,6 @@ class ModelController extends AdminController {
      */
     public function update(){
         $res = D('Model')->update();
-
         if(!$res){
             $this->error(D('Model')->getError());
         }else{

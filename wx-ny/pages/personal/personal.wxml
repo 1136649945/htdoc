@@ -1,0 +1,55 @@
+<!--pages/personal/personal.wxml-->
+<view class='personal'>
+    <view class='roof'>
+      <image class='portrait' src='{{imgUrl}}'></image>
+      <view class='inform'>
+        <view class='username'>{{username}}</view>
+        <view class='level'>
+          <image src='../../images/v.png'></image>
+          {{level}}  会员
+        </view>
+      </view>
+      <view class='weather'>
+        <view class='condition'>
+          <image src='{{condition}}'></image>
+          {{conditionText}}
+        </view>
+        <view class='c'>{{c}}</view>
+      </view>
+      <view class='sign'>签到</view>
+    </view>
+    <view class='mine-box'>
+      <navigator class='mine' url='/pages/perData/perData'>
+        <image src='../../images/icon01.png' class='mine-icon'></image>
+        <text>我的资料</text>
+        <image src='../../images/icon_right.png' class='mine-push'></image>
+      </navigator>
+      <navigator class='mine' url='/pages/recommend/recommend'>
+        <image src='../../images/icon02.png' class='mine-icon'></image>
+        <text>我的推荐</text>
+        <image src='../../images/icon_right.png' class='mine-push'></image>
+      </navigator>
+      <navigator class='mine' url=''>
+        <image src='../../images/icon03.png' class='mine-icon'></image>
+        <text>我的报表</text>
+        <image src='../../images/icon_right.png' class='mine-push'></image>
+      </navigator>
+    </view>
+    <view class='mine-box func-box'>
+      <navigator class='mine' url='/pages/integral/integral'>
+        <image src='../../images/icon01.png' class='mine-icon'></image>
+        <text>积分中心</text>
+        <image src='../../images/icon_right.png' class='mine-push'></image>
+      </navigator>
+      <navigator class='mine' url='/pages/help/help'>
+        <image src='../../images/icon02.png' class='mine-icon'></image>
+        <text>帮助中心</text>
+        <image src='../../images/icon_right.png' class='mine-push'></image>
+      </navigator>
+      <navigator class='mine' url='/pages/Absystem/Absystem'>
+        <image src='../../images/icon03.png' class='mine-icon'></image>
+        <text>关于系统</text>
+        <image src='../../images/icon_right.png' class='mine-push'></image>
+      </navigator>
+    </view>
+</view>

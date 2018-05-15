@@ -1,0 +1,4 @@
+/* pages/Absystem/Absystem.wxss */
+.Absystem{padding: 50rpx 30rpx;}
+.Ab-h{font-size: 32rpx;color: #848484;text-align: center;}
+.Ab-cont{width: 100%;font-size: 28rpx;color: #919191;margin-top: 20rpx;margin-bottom: 35rpx;line-height: 1.5;text-indent: 2em;}
