@@ -17,6 +17,9 @@
       password="true" />
       <image src='../../images/OFF.png' class='log-right'></image>
     </view>
+    <view class='one'>
+       <image src='{{verimg}}' class='verify'  mode= 'aspectFit'></image> 
+    </view>
     <view class='log-btn'>
       <button formType="submit" size="mini" plain="true" class="login-btn"
         hover-class="other-button-hover" hover-class="btn-hover"> 登 录 </button>

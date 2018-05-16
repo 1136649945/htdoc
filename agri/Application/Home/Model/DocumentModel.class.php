@@ -92,6 +92,8 @@ class DocumentModel extends Model{
             $this->error = $logic->getError();
             return false;
         }
+        $info["create_time"] = date("Y-m-d",$info["create_time"]);
+        $info["update_time"] = date("Y-m-d",$info["update_time"]);
         return array_merge($info, $detail);
     }
 

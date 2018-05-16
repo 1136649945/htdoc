@@ -43,7 +43,7 @@ class BaseLogic extends Model {
         if ($this->getDbFields() == false) {
             $data = array();
         } else {
-            $data = $this->field(true)->find($id);
+            $data = $this->cache("DOCUMENT_D_".$id,C("DOCUMET_D_CACHE"))->field(true)->find($id);
             if (!$data) {
                 $this->error = '获取详细信息出错！';
                 return false;

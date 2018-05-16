@@ -14,13 +14,19 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-//HUD 
-//成功提示
-function showSuccess(title = "成功啦", duration = 2500) {
+function strempty(str) {
+  if (str != null && str.trim().length>0){
+    return false;
+  }else{
+    return true;
+  }
+}
+//提示
+function showtip(title, icon,duration) {
   wx.showToast({
     title: title,
-    icon: 'success',
-    duration: (duration <= 0) ? 2500 : duration
+    image: (icon == 1) ? '../../images/iconok.png' :'../../images/iconfail.png',
+    duration: duration ? duration : 2000
   });
 }
 //loading提示
@@ -170,7 +176,8 @@ function getSystemInfo(cb) {
 }
 module.exports = {
   formatTime: formatTime,
-  showSuccess: showSuccess,
+  strempty: strempty,
+  showtip: showtip,
   showLoading: showLoading,
   hideToast: hideToast,
   alertViewWithCancel: alertViewWithCancel,

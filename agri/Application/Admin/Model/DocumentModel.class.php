@@ -56,7 +56,7 @@ class DocumentModel extends Model{
      */
     public function detail($id){
         /* 获取基础数据 */
-        $info = $this->field(true)->find($id);
+        $info = $this->cache("DOCUMENT_M_".$id,C("DOCUMET_D_CACHE"))->field(true)->find($id);
         if(!(is_array($info) || 1 !== $info['status'])){
             $this->error = '文档被禁用或已删除！';
             return false;
@@ -70,7 +70,6 @@ class DocumentModel extends Model{
             return false;
         }
         $info = array_merge($info, $detail);
-
         return $info;
     }
 

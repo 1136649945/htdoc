@@ -18,10 +18,11 @@ Page({
     var that = this;
     util.sendrequest("/index.php/Public/userProtocol", null,
       function (data) {
-        console.log(data);
-        that.data.title = data["title"];
-        that.data.article = data["content"];
-        that.data.date = data["create_time"];
+        that.setData({
+          title : data["title"],
+          article : data["content"],
+          date : data["create_time"]
+        });
         WxParse.wxParse('article', 'html', that.data.article, that, 5);
       }, function (e) {
         wx.showToast({

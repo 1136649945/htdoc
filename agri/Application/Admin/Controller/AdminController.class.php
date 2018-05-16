@@ -9,7 +9,6 @@
 namespace Admin\Controller;
 use Admin\Model\AuthRuleModel;
 use Common\Controller\ExeclController;
-use User\Api\UserApi;
 /**
  * 后台首页控制器
  * @author 麦当苗儿 <zuojiazi@vip.qq.com>
