@@ -9,11 +9,25 @@
 
 namespace App\Controller;
 
+use User\Api\UserApi;
 /**
  * 用户控制器
  * 包括用户中心，用户登录及注册
  */
 class UserController extends AppController {
-
+    /**
+     * 退出登录
+     */
+    public function loginout(){
+        if(is_login()){
+            $User = new UserApi();
+            $User->logout();
+            session('[destroy]');
+            $this->success('退出成功！', U('login'));
+        }
+        if(!session('user_auth')){
+            $this->ajaxReturn(array("status"=>1),'json');
+        }
+    }
 
 }

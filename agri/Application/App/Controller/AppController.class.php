@@ -30,15 +30,20 @@ class AppController extends Controller {
             $config =   api('Config/lists');
             S('DB_CONFIG_DATA',$config,C("DATA_CACHE_TIME"));
         }
-        var_dump($config);
         C($config); //添加配置
         if(!C('WEB_SITE_CLOSE')){
             $this->ajaxReturn(array("status"=>0,"info"=>"站点已经关闭，请稍后访问~"));
         }
         // 获取当前用户ID
-//         if( !is_login() ){// 还没登录 跳转到登录页面
-//             $this->ajaxReturn(array("status"=>0,"info"=>"你还没有登录！"));
-//         }
+        if( !is_login()){// 还没登录 跳转到登录页面
+            $this->ajaxReturn(array("status"=>0,"info"=>"你还没有登录！"));
+            exit();
+        }
+        $status = session('user_auth')['status'];
+        if($status!==1){
+            $this->ajaxReturn(array("status"=>$status,"info"=>showErrorMessage($status)));
+            exit();
+        }
     }
 
 }

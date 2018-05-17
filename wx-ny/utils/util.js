@@ -79,11 +79,11 @@ function pay(){
   })   
 }
 //微信发送请求
-function sendrequest(url, data, scallback, fcallback, session) {
-  if (session != null && session != "") {
+function sendrequest(url, data, scallback, fcallback, session=false) {
+  if (session) {
     var header = {
       'content-type': 'application/x-www-form-urlencoded',
-      'Cookie': 'PHPSESSID=' + session
+      'Cookie': 'PHPSESSID=' + getSession()
     };
   } else {
     var header = { 'content-type': 'application/x-www-form-urlencoded' };
@@ -100,6 +100,14 @@ function sendrequest(url, data, scallback, fcallback, session) {
       fcallback(e);
     }
   })
+}
+function getSession(){
+  var session = wx.getStorageSync('session');
+  if (session){
+    return session.substring(4, session.length-4);
+  }else{
+    return null;
+  }
 }
 //上传文件
 function uplodaFile(path, scallback, fcallback, session) {
@@ -185,6 +193,7 @@ module.exports = {
   sendrequest: sendrequest,
   uplodaFile: uplodaFile,
   getOpenid: getOpenid,
+  getSession: getSession,
   getSystemInfo: getSystemInfo,
   domain: "http://localhost:8080/agri",
   openidurl: "https://api.weixin.qq.com/sns/jscode2session?grant_type=authorization_code",

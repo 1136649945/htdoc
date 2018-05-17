@@ -59,9 +59,9 @@ class UcenterMemberModel extends Model{
 			/* 验证用户密码 */
 			if($type===5 || think_encrypt($password) === $user['password']){
 			    $info = $this->info($user['id']);
-			    if(1!=$info['status']){
+			    if(1!==$info['status']){
 			        //账号禁用，删除，审核
-			        return array("status"=>$info['status'],"info"=>$this->showErrorMessage($info['status']));
+			        return array("status"=>$info['status'],"info"=>showErrorMessage($info['status']));
 			    }
 				$this->updateLogin($user['id']); //更新用户登录信息
 				$this->autoLogin($info);
@@ -69,11 +69,11 @@ class UcenterMemberModel extends Model{
 				return $info; //登录成功，返回用户ID
 			} else {
 				//密码错误
-			    return array("status"=>-3,"info"=>$this->showErrorMessage(-3));
+			    return array("status"=>-3,"info"=>showErrorMessage(-3));
 			}
 		} else {
 			//用户不存
-		    return array("status"=>-4,"info"=>$this->showErrorMessage(-4));
+		    return array("status"=>-4,"info"=>showErrorMessage(-4));
 		}
 	}
 	
@@ -88,11 +88,10 @@ class UcenterMemberModel extends Model{
 	        'username'        => $user['nickname'],
 	        'mlevel'        => $user['mlevel'],
 	        'role'        => $user['role'],
+	        'status'       => $user['status'],
 	    );
-	    S(session_id(),$auth,C("APP_SESSION"));
 	    session('user_auth', $auth);
 	    session('user_auth_sign', data_auth_sign($auth));
-	
 	}
 	
 	
@@ -103,7 +102,6 @@ class UcenterMemberModel extends Model{
 	public function logout(){
 	    session('user_auth', null);
 	    session('user_auth_sign', null);
-	    S(session_id(),null);
 	}
 	
 	
@@ -223,6 +221,8 @@ class UcenterMemberModel extends Model{
 			'last_login_time' => date("Y-m-d H:i:s"),
 		);
 		$Member->save($data);
+		//记录行为
+		action_log('user_login', 'member', $uid, $uid);
 	}
 
 	/**
@@ -278,22 +278,6 @@ class UcenterMemberModel extends Model{
 			return true;
 		}
 		return false;
-	}
-	/**
-	 * 登录状态信息
-	 * @param unknown $mode
-	 */
-	private function showErrorMessage($mode){
-	    $error = '未知错误！';
-	    switch($mode) {
-	        case 0: $error = '账号被禁用！'; break; //系统级别禁用
-	        case -1: $error = '账号被删除！'; break; //系统级别删除
-	        case -2: $error = '账号审核中！'; break;
-	        case -3: $error = '密码错误！'; break;
-	        case -4: $error = '账号不存在！'; break;
-	        default: $error = '未知错误！'; break; // 0-接口参数错误（调试阶段使用）
-	    }
-	    return $error;
 	}
 
 }

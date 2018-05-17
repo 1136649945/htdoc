@@ -18,6 +18,11 @@
       <image src='../../images/OFF.png' class='log-right'></image>
     </view>
     <view class='one'>
+      <image src='../../images/password.png' class='log-left'></image>
+      <input class="input" name="verify" placeholder="验证码"  
+      placeholder-class="input-placeholder" />
+    </view>
+    <view>
        <image src='{{verimg}}' class='verify'  mode= 'aspectFit'></image> 
     </view>
     <view class='log-btn'>

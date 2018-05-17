@@ -20,31 +20,16 @@ class PublicController extends Controller {
     // 注册或更新用户
     public function login($username=-1,$password=-1,$verify=-1) {
         if(IS_POST){
-            $verify = think_decrypt($verify);
-            if($verify!=session("verify")){
-                $this->ajaxReturn(array('status'=>0,'info'=>"验证码错误"),'json');
-                exit();
+            if(!check_verify($verify)){
+                $this->ajaxReturn(array("status"=>0,"info"=>'验证码输入错误！'),"json");
+            }else{
+                $User = new UserApi();
+                $info = $User->login($username, $password);
+                $this->ajaxReturn(array("status"=>$info["status"],"nickname"=>$info["nickname"],"mlevel"=>$info["mlevel"],"role"=>$info["role"]),'json');
             }
-            $User = new UserApi();
-            $info = $User->login($username, $password);
-            $info['session'] = session_id();
-            $this->ajaxReturn($info,'json');
         }
     }
-    /**
-     * 退出登录
-     */
-    public function loginout(){
-        if(is_login()){
-            $User = new UserApi();
-            $User->logout();
-            session('[destroy]');
-            $this->success('退出成功！', U('login'));
-        }
-        if(!session('user_auth')){
-            $this->ajaxReturn(array("status"=>1),'json');
-        }
-    }
+    
     /**
      * 注册
      * $data['openid']
@@ -52,31 +37,13 @@ class PublicController extends Controller {
      * $data['sex']
      * @param unknown $data
      */
-    public function regist() {
+    public function regist($username=-1,$password=-1,$verify=-1,$pcode=-1) {
         if(IS_POST){
-            $data = json_decode($_REQUEST['data'],true);
-            $verify = think_decrypt($data['verify']);
-            if($verify!=session("verify")){
-                $this->ajaxReturn(array('status'=>0,'info'=>"验证码错误"),'json');
-                exit();
-            }
-            $User = new UserApi();
-            if ($User->existenceUser(array("openid"=>$data['openid']))) {
-                $info = $User->login($data['openid'], null,5);
-                $this->ajaxReturn($info,'json');
-            } else {
-                $data["status"] = -2;
-                $data["role"] = 2;
-                $data["nickname"] = msubstr($data['nickName'],0,30, "utf-8", false);
-                $data["photo"] = $data['avatarUrl'];
-                $field = array("openid","status","role","nickname","photo","gender");
-                foreach ($data as $k=>$v)
-                {
-                    if(!in_array($k, $field))
-                        unset($data[$k]);
-                }
-                $info = $User->register((array)$data);
-                $this->ajaxReturn($info,"json");
+            /* 检测验证码 TODO: */
+            if(!check_verify($verify)){
+                $this->ajaxReturn(array("status"=>0,"info"=>'验证码输入错误！'),"json");
+            }else{
+                $this->ajaxReturn(array("username"=>$username,"password"=>$password,"verify"=>$verify,"pcode"=>$pcode),"json");
             }
         }
     }
@@ -118,7 +85,7 @@ class PublicController extends Controller {
     }
     // 获取四个随机数
     public function session() {
-        $this->ajaxReturn(array('session'=>session_id()),'json') ;
+        $this->ajaxReturn(array('session'=>$this->createNoncestr().session_id().$this->createNoncestr()),'json') ;
     }
     /**
      * 验证码
@@ -139,5 +106,14 @@ class PublicController extends Controller {
     
         $verify = new \Think\Verify($config);
         $verify->entry(1);
+    }
+    //作用：产生随机字符串，不长于32位
+    private function createNoncestr($length = 4) {
+        $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        $str = "";
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+        return $str;
     }
 }

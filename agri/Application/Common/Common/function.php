@@ -1049,3 +1049,20 @@ function check_category_model($info){
     $array  =   explode(',', $info['pid'] ? $cate['model_sub'] : $cate['model']);
     return in_array($info['model_id'], $array);
 }
+
+/**
+ * 登录状态信息
+ * @param unknown $mode
+ */
+function showErrorMessage($mode){
+    $error = '未知错误！';
+    switch($mode) {
+        case 0: $error = '账号被禁用！'; break; //系统级别禁用
+        case -1: $error = '账号被删除！'; break; //系统级别删除
+        case -2: $error = '账号审核中！'; break;
+        case -3: $error = '密码错误！'; break;
+        case -4: $error = '账号不存在！'; break;
+        default: $error = '未知错误！'; break; // 0-接口参数错误（调试阶段使用）
+    }
+    return $error;
+}

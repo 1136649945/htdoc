@@ -9,7 +9,7 @@ Page({
     that.setData({ verimg: util.domain + "/app.php/Public/verify?random=" + Math.random() });
     util.sendrequest("/app.php/Public/session", null,
       function (data) {
-        app.globalData.session = data.session;
+        wx.setStorageSync('session', data.session);
       }, function (e) {
         wx.showToast({
           title: "服务器连接异常",
@@ -39,33 +39,9 @@ Page({
       util.showtip("请输入验证码", 2);
       return;
     }
-    util.sendrequest("/app.php/Public/login", { username: username, password: password, verify: verify},
+    util.sendrequest("/app.php/Public/login", e.detail.value,
       function (data) {
-        if (data['status']) {
-          if ((form && form.rember)) {
-            wx.setStorageSync(
-              "loginfo", {
-                "username": form.username,
-                "password": form.password,
-                "rember": form.rember
-              });
-          } else {
-            wx.setStorageSync(
-              "loginfo",
-              {
-                "username": null,
-                "password": null,
-                "rember": false
-              });
-          }
-        } else {
-          wx.showToast({
-            title: "用户名或密码错误",
-            icon: "warn",
-            //image: 'warn',自定义图标的本地路径，image 的优先级高于 icon
-            duration: 1000
-          });
-        }
+        console.log(data);
       }, function (e) {
         console.log(e);
       });

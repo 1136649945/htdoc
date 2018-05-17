@@ -12,81 +12,43 @@ Page({
     wx.navigateBack(1);
   }, 
   formSubmit: function (e) {
-
-    console.log("提交表单");
-    console.log(e);
     var username = e.detail.value.username;
     var password = e.detail.value.password;
     var verify = e.detail.value.verify;
-    if (username.length < 1) {
-      util.alertViewWithCancel("提示", "请输入用户名", function () {
-        console.log("点击确定按钮");
-      }, "true");
+    var pcode = e.detail.value.pcode;
+    if (util.strempty(username)) {
+      util.showtip("请输入用户名", 2);
       return;
     }
-    if (password.length < 1) {
-      util.alertView("提示", "请输入密码", function () {
-        console.log("点击确定按钮");
-      });
+    var email = new RegExp("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+", "g");
+    var mobile = new RegExp("0?(13|14|15|16|17|18|19)[0-9]{9}", "g");
+    var user = new RegExp("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$", "g");
+    var chian = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+    if (chian.exec(username) || username.length>32 || (!email.exec(username) && !mobile.exec(username) && !user.exec(username))) {
+      util.showtip("用户名不合法", 2);
       return;
     }
-    util.alertView("提示", "登录成功", function () {
-      //跳转到农业专家系统页面
-      wx.switchTab({
-        url: '../system/system',
-      })
-    })
-
-
-    if (!this.data.end) {
+    if (util.strempty(password)) {
+      util.showtip("请输入密码", 2);
       return;
     }
-    var form = e.detail.value;
-    if (!(form && form.username)) {
-      wx.showToast({
-        title: "用户名不能为空",
-        icon: "fail",
-        duration: 1000
-      });
+    if (password.length < 6 || password.length>16) {
+      util.showtip("密码不合法", 2);
       return;
     }
-    if (!(form && form.password)) {
-      wx.showToast({
-        title: "密码不能为空",
-        icon: "warn",
-        //image: 'warn',自定义图标的本地路径，image 的优先级高于 icon
-        duration: 1000
-      });
+    if (util.strempty(verify)) {
+      util.showtip("请输入验证码", 2);
       return;
     }
-    util.sendrequest("/admin.php/Weixin/applogin", form,
+    if (!util.strempty(pcode)) {
+      if (!user.exec(pcode)){
+        util.showtip("非法的邀请码", 2);
+        return;
+      }
+    }
+    util.sendrequest("/app.php/Public/regist", e.detail.value,
       function (data) {
-        console.log(form);
-        if (data['status']) {
-          if ((form && form.rember)) {
-            wx.setStorageSync(
-              "loginfo", {
-                "username": form.username,
-                "password": form.password,
-                "rember": form.rember
-              });
-          } else {
-            wx.setStorageSync(
-              "loginfo",
-              {
-                "username": null,
-                "password": null,
-                "rember": false
-              });
-          }
-        } else {
-          wx.showToast({
-            title: "用户名或密码错误",
-            icon: "warn",
-            //image: 'warn',自定义图标的本地路径，image 的优先级高于 icon
-            duration: 1000
-          });
-        }
+        console.log(data);
       }, function (e) {
         console.log(e);
       });
