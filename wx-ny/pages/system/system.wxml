@@ -30,7 +30,7 @@
   <view class='problem-box'>
     <view class='problem' wx:for="{{proArr}}" wx:for-index="i" wx:for-item="items">
       <navigator url='../reply/reply'>
-        <image class='pro-img' src='{{items.imgUrl}}'></image> 
+        <image class='pro-img' src='{{items.img}}' mode= 'aspectFit'></image> 
         <view class='pro-cont'>
           <view class='pro-title'>
             <view class="{{items.sign==1 ? 'active':''}}">{{items.title}}</view>
@@ -38,11 +38,11 @@
           </view>
           <view class='pro-addr'>
             <text>[生产技术·蔬菜]</text>
-            {{items.addr}}
+            {{items.reqid_text}}
           </view>
           <view class='pro-date'>
             <image src='../../images/reference.png'></image>
-            推荐  |   {{items.date}}
+            推荐  |   {{items.create_time}}
           </view>
         </view>
         <view class="fast-recovery {{items.sign==1 ? 'active':''}}">快速回复</view> 

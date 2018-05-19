@@ -81,6 +81,6 @@ class ProblemModel extends Model{
      * @param unknown $id
      */
     public function toBeAnswered($size=5,$order="create_time asc"){
-        return $this->where("status=0 and uid=".is_login())->order($order)->limit($size)->select();
+        return $this->where("status=0 and hide=0 and uid=".UID)->order($order)->limit($size)->select();
     }
 }

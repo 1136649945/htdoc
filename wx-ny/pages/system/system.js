@@ -1,5 +1,6 @@
 // pages/system/system.js
-var app = getApp();
+var util = require('../../utils/util.js')
+var app = getApp()
 Page({
 
   /**
@@ -35,48 +36,7 @@ Page({
     interval: 5000,
     duration: 1000,
     swiperCurrent: 0,
-    proArr: [
-      {
-        id: 0,
-        imgUrl: '../../images/problem01.jpg',
-        title: '请问老师韭菜什么时候种最好',
-        sign: 1,
-        addr: '北京诺亚庄园',
-        date: '2018-04-25'
-      },
-      {
-        id: 1,
-        imgUrl: '../../images/problem02.jpg',
-        title: '当前处于7月末，水稻已经孕穗，需要在何时追施穗',
-        sign: 0,
-        addr: '',
-        date: '2018-04-25'
-      },
-      {
-        id: 2,
-        imgUrl: '../../images/problem03.jpg',
-        title: '母羊消瘦、腹泻，喜啃土，怎么治',
-        sign: 0,
-        addr: '',
-        date: '2018-04-25'
-      },
-      {
-        id: 3,
-        imgUrl: '../../images/problem01.jpg',
-        title: '请问老师韭菜什么时候种最好',
-        sign: 0,
-        addr: '',
-        date: '2018-04-25'
-      },
-      {
-        id: 4,
-        imgUrl: '../../images/problem02.jpg',
-        title: '当前处于7月末，水稻已经孕穗，需要在何时追施穗',
-        sign: 0,
-        addr: '',
-        date: '2018-04-25'
-      }
-    ]
+    proArr: null
   },
   goproblem: function(){
     wx.switchTab({
@@ -93,7 +53,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     app.ntabBar(app.globalData.tabBar);
+    util.sendrequest("/app.php/Problem/toBeAnswered",null,
+      function (data) {
+        that.setData({ proArr: data});
+      }, function (e) {
+        util.showtip("服务器连接异常",2);
+      }, app.globalData.session);
   },
 
   /**

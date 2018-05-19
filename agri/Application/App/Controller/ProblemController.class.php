@@ -29,7 +29,14 @@ class ProblemController extends AppController{
      * @param string $order
      */
     public function toBeAnswered($size=5,$order="create_time asc"){
+        define("UID", 2);
         $User = new UserApi();
-        $this->ajaxReturn(int_to_string(D("Admin/Problem")->toBeAnswered(),array("reqid"=>arr2map($User->infoAll(),"uid","nickname"))),"json");
+        $data = int_to_string(D("Admin/Problem")->toBeAnswered(),array("reqid"=>arr2map($User->infoAll(),"uid","nickname")));
+        $pid = array();
+        foreach ($data as &$val){
+            $val["create_time"] = time_format(strtotime($val["create_time"]),"Y-m-d");
+            $val['img']="http://192.168.3.134:8080/agri/". D("Admin/Problemg")->field("path")->where(array("doctype"=>1,"pid"=>$val["id"]))->find()["path"];
+        }
+        $this->ajaxReturn($data,"json");
     }
 }
