@@ -29,5 +29,4 @@ class UserController extends AppController {
             $this->ajaxReturn(array("status"=>1),'json');
         }
     }
-
 }

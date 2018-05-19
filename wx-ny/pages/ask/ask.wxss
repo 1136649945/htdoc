@@ -1,5 +1,5 @@
 /* pages/ask/ask.wxss */
-.ask-box{background-color: #f6f6f6;}
+.ask-box{background-color: #f6f6f6;padding-bottom: 120rpx;}
 .ask-head{background-color: #fff;padding: 40rpx 0 20rpx;margin-bottom: 5rpx;}
 .ask_l{position: absolute;top:40rpx;left:30rpx;width: 140rpx;text-align: center;}
 .ask_l image{width: 140rpx;height: 140rpx;border-radius: 50%;}

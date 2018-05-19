@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.94",
-	"appid": "wx2d37a95245474f6d",
-	"projectname": "wx-ny2",
+	"appid": "wx3df094bf823c63e3",
+	"projectname": "wx-ny4",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,

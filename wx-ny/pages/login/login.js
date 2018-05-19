@@ -51,8 +51,9 @@ Page({
         if (data.status) {
           app.globalData.userInfo = data;
           util.showtip(data.info, 1);
-          wx.switchTab({
-            url: '/pages/system/system',
+          app.globalData.tabBar = JSON.parse(data.menu);
+          wx.redirectTo({
+            url: '/pages/learn/learn',
           });
         }
       }, function (e) {

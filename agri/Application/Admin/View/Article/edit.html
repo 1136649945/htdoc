@@ -112,7 +112,7 @@
 							        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
 							        "onUploadSuccess" : uploadPicture{$field.name},
 							        'onFallback' : function() {
-							            alert('未检测到兼容版本的Flash.');
+							            //alert('未检测到兼容版本的Flash.');
 							        }
 							    });
 								function uploadPicture{$field.name}(file, data){
@@ -157,7 +157,7 @@
 							        'removeTimeout'	  : 1,
 							        "onUploadSuccess" : uploadFile{$field.name},
 							        'onFallback' : function() {
-							            alert('未检测到兼容版本的Flash.');
+							            //alert('请设置浏览器的.');
 							        }
 							    });
 								function uploadFile{$field.name}(file, data){

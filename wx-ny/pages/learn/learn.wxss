@@ -1,5 +1,5 @@
 /* pages/learn/learn.wxss */
-.container{width: 100%;height: 100%;background-color: #f6f6f6;}
+.container{width: 100%;height: 100%;background-color: #f6f6f6;padding-bottom: 120rpx;}
 .search{width: 100%;background-color: #fff;padding: 20rpx 0;}
 .learn-search{font-size:34rpx;display:block;width: 84%;margin: 0 4%;background-color: #f6f6f6;height: 80rpx;border-radius: 80rpx;padding: 0 4%;letter-spacing: 5rpx;}
 .nav-box{width:100%;padding: 20rpx 0;background-color: #fff;margin-top: 10rpx;}

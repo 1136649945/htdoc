@@ -15,7 +15,14 @@ use Think\Model;
  */
 class ProblemModel extends Model{
     /**
-     * 问题树列表
+     * 问题详情列表
+     * @param unknown $id
+     */
+    public function getProblem($id){
+        return $this->where("hiden=0 and id=".$id." or pid=".$id)->select();
+    }
+    /**
+     * 问题详情
      * @param unknown $field
      * @param string $order
      * @param unknown $p
@@ -38,43 +45,42 @@ class ProblemModel extends Model{
         $data['show'] = $Page->show();// 分页显示输出
         //查询数据
         $data['data'] = $this->field($fieldp)->where("pid=0")->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
-//         if(is_array($data['data']) && count($data['data'])>0){
-//             $id = array();
-//             foreach ($data['data'] as $val){
-//                 //获取所有主表数据id
-//                 array_push($id, $val['id']);
-//             }
-//             if(count($id)>0){
-//                 $fielda = true;
-//                 if($field['a']){
-//                     //获取回答要查询字段
-//                     $fielda = $field['a'];
-//                 }
-//                //查询子表数据
-//                $answer = D("Problemanswer")->getAnswer($id);
-//                if(is_array($answer) && count($answer)>0){
-//                    foreach ($data['data'] as $key=>$val){
-//                        $dataTemp = array();
-//                        foreach ($answer as $aval){
-//                            if($aval['pid']==$val['id']){
-//                                //回答的是当前问题就取出来
-//                                array_push($dataTemp, $aval);
-//                                //移除
-//                                array_shift($answer);
-//                            }
-//                        }
-//                        $data['data'][$key]['_'] = $dataTemp;
-//                    }
-//                }
-//             }
-//         }
+        if(is_array($data['data']) && count($data['data'])>0){
+            $id = array();
+            foreach ($data['data'] as $val){
+                //获取所有主表数据id
+                array_push($id, $val['id']);
+            }
+            if(count($id)>0){
+                $fielda = true;
+                if($field['a']){
+                    //获取回答要查询字段
+                    $fielda = $field['a'];
+                }
+               //查询子表数据
+               $answer = D("Problemanswer")->getAnswer($id);
+               if(is_array($answer) && count($answer)>0){
+                   foreach ($data['data'] as $key=>$val){
+                       $dataTemp = array();
+                       foreach ($answer as $aval){
+                           if($aval['pid']==$val['id']){
+                               //回答的是当前问题就取出来
+                               array_push($dataTemp, $aval);
+                           }
+                       }
+                       $data['data'][$key]['_'] = $dataTemp;
+                   }
+               }
+            }
+        }
         return $data;
     }
+   
     /**
-     * 问题详情
+     * 最新待回答默认前5个
      * @param unknown $id
      */
-    public function getProblem($id){
-        return $this->where("id=".$id." or pid=".$id)->select();
+    public function toBeAnswered($size=5,$order="create_time asc"){
+        return $this->where("status=0 and uid=".is_login())->order($order)->limit($size)->select();
     }
 }

@@ -1,4 +1,5 @@
 /* pages/problem/problem.wxss */
+.problems{padding-bottom: 120rpx;}
 .swiper{height: 225rpx;width: 100%;}
 .swiper image{height: 100%;width: 100%;}
 .swiper-container{position: relative;}

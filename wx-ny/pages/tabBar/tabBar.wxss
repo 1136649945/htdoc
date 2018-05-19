@@ -1,0 +1,36 @@
+/* pages/tabBar/tabBar.wxss */
+.verify{height:100rpx;}
+.menu-item{  
+  width: 32%; 
+  float: left;  
+  text-align: center;  
+  padding-top: 8px;  
+}  
+.menu-item2{  
+  width: 24%;  
+  float: left;  
+  text-align: center;  
+  padding-top: 8px;  
+}  
+.img{  
+  width: 58rpx;  
+  height: 58rpx;  
+  display: block;
+  margin:auto;
+}  
+.clear{  
+  clear: both;  
+}  
+.tab-bar{  
+  position: fixed;  
+  width: 100%;
+  overflow: hidden; 
+  background-color: #f4f4f4;
+}
+.tab-bar navigator{
+  width:20%;
+  float: left;
+  font-size: 24rpx;
+  text-align: center;
+  margin: 10rpx 0;
+}

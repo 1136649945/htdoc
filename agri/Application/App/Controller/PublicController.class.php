@@ -18,7 +18,9 @@ use User\Api\UserApi;
 class PublicController extends Controller {
 
     // 注册或更新用户
-    public function login($username=-1,$password=-1,$verify=-1) {
+    public function login($username="qwe123",$password="123123",$verify=-1) {
+        $User = new UserApi();
+        $info = $User->login($username, $password);
         if(IS_POST){
             $secode = S(session_id());
             if(!$secode){
@@ -31,11 +33,90 @@ class PublicController extends Controller {
             }else{
                 $User = new UserApi();
                 $info = $User->login($username, $password);
-                $this->ajaxReturn(array("status"=>$info["status"],"info"=>$info["info"],"data"=>array("nickname"=>$info["nickname"],"mlevel"=>$info["mlevel"],"role"=>$info["role"])),'json');
+                $this->ajaxReturn(array("status"=>$info["status"],"info"=>$info["info"],"data"=>array("nickname"=>$info["nickname"]),"menu"=>$this->menu()),'json');
             }
         }
     }
-    
+    /**
+     * 退出登录
+     */
+    private function menu(){
+        $e = "{
+          \"color\": \"#848484\",
+          \"selectedColor\": \"#4ac372\",
+          \"backgroundColor\": \"#f4f4f4\",
+          \"position\": \"bottom\",
+          \"borderStyle\": \"white\",
+          \"list\": [{
+            \"pagePath\": \"../../pages/system/system\",
+            \"text\": \"专家系统\",
+            \"iconPath\": \"../../images/system.png\",
+            \"selectedIconPath\": \"../../images/system_cur.png\"
+          }, {
+              \"pagePath\": \"../../pages/problem/problem\",
+            \"text\": \"问题中心\",
+            \"iconPath\": \"../../images/problem.png\",
+            \"selectedIconPath\": \"../../images/problem_cur.png\"
+          }, {
+              \"pagePath\": \"../../pages/learn/learn\",
+            \"text\": \"学习园地\",
+            \"iconPath\": \"../../images/learn.png\",
+            \"selectedIconPath\": \"../../images/learn_cur.png\"
+          }, {
+              \"pagePath\": \"../../pages/personal/personal\",
+            \"text\": \"个人中心\",
+            \"iconPath\": \"../../images/personal.png\",
+            \"selectedIconPath\": \"../../images/personal_cur.png\"
+          }]
+        }";
+        $u = "{
+          \"color\": \"#848484\",
+          \"selectedColor\": \"#4ac372\",
+          \"backgroundColor\": \"#f4f4f4\",
+          \"position\": \"bottom\",
+          \"borderStyle\": \"white\",
+          \"list\": [{
+            \"pagePath\": \"../../pages/ask/ask\",
+            \"text\": \"提问\",
+            \"iconPath\": \"../../images/ask.png\",
+            \"selectedIconPath\": \"../../images/ask_cur.png\"
+          }, {
+              \"pagePath\": \"../../pages/problem/problem\",
+            \"text\": \"问题中心\",
+            \"iconPath\": \"../../images/problem.png\",
+            \"selectedIconPath\": \"../../images/problem_cur.png\"
+          }, {
+              \"pagePath\": \"../../pages/learn/learn\",
+            \"text\": \"学习园地\",
+            \"iconPath\": \"../../images/learn.png\",
+            \"selectedIconPath\": \"../../images/learn_cur.png\"
+          }, {
+              \"pagePath\": \"../../pages/personal/personal\",
+            \"text\": \"个人中心\",
+            \"iconPath\": \"../../images/personal.png\",
+            \"selectedIconPath\": \"../../images/personal_cur.png\"
+          }]
+        }";
+        //         $auth = array(
+        //                 'uid'             => $user['uid'],
+        //                 'username'        => $user['nickname'],
+        //                 'mlevel'        => $user['mlevel'],
+        //                 'role'        => $user['role'],
+        //                 'status'       => $user['status'],
+        //             );
+        return $e;
+        $auth = session('user_auth');
+        if($auth){
+            if($auth["status"]){
+                if($auth["role"]==1){
+                   return $e;
+                }
+                if($auth["role"]==2){
+                    return $u;
+                }
+            }
+        }
+    }
     /**
      * 注册
      * $data['openid']

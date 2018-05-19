@@ -71,3 +71,5 @@
     </view>
   </view>
 </view>
+<import src="/pages/tabBar/tabBar.wxml"/> 
+<template is="tabBar" data="{{tabBar}}"/>

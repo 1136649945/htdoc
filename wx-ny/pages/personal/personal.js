@@ -1,12 +1,11 @@
 // pages/personal/personal.js
-var app = getApp()
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabBar:null,
     imgUrl: '../../images/portrait.jpg',
     username: 'PeterPan小飞侠',
     level: '2',

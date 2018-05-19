@@ -59,7 +59,6 @@ class AdminController extends ExeclController {
                 }
             }
         }        
-
         $this->assign('__MENU__', $this->getMenus());
     }
 
