@@ -1,10 +1,12 @@
 // pages/personal/personal.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    tabBar:null,
     imgUrl: '../../images/portrait.jpg',
     username: 'PeterPan小飞侠',
     level: '2',
@@ -17,10 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    // that.setData({
-    //   username: 'gcj'
-    // });
+    app.ntabBar(app.globalData.tabBar);
   },
 
   /**

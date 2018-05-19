@@ -23,7 +23,7 @@
       placeholder="验证码" placeholder-class="input-placeholder" 
       />
     </view>
-    <view class='one'>
+    <view bindtap='refreVeify'>
       <image src='{{verimg}}' class='verify'  mode= 'aspectFit'></image>
     </view>
     <view class='one'>

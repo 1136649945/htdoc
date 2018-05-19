@@ -6,10 +6,10 @@ Page({
   },
   onLoad() {
     var that = this;
-    that.setData({ verimg: util.domain + "/app.php/Public/verify?random=" + Math.random() });
     util.sendrequest("/app.php/Public/session", null,
       function (data) {
-        wx.setStorageSync('session', data.session);
+        app.globalData.session= data.session;
+        that.refreVeify();
       }, function (e) {
         wx.showToast({
           title: "服务器连接异常",
@@ -18,12 +18,11 @@ Page({
         });
       });
   },
-
   onPullDownRefresh() {
     wx.stopPullDownRefresh()
   },
-
   formSubmit: function (e) {
+    var that = this;
     var username = e.detail.value.username;
     var password = e.detail.value.password;
     var verify = e.detail.value.verify;
@@ -41,9 +40,26 @@ Page({
     }
     util.sendrequest("/app.php/Public/login", e.detail.value,
       function (data) {
-        console.log(data);
+        if (data.status == -2) {
+          util.showtip(data.info, 2);
+          return;
+        }
+        if (data.status<0){
+          util.showtip(data.info,2);
+          that.refreVeify();
+        }
+        if (data.status) {
+          app.globalData.userInfo = data;
+          util.showtip(data.info, 1);
+          wx.switchTab({
+            url: '/pages/system/system',
+          });
+        }
       }, function (e) {
         console.log(e);
-      });
+      }, app.globalData.session);
+  },
+  refreVeify: function (e) {
+    this.setData({ verimg: util.domain + "/app.php/Public/verify?session_id=" + app.globalData.session +"&random=" + Math.random() });
   }
 })

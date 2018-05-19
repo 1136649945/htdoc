@@ -53,3 +53,5 @@
       </navigator>
     </view>
 </view>
+<import src="../../tabBar.wxml"/> 
+<template is="tabBar" data="{{tabBar}}"/>

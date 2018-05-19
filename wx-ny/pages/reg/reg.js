@@ -53,11 +53,14 @@ Page({
         console.log(e);
       });
   },
+  refreVeify: function (e) {
+    this.setData({ verimg: util.domain + "/app.php/Public/verify?session_id=" + app.globalData.session + "&random=" + Math.random() });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ verimg: util.domain +"/app.php/Public/verify?random="+Math.random()});
+    this.refreVeify();
   },
 
   /**
@@ -108,4 +111,5 @@ Page({
   onShareAppMessage: function () {
   
   }
+  
 })

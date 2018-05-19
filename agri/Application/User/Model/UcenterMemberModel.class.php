@@ -59,7 +59,7 @@ class UcenterMemberModel extends Model{
 			/* 验证用户密码 */
 			if($type===5 || think_encrypt($password) === $user['password']){
 			    $info = $this->info($user['id']);
-			    if(1!==$info['status']){
+			    if(1!=$info['status']){
 			        //账号禁用，删除，审核
 			        return array("status"=>$info['status'],"info"=>showErrorMessage($info['status']));
 			    }

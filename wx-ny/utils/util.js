@@ -79,11 +79,11 @@ function pay(){
   })   
 }
 //微信发送请求
-function sendrequest(url, data, scallback, fcallback, session=false) {
-  if (session) {
+function sendrequest(url, data, scallback, fcallback, session) {
+  if (session!=null) {
     var header = {
       'content-type': 'application/x-www-form-urlencoded',
-      'Cookie': 'PHPSESSID=' + getSession()
+      'Cookie': 'PHPSESSID=' + getSession(session)
     };
   } else {
     var header = { 'content-type': 'application/x-www-form-urlencoded' };
@@ -101,8 +101,8 @@ function sendrequest(url, data, scallback, fcallback, session=false) {
     }
   })
 }
-function getSession(){
-  var session = wx.getStorageSync('session');
+
+function getSession(session){
   if (session){
     return session.substring(4, session.length-4);
   }else{

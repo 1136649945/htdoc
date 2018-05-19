@@ -20,12 +20,18 @@ class PublicController extends Controller {
     // 注册或更新用户
     public function login($username=-1,$password=-1,$verify=-1) {
         if(IS_POST){
-            if(!check_verify($verify)){
-                $this->ajaxReturn(array("status"=>0,"info"=>'验证码输入错误！'),"json");
+            $secode = S(session_id());
+            if(!$secode){
+                $this->ajaxReturn(array("status"=>-6,"info"=>'验证码失效！'),"json");
+                exit();
+            }
+            if($secode!=strtoupper($verify)){
+                $this->ajaxReturn(array("status"=>-5,"info"=>'验证码错误！'),"json");
+                exit();
             }else{
                 $User = new UserApi();
                 $info = $User->login($username, $password);
-                $this->ajaxReturn(array("status"=>$info["status"],"nickname"=>$info["nickname"],"mlevel"=>$info["mlevel"],"role"=>$info["role"]),'json');
+                $this->ajaxReturn(array("status"=>$info["status"],"info"=>$info["info"],"data"=>array("nickname"=>$info["nickname"],"mlevel"=>$info["mlevel"],"role"=>$info["role"])),'json');
             }
         }
     }
@@ -40,8 +46,14 @@ class PublicController extends Controller {
     public function regist($username=-1,$password=-1,$verify=-1,$pcode=-1) {
         if(IS_POST){
             /* 检测验证码 TODO: */
-            if(!check_verify($verify)){
-                $this->ajaxReturn(array("status"=>0,"info"=>'验证码输入错误！'),"json");
+            $secode = S(session_id());
+            if(!$secode){
+                $this->ajaxReturn(array("status"=>-6,"info"=>'验证码失效！'),"json");
+                exit();
+            }
+            if($secode!=$verify){
+                $this->ajaxReturn(array("status"=>-5,"info"=>'验证码输入错误！'),"json");
+                exit();
             }else{
                 $this->ajaxReturn(array("username"=>$username,"password"=>$password,"verify"=>$verify,"pcode"=>$pcode),"json");
             }
@@ -90,8 +102,11 @@ class PublicController extends Controller {
     /**
      * 验证码
      */
-    public function verify()
+    public function verify($session_id=null)
     {
+        if($session_id){
+            $session_id = substr($session_id, 4,strlen($session_id)-8);
+        }
         $config = array(
             'useCurve' => false, // 是否画混淆曲线
             'useNoise' => false, // 是否添加杂点
@@ -101,7 +116,9 @@ class PublicController extends Controller {
             'fontSize' => 15,
             'imageW' => 210,
             'imageH' => 30,
-            'bg' => array(255, 255, 255)
+            'expire' => 600,
+            'bg' => array(255, 255, 255),
+            "session_id" =>$session_id
         ); // 验证码字体，不设置随机获取
     
         $verify = new \Think\Verify($config);

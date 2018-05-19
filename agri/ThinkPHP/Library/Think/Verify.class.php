@@ -28,6 +28,7 @@ class Verify {
         'fontttf'   =>  '',              // 验证码字体，不设置随机获取
         'bg'        =>  array(243, 251, 254),  // 背景颜色
         'reset'     =>  true,           // 验证成功后是否重置
+        'session_id'     =>  null,           // 验证成功后是否重置
         );
 
     private $_image   = NULL;     // 验证码图片实例
@@ -169,17 +170,18 @@ class Verify {
        
         // 保存验证码
         $key        =   $this->authcode($this->seKey);
+        if($this->session_id){
+            S($this->session_id,strtoupper(implode('', $code)),$this->expire);               
+        }
         $code       =   $this->authcode(strtoupper(implode('', $code)));
         $secode     =   array();
         $secode['verify_code'] = $code; // 把校验码保存到session
         $secode['verify_time'] = NOW_TIME;  // 验证码创建时间
         session($key.$id, $secode);
-                        
         header('Cache-Control: private, max-age=0, no-store, no-cache, must-revalidate');
         header('Cache-Control: post-check=0, pre-check=0', false);		
         header('Pragma: no-cache');
         header("content-type: image/png");
-
         // 输出图像
         imagepng($this->_image);
         imagedestroy($this->_image);

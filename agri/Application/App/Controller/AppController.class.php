@@ -35,15 +35,15 @@ class AppController extends Controller {
             $this->ajaxReturn(array("status"=>0,"info"=>"站点已经关闭，请稍后访问~"));
         }
         // 获取当前用户ID
-        if( !is_login()){// 还没登录 跳转到登录页面
-            $this->ajaxReturn(array("status"=>0,"info"=>"你还没有登录！"));
-            exit();
-        }
-        $status = session('user_auth')['status'];
-        if($status!==1){
-            $this->ajaxReturn(array("status"=>$status,"info"=>showErrorMessage($status)));
-            exit();
-        }
+//         if( !is_login()){// 还没登录 跳转到登录页面
+//             $this->ajaxReturn(array("status"=>0,"info"=>"你还没有登录！"));
+//             exit();
+//         }
+//         $status = session('user_auth')['status'];
+//         if($status!=1){
+//             $this->ajaxReturn(array("status"=>$status,"info"=>showErrorMessage($status)));
+//             exit();
+//         }
     }
 
 }
