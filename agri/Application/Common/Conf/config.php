@@ -12,7 +12,7 @@
  * 所有系统级别的配置
  */
 return array(
-    
+    'DNSADD' =>'http://192.168.3.134:8080/agri/',
     //APP SESSION时间
     'APP_SESSION' => 60,
     // 数据缓存时间
@@ -21,6 +21,8 @@ return array(
     'DOCUMET_D_CACHE'   => 60,
     //文章列表数据缓存时间
     'DOCUMET_L_CACHE'   => 60,
+    //录音时间
+    'total' => 60,
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',

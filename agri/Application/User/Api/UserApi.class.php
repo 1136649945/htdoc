@@ -52,6 +52,12 @@ class UserApi extends Api{
     public function register($data){
         return $this->model->register($data);
     }
+    /**
+     * 获取专家所在地区
+     */
+    public function region(){
+        return $this->model->region();
+    }
     
     /**
      * 获取用户信息

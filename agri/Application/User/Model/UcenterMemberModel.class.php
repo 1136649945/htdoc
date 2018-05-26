@@ -171,7 +171,13 @@ class UcenterMemberModel extends Model{
 	 * @return array                用户信息
 	 */
 	public function infoAll(){
-	    return D("Member")->cache("MEMBER_CACHE",C("DATA_CACHE_TIME"))->field("uid,nickname")->select();
+	    return D("Member")->cache("MEMBER_CACHE",C("DATA_CACHE_TIME"))->field("uid,photo,region,nickname")->select();
+	}
+	/**
+	 * 获取所有专家所在地区
+	 */
+	public function region(){
+	   return $data = M("member")->cache("MEMBER_CACHE",C("DATA_CACHE_TIME"))->where("status=1")->field("region_p,region_c,region_a")->group("region_p,region_c,region_a")->select();
 	}
 	/**
 	 * 获取所有用户信息

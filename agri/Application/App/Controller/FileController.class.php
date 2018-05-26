@@ -17,22 +17,37 @@ use Think\Upload;
 
 class FileController extends AppController {
 	/* 文件上传 */
-	public function upload(){
-	    if(empty($_FILES["file"]['tmp_name'])){
-	        $this->ajaxReturn( array("status"=>0,"info"=>"没有上传文件！"));
+	public function uploadAudio(){
+	    if(IS_POST){
+	        if(empty($_FILES["file"]['tmp_name'])){
+	            $this->ajaxReturn( array("status"=>0,"info"=>"没有上传文件！"));
+	        }
+	        $Upload = new Upload(C("ATTACHMENT_UPLOAD"));
+	        $info   = $Upload->upload($_FILES);
+	        if($info){
+	            return $this->ajaxReturn( array("status"=>1,"data"=>array("total"=>C("total"),"stop"=>true,"num"=>ceil(($info["file"]["size"])/(3*1024)),"path"=>C("DNSADD").C("ATTACHMENT_UPLOAD")['rootPath'].$info["file"]["savepath"]. $info["file"]["savename"])),"json");
+	        }else{
+	            /* 返回JSON数据 */
+	            $this->ajaxReturn( array("status"=>0,"info"=>$Upload->getError()));
+	        }
 	    }
-	    $Upload = new Upload(C("ATTACHMENT_UPLOAD"));
-	    $info   = $Upload->upload($_FILES);
-	    if($info){
-	        return $this->ajaxReturn(array("status"=>1,"info"=>C("ATTACHMENT_UPLOAD")['rootPath'].$info["file"]["savepath"]. $info["file"]["savename"]),"json");
-	    }else{
-	        /* 返回JSON数据 */
-	        $this->ajaxReturn( array("status"=>0,"info"=>$Upload->getError()));
-	    }
-
-		
 	}
-
+	/* 文件上传 */
+	public function upload(){
+	    if(IS_POST){
+	        if(empty($_FILES["file"]['tmp_name'])){
+	            $this->ajaxReturn( array("status"=>0,"info"=>"没有上传文件！"));
+	        }
+	        $Upload = new Upload(C("ATTACHMENT_UPLOAD"));
+	        $info   = $Upload->upload($_FILES);
+	        if($info){
+	            return $this->ajaxReturn( array("status"=>1,"path"=>C("DNSADD").C("ATTACHMENT_UPLOAD")['rootPath'].$info["file"]["savepath"]. $info["file"]["savename"]),"json");
+	        }else{
+	            /* 返回JSON数据 */
+	            $this->ajaxReturn( array("status"=>0,"info"=>$Upload->getError()));
+	        }
+	    }
+	}
 	/* 下载文件 */
 	public function download($id = null){
 		if(empty($id) || !is_numeric($id)){

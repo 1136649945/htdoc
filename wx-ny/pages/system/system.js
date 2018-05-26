@@ -47,8 +47,11 @@ Page({
     this.setData({
       swiperCurrent: e.detail.current
     })
+  }, viewImg:function(e){
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.src],
+    });
   },
-
   /**
    * 生命周期函数--监听页面加载
    */

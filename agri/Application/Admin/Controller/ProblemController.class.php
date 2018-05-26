@@ -31,61 +31,69 @@ class ProblemController extends AdminController{
      */
     public function detail(){
         $id = I("id",0);
-        $Problem = D("Problem")->getProblem($id);
-        $arr = array();
-        foreach ($Problem as $val){
-            array_push($arr, (int)$val["id"]);
-        }
-        $Problema = D("Problemanswer")->getAnswer(array_unique($arr));
-        foreach ($Problema as $val){
-            array_push($arr, (int)$val["id"]);
-        }
-        $Problemg = D("Problemg")->getProblemg(array_unique($arr));
-        foreach ($Problem as &$v){
-            $temp = array();//回答
-            foreach ($Problema as $k=>&$va){
-                $temp1 = array();//图片
-                $temp2 = array();//语音
-                foreach ($Problemg as $val){
-                    if($va["id"]==$val["pid"]){
-                        if($val["doctype"]==3){
-                            array_push($temp1, $val);
-                        }
-                        if($val["doctype"]==4){
-                            array_push($temp2, $val);
-                        }
-                    }
-                }
-                $va["_img"] = $temp1;
-                $va["_audio"] = $temp2;
-                if($v["id"]==$va["pid"]){
-                    array_push($temp, $va);
-                }
-            }
-            $v["_a"] = $temp;
-            $temp1 = array();//图片
-            $temp2 = array();//语音
-            foreach ($Problemg as $val){
-                if($v["id"]==$val["pid"]){
-                    if($val["doctype"]==1){
-                        array_push($temp1, $val);
-                    }
-                    if($val["doctype"]==2){
-                        array_push($temp2, $val);
-                    }
-                }
-            }
-            $v["_img"] = $temp1;
-            $v["_audio"] = $temp2;
-        }
-        $this->assign("tree",list_to_tree($Problem));     
         if($id){
             //问题分类
-            $this->assign("group",arr2map(D("Problemgroup")->getGroupCache("id,title","status=1"),"id","title"));
+            $groupInfo = arr2map(D("Problemgroup")->getGroupCache("id,title","status=1"),"id","title");
             //用户信息
             $User = new UserApi();
             $data = $User->infoAll();
             $this->assign("userinfo",arr2map($data,"uid","nickname"));
+            $Problem = D("Problem")->getProblem($id);
+            $arr = array();
+            foreach ($Problem as $k =>$val){
+                if($val["block"]){
+                      $block = explode("-", $val["block"]);
+                      $str = "";
+                      foreach ($block as $v){
+                         $str .= $groupInfo[$v].".";
+                      }
+                      $Problem[$k]["block"] = substr($str, 0,strlen($str)-1);
+                }
+                array_push($arr, (int)$val["id"]);
+            }
+            $Problema = D("Problemanswer")->getAnswer(array_unique($arr));
+            foreach ($Problema as $val){
+                array_push($arr, (int)$val["id"]);
+            }
+            $Problemg = D("Problemg")->getProblemg(array_unique($arr));
+            foreach ($Problem as &$v){
+                $temp = array();//回答
+                foreach ($Problema as $k=>&$va){
+                    $temp1 = array();//图片
+                    $temp2 = array();//语音
+                    foreach ($Problemg as $val){
+                        if($va["id"]==$val["pid"]){
+                            if($val["doctype"]==3){
+                                array_push($temp1, $val);
+                            }
+                            if($val["doctype"]==4){
+                                array_push($temp2, $val);
+                            }
+                        }
+                    }
+                    $va["_img"] = $temp1;
+                    $va["_audio"] = $temp2;
+                    if($v["id"]==$va["pid"]){
+                        array_push($temp, $va);
+                    }
+                }
+                $v["_a"] = $temp;
+                $temp1 = array();//图片
+                $temp2 = array();//语音
+                foreach ($Problemg as $val){
+                    if($v["id"]==$val["pid"]){
+                        if($val["doctype"]==1){
+                            array_push($temp1, $val);
+                        }
+                        if($val["doctype"]==2){
+                            array_push($temp2, $val);
+                        }
+                    }
+                }
+                $v["_img"] = $temp1;
+                $v["_audio"] = $temp2;
+            }
+            $this->assign("tree",list_to_tree($Problem));
         }
         $this->meta_title = '问题详情';
         $this->display();
@@ -135,11 +143,19 @@ class ProblemController extends AdminController{
         $group = D("Problemgroup");
         $list = $group->getGroup();
         int_to_string($list,array('status'=>array(1=>'正常',0=>'禁用')));
-        $this->assign("_list",$list);
+        $this->assign("tree",list_to_tree($list));
         $this->meta_title = '问题分类';
         $this->display();
     }
-    
+    /**
+     * 显示分类树，仅支持内部调
+     * @param  array $tree 分类树
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function grouptree($list = null){
+        $this->assign('tree', $list);
+        $this->display("grouptree");
+    }
     /**
      * 新增问题分类
      * @param string $username
@@ -147,12 +163,59 @@ class ProblemController extends AdminController{
      * @param string $repassword
      * @param string $email
      */
-    public function addgroup($id=0){
+    public function addgroup($pid=0){
         $Problemgroup = D("Problemgroup");
+        $group = $Problemgroup->getGroup("id,title,lev","lev<3");
+        $this->assign("group",$group);
+        $this->assign("pid",$pid);
+        if(IS_POST){
+            $return = array();
+            $data = $Problemgroup->create();
+            if($data){
+                $groupMap = arr2map($group,"id","lev");
+                $data["lev"] = 1+ $groupMap[$data["pid"]];
+                $id = $Problemgroup->add($data);
+                if($id!==false){
+                    $return['status']   =   1;
+                    $return['info']     =   '保存成功！';
+                    $return['url'] = "/admin.php?s=/Problem/group";
+                    $this->ajaxReturn($return,'json');
+                    return ;
+                }else{
+                    $return['status']   =   0;
+                    $return['info']     =   '保存失败！';
+                    $this->ajaxReturn($return,'json');
+                    return ;
+                }
+            }else{
+                $return['status']   =   0;
+                $return['info']     =   $Problemgroup->getError();
+                $this->ajaxReturn($return,'json');
+                return ;
+            }
+        } else {
+            $this->meta_title = '新增问题分类';
+            $this->display();
+        }
+    }
+    /**
+     * 新增问题分类
+     * @param string $username
+     * @param string $password
+     * @param string $repassword
+     * @param string $email
+     */
+    public function editgroup($id=-1,$pid=0){
+        $Problemgroup = D("Problemgroup");
+        $group = $Problemgroup->getGroup("id,title,lev","lev<3 and id<>".$id);
+        $this->assign("group",$group);
+        $this->assign("pid",$pid);
         if(IS_POST){
             $return = array();
             if($id){
                 $data = $Problemgroup->create();
+                $groupMap = arr2map($group,"id","lev");
+                $data["lev"] = 1+ $groupMap[$data["pid"]];
                 if($data){
                     $id = $Problemgroup->save($data);
                     if($id!==false){
@@ -173,42 +236,15 @@ class ProblemController extends AdminController{
                     $this->ajaxReturn($return,'json');
                     return ;
                 }
-            }else{
-                $data = $Problemgroup->create();
-                if($data){
-                    $id = $Problemgroup->add($data);
-                    if($id!==false){
-                        $return['status']   =   1;
-                        $return['info']     =   '保存成功！';
-                        $return['url'] = "/admin.php?s=/Problem/group";
-                        $this->ajaxReturn($return,'json');
-                        return ;
-                    }else{
-                        $return['status']   =   0;
-                        $return['info']     =   '保存失败！';
-                        $this->ajaxReturn($return,'json');
-                        return ;
-                    }
-                }else{
-                    $return['status']   =   0;
-                    $return['info']     =   $Problemgroup->getError();
-                    $this->ajaxReturn($return,'json');
-                    return ;
-                }
             }
-    
         } else {
             if($id){
                 $this->assign("info",$Problemgroup->getGroupInfo($id));
                 $this->meta_title = '编辑问题分类';
                 $this->display();
-            }else{
-                $this->meta_title = '新增问题分类';
-                $this->display();
             }
         }
     }
-    
     /**
      * 会员状态修改
      * @author 朱亚杰 <zhuyajie@topthink.net>

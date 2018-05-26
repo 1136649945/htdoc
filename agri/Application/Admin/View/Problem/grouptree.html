@@ -1,0 +1,27 @@
+<volist name="tree" id="list">
+	<dl class="cate-item">
+		<dt class="cf">
+			    <input type="hidden" name="status" class="text" value="{$list.status}">
+				<input type="hidden" name="pid" class="text" value="{$list.pid}">
+				<div class="btn-toolbar opt-btn cf">
+					<a title="编辑" href="{:U('editgroup?id='.$list['id'].'&pid='.$list['pid'])}">编辑</a>
+					<a title="{$list.status|show_status_op}" href="{:U('Problem/changeStatu?method=g&id='.$list['id'].'&status='.abs(1-$list['status']))}" class="ajax-get">{$list.status|show_status_op}</a>
+				</div>
+				<div class="fold"><i></i></div>
+				<div class="order">{$list.id}</div>
+				<div class="name">
+					<span class="tab-sign"></span>
+					<input type="text" disabled="disabled" name="title" class="text" value="{$list.title}">
+					<input type="text" disabled="disabled" name="sort" class="text input-mini" value="{$list.sort}">
+					<a class="add-sub-cate" title="添加子分类" href="{:U('addgroup?pid='.$list['id'])}">
+						<i class="icon-add"></i>
+					</a>
+				</div>
+		</dt>
+		<notempty name="list['_child']">
+			<dd>
+				{:R('Problem/grouptree', array($list['_child']))}
+			</dd>
+		</notempty>
+	</dl>
+</volist>

@@ -19,7 +19,21 @@ class ProblemModel extends Model{
      * @param unknown $id
      */
     public function getProblem($id){
-        return $this->where("hiden=0 and id=".$id." or pid=".$id)->select();
+        return $this->where("hide=0 and( id=".$id." or pid=".$id.")")->select();
+    }
+    /**
+     * 问题详情列表过滤用户
+     * @param unknown $id
+     */
+    public function getProblemUid($id){
+        return $this->where("hide=0 and uid=".UID." and( id=".$id." or pid=".$id.")")->select();
+    }
+    /**
+     * 获取问题详情
+     * @param unknown $id
+     */
+    public function getDeatil($id){
+        return $this->where("uid=".UID." and id=".$id)->find();
     }
     /**
      * 问题详情
@@ -80,7 +94,7 @@ class ProblemModel extends Model{
      * 最新待回答默认前5个
      * @param unknown $id
      */
-    public function toBeAnswered($size=5,$order="create_time asc"){
+    public function toBeAnswered($size=5,$order="create_time DESC"){
         return $this->where("status=0 and hide=0 and uid=".UID)->order($order)->limit($size)->select();
     }
 }

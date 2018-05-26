@@ -23,7 +23,7 @@
 .ask-addr{position: absolute;right:20rpx;top:40rpx;}
 .ask-addr view{font-size: 28rpx;color:#f4a60c;}
 .ask-addr view text{margin: 0 10rpx;}
-.tiwen{font-size: 26rpx;color:#fff;background-color: #4ac372;text-align: center;display:block;height:50rpx;line-height:50rpx;width:110rpx;border-radius: 25rpx;margin-top: 10rpx;border:none;}
+.tiwen{font-size: 26rpx;color:#fff;background-color: #4ac372;text-align: center;display:block;height:50rpx;line-height:50rpx;width:120rpx;border-radius: 25rpx;margin-top: 10rpx;border:none;}
 .ask-date{text-align: right;padding: 0 20rpx;font-size: 28rpx;color: #4ac372;position: relative;margin-bottom: 30rpx;}
 .heng{position: absolute;right: 20rpx;top:20rpx;}
 .date{display: inline-block;} 

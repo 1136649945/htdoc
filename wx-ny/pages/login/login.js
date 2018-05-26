@@ -16,7 +16,7 @@ Page({
           icon: "fail",
           duration: 2000
         });
-      });
+    });
   },
   onPullDownRefresh() {
     wx.stopPullDownRefresh()
@@ -57,7 +57,7 @@ Page({
           });
         }
       }, function (e) {
-        console.log(e);
+        util.showtip("服务器请求异常", 2);
       }, app.globalData.session);
   },
   refreVeify: function (e) {

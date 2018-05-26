@@ -1,0 +1,59 @@
+<!--pages/reply/reply.wxml-->
+<view class='reply'>
+  <view class='head-box'>
+     <image src='{{photo}}' class='pic-img' mode='aspectFit'></image> 
+    <view class='pic-cont'>
+      <view class='pic-addr'><image src='../../images/per_01.png'></image>{{region}}</view>
+      <view class='pic-crew'><image src='../../images/per_02.png'></image>{{nickname}}</view>
+    </view>
+  </view>
+  <view class='pro'>
+    <image src='../../images/ask.jpg'></image>
+    西红柿开花后结果少，且生病！
+  </view>
+  <view class='reply-imgs'>
+    <image src='{{items}}' wx:for="{{replayImg}}" wx:for-index="i" wx:for-item="items"></image>
+  </view>
+  <view class='reply-text'>
+    <view>
+      具体情况
+      <text>描述一下情况细节内容</text>  
+    </view>
+    <!-- <textarea maxlength='{{total}}' bindinput="bindTextNumInput"></textarea> -->
+    <view >{{}}</view>
+    <!-- <view class='num'>{{num}}/{{total}}</view> -->
+  </view>
+  <view class='pro'>
+    <image src='../../images/answer.jpg'></image>
+    语音
+    <image src='../../images/ting.png' class='ting'></image>
+    <image src='../../images/yuyin.png' class='yuyin'></image>
+  </view>
+  <view class='reply-cont'>
+    <view class='reply-head'>
+      <image src='../../images/portrait_small.jpg'></image>
+      <text class='rep-name'>宣景宏</text>
+      <text class='rep-type'>生产技术·蔬菜（专家）</text>
+      <text class='rep-date'>5小时前</text>
+    </view>
+    <view class='reply-p'>一般是病害，最常见的是青枯病，主要在结果初期发病。开始植株白天萎蔫，晚上恢复，最后逐渐死亡，并且会传染至整个田块。</view>
+    <view class='after'>
+      <text>追答</text>
+      发病原因与品种抗病性、重茬种植、天气高温高湿有关。
+    </view>
+  </view>
+  <view class='voice-box'>
+    <view class='voice' wx:for="{{voiceArr}}" wx:for-index="index" wx:for-item="items">
+      {{items.date}}
+      <progress percent="{{items.num/items.total*100}}" active-mode="backwards"/>
+      <view class='voice-r'>
+        {{items.num}}S
+        <text class='shu'></text>
+        <image src='../../images/play.png'></image>
+      </view>
+    </view>
+  </view>
+  <navigator url='../revert/revert' class='revert'>
+    <image class='editor' src='../../images/editor.png'></image>
+  </navigator>
+</view>

@@ -27,7 +27,7 @@
 	  	<div class="layui-form-item">
 		  	<notempty name="vo['_img']">
 			<volist name="vo['_img']" id="img">
-				<img style="margin-right: 10px; max-height: 70px; max-width: 70px;" src="{$img['path']}"/>
+				<a href="{$img['path']}" target="_blank" style="text-decoration:none;border-bottom:none;"><img style="margin-right: 10px; max-height: 70px; max-width: 70px;" src="{$img['path']}"/></a>
 			</volist>
 			</notempty>
 		</div>

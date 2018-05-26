@@ -33,6 +33,8 @@
 .voice image{width: 27rpx;height: 32rpx;margin-bottom: -3rpx;}
 .voice-r{position: absolute;right: 0;top:0;}
 .voice .shu{width:2rpx;height: 24rpx;display: inline-block;background-color: #c5c5c5;margin-right: 15rpx;}
-.delicon{ height: 30rpx;width: 30rpx;}
+
+
 .revert{background-color: #fff;padding: 50rpx 30rpx;text-align: right;}
+
 .editor{width: 100rpx;height: 100rpx;text-align: right;}

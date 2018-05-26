@@ -110,6 +110,30 @@ function getSession(session){
   }
 }
 //上传文件
+function uplodaAudio(path, scallback, fcallback, session) {
+  if (session != null && session != "") {
+    var header = {
+      'content-type': 'application/x-www-form-urlencoded',
+      'Cookie': 'PHPSESSID=' + session
+    };
+  } else {
+    var header = { 'content-type': 'application/x-www-form-urlencoded' };
+  }
+  var that = this;
+  wx.uploadFile({
+    header: header,
+    url: this.domain + '/app.php/File/uploadAudio', 
+    filePath: path,
+    name: 'file',
+    success: function (res) {
+      scallback(JSON.parse(res.data));
+    },
+    fail: function (e) {
+      fcallback(e);
+    }
+  })
+}
+//上传文件
 function uplodaFile(path, scallback, fcallback, session) {
   if (session != null && session != "") {
     var header = {
@@ -122,7 +146,7 @@ function uplodaFile(path, scallback, fcallback, session) {
   var that = this;
   wx.uploadFile({
     header: header,
-    url: this.domain + '/app.php/File/upload', 
+    url: this.domain + '/app.php/File/upload',
     filePath: path,
     name: 'file',
     success: function (res) {
@@ -192,6 +216,7 @@ module.exports = {
   alertView: alertView,
   sendrequest: sendrequest,
   uplodaFile: uplodaFile,
+  uplodaAudio: uplodaAudio,
   getOpenid: getOpenid,
   getSession: getSession,
   getSystemInfo: getSystemInfo,

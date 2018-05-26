@@ -1,35 +1,11 @@
 <!--pages/ask/ask.wxml-->
 <view class='ask-box'>
-  <view class='ask-head'>
-      <view class='ask_l'>
-        <image src='{{imgUrl}}'></image>
-        <view>{{name}}</view>
-      </view>
-      <view class='ask-mid'>
-        <view class='mid-title'>{{title}}</view>
-        <view class='mid-type'>{{type}} | {{species}}</view>
-        <view class='mid-p'>{{cont}}</view>
-      </view>
-      <view class='ask-addr'>
-        <view>
-          <text class='city'>{{city}}</text>
-          <text class='area'>{{area}}</text>
-        </view>
-        <button class='tiwen'>提问</button>
-      </view>
-      <view class='ask-date'>
-        <view class='date'>{{date}}</view>
-        <view class='heng'>
-          <text style='width:{{dateW}}rpx'></text>
-          <text style='width:{{dateW}}rpx'></text>
-        </view>
-      </view>
-  </view>
   <view class='ask-choose'>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{areaArr}}">
-      <view class="picker">
-        {{areaArr[index]}}
-        <image class='pic-img' src='../../images/disclosure.png'></image>
+   
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+       <view class="picker">
+      地区
+      <image class='pic-img' src='../../images/disclosure.png'></image>
       </view>
     </picker>
     <picker bindchange="bindPicker2Change" value="{{index2}}" range="{{categoryArr}}">

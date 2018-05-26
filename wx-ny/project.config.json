@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 20,
 			"list": [
 				{
 					"id": -1,
@@ -141,6 +141,23 @@
 					"name": "帮助中心",
 					"pathName": "pages/help/help",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "回复",
+					"pathName": "pages/reply/reply",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "回复",
+					"pathName": "pages/reply/reply",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "提问",
+					"pathName": "pages/ask/ask"
 				}
 			]
 		}

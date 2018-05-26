@@ -23,7 +23,7 @@
 			<div class="layui-inline">
 				<label class="layui-form-label" >问题分类：</label>
 				<div class="layui-input-inline">
-					<input type="text" class="layui-input" value="{$group[$vo['block']]}" disabled="disabled"/>
+					<input type="text" class="layui-input" value="{$vo['block']}" disabled="disabled"/>
 				</div>
 			</div>
 			<a href="{:U('Problem/changeStatus?method=p&id='.$vo['id'].'&hide='.($vo['hide']?'0':'1'))}" class="ajax-get">{$vo['hide']?'显示该追问':'隐藏该追问'}</a>
@@ -39,7 +39,7 @@
 		  	<div class="layui-form-item">
 			  	<notempty name="vo['_img']">
 				<volist name="vo['_img']" id="img">
-					<img style="margin-right: 10px; max-height: 70px; max-width: 70px;" src="{$img['path']}"/>
+					<a href="{$img['path']}" target="_blank" style="text-decoration:none;border-bottom:none;"><img style="margin-right: 10px; max-height: 70px; max-width: 70px;" src="{$img['path']}"/></a>
 				</volist>
 				</notempty>
 			</div>

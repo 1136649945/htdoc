@@ -147,9 +147,12 @@
 
 		<div class="layui-inline">
 			<label class="layui-form-label" style="width: 135px;">地区(支持两级：市-区/省-市)</label>
-			<div class="layui-input-inline">
-				<input type="text" class="layui-input" name="region" maxlength="25"
-					value="{$info.region}">
+			<div class="layui-input-inline" style="width:auto;">
+				<!--<input type="text" class="layui-input" name="region" maxlength="25"
+					value="{$info.region}">-->
+				<select style="display:inline-block;margin-top:15px;" name="region_p" id="region_p"></select>
+                <select style="display:inline-block;" name="region_c" id="region_c"></select>
+                <select style="display:inline-block;" name="region_a" id="region_a"></select>
 			</div>
 		</div>
 	</div>
@@ -179,7 +182,11 @@
 </block>
 
 <block name="script"> 
-<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/regionselect.js"></script> 
+<script type="text/javascript">
+    new PCAS('region_p', 'region_c', 'region_a', '北京', '', '');
+</script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
 <script type="text/javascript">
 		//上传图片
 	    /* 初始化上传插件 */
@@ -221,6 +228,9 @@
     Think.setValue("gender", {$info.gender|default=0});
     Think.setValue("areas", {$info.areas|default=0});
     Think.setValue("status", {$info.status|default=1});
-    Think.setValue("education", {$info.education|default="本科"});
+    Think.setValue("education", "{$info.education|default='本科'}");
+    Think.setValue("region_p", "{$info.region_p|default='北京市'}");
+    Think.setValue("region_c", "{$info.region_c}");
+    Think.setValue("region_a", "{$info.region_a}");
     
 </script> </block>

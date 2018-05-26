@@ -29,4 +29,13 @@ class UserController extends AppController {
             $this->ajaxReturn(array("status"=>1),'json');
         }
     }
+    /**
+     * 获取专家所在地区
+     */
+    public function region(){
+        if(IS_POST){
+            $User = new UserApi();
+            $this->ajaxReturn($User->region(),'json');
+        }
+    }
 }
